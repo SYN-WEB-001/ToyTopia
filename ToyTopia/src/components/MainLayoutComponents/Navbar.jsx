@@ -41,7 +41,7 @@ const Navbar = () => {
               About
             </a>
             <a
-              href="#contact"
+              href="/contact-us"
               className="text-gray-700 hover:text-green-600 transition duration-300 font-medium"
             >
               Contact
@@ -116,7 +116,7 @@ const Navbar = () => {
             About
           </a>
           <a
-            href="#contact"
+            href="/contact-us"
             className="block px-3 py-2 rounded-md text-gray-700 hover:bg-green-100 hover:text-green-600 transition duration-300 font-medium"
             onClick={() => setIsMenuOpen(false)}
           >
