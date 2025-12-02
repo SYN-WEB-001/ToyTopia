@@ -1,22 +1,14 @@
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import HeroSection from '../sections/HeroSection';
-import CategoryCards from '../sections/CategoryCards';
+import HeroSection from '../components/HomePageComponents/sections/HeroSection';
+import CategoryCards from '../components/HomePageComponents/sections/CategoryCards';
+import TestimonialsSection from '../components/HomePageComponents/TestimonialsSection';
 
 const Homepage = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-grow">
-        <HeroSection />
-        <CategoryCards />
-        <Testimonials />
-        <ContactUs />
-        <Products />
-        {/* Add more sections here as needed */}
-      </main>
-      <Footer />
-    </div>
+    <>
+      <HeroSection />
+      <CategoryCards />
+      <TestimonialsSection />
+    </>
   );
 };
 

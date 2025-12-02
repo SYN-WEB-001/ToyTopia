@@ -1,0 +1,13 @@
+{
+  "name": "toytopia-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd ToyTopia && npm run dev",
+    "build": "cd ToyTopia && npm run build",
+    "preview": "cd ToyTopia && npm run preview",
+    "lint": "cd ToyTopia && npm run lint",
+    "install": "cd ToyTopia && npm install"
+  }
+}
+
