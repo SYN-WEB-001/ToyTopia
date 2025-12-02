@@ -1,0 +1,18 @@
+{
+  "puzzleName": "Tierbilder-Puzzle",
+  "description": "Ordne die Teile des Bildes in die richtige Reihenfolge.",
+  "rows": 3,
+  "columns": 3,
+  "pieces": [
+    { "id": 1, "correctPosition": [0, 0], "currentPosition": [1, 2] },
+    { "id": 2, "correctPosition": [0, 1], "currentPosition": [0, 0] },
+    { "id": 3, "correctPosition": [0, 2], "currentPosition": [2, 0] },
+    { "id": 4, "correctPosition": [1, 0], "currentPosition": [0, 2] },
+    { "id": 5, "correctPosition": [1, 1], "currentPosition": [1, 0] },
+    { "id": 6, "correctPosition": [1, 2], "currentPosition": [2, 2] },
+    { "id": 7, "correctPosition": [2, 0], "currentPosition": [2, 1] },
+    { "id": 8, "correctPosition": [2, 1], "currentPosition": [1, 1] },
+    { "id": 9, "correctPosition": [2, 2], "currentPosition": [0, 1] }
+  ],
+  "image": "puzzlebild.png"
+}
