@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import HeroSection from '../sections/HeroSection';
+import CategoryCards from '../sections/CategoryCards';
 
 const Homepage = () => {
   return (
@@ -8,6 +9,7 @@ const Homepage = () => {
       <Navbar />
       <main className="flex-grow">
         <HeroSection />
+        <CategoryCards />
         {/* Add more sections here as needed */}
       </main>
       <Footer />
