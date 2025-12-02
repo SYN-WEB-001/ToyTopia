@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "books",
+    "name": "Books",
+    "description": "Explore our collection of educational and entertaining books for children of all ages. From picture books to chapter books, find the perfect story for your little reader.",
+    "category": "Educational",
+    "image": "/src/assets/images/Category-Images/Books.jpg"
+  },
+  {
+    "slug": "hot-wheels",
+    "name": "Hot Wheels",
+    "description": "Rev up the excitement with our Hot Wheels collection! Featuring fast cars, thrilling tracks, and endless racing adventures for speed enthusiasts.",
+    "category": "Vehicles",
+    "image": "/src/assets/images/Category-Images/Hot Wheels.jpg"
+  },
+  {
+    "slug": "lego",
+    "name": "Lego",
+    "description": "Build, create, and imagine with our extensive Lego collection. From classic sets to themed builds, unleash creativity brick by brick.",
+    "category": "Building & Construction",
+    "image": "/src/assets/images/Category-Images/Lego.jpg"
+  },
+  {
+    "slug": "puzzles",
+    "name": "Puzzles",
+    "description": "Challenge young minds with our diverse puzzle collection. Enhance problem-solving skills while having fun with puzzles for every age and skill level.",
+    "category": "Brain Games",
+    "image": "/src/assets/images/Category-Images/Puzzles.jpg"
+  }
+]
