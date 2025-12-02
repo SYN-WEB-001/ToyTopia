@@ -1,4 +1,4 @@
-import categoryData from '../data/categoryData.json';
+import categoryData from '../../../data/categoryData.json';
 
 const CategoryCards = () => {
   return (

@@ -10,6 +10,9 @@ const Homepage = () => {
       <main className="flex-grow">
         <HeroSection />
         <CategoryCards />
+        <Testimonials />
+        <ContactUs />
+        <Products />
         {/* Add more sections here as needed */}
       </main>
       <Footer />
