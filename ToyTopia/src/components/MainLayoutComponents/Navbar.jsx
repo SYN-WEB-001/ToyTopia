@@ -14,11 +14,13 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="shrink-0">
-            <img 
-              src="/Logo.png" 
-              alt="ToyTopia Logo" 
-              className="h-14 md:h-16 w-auto"
-            />
+            <Link to="/">
+              <img 
+                src="/Logo.png" 
+                alt="ToyTopia Logo" 
+                className="h-14 md:h-16 w-auto"
+              />
+            </Link>
           </div>
 
           {/* Desktop Menu */}
@@ -36,7 +38,7 @@ const Navbar = () => {
               Products
             </Link>
             <Link
-              to="/about-us"
+              to="/about"
               className="text-gray-700 hover:text-green-600 transition duration-300 font-medium"
             >
               About
@@ -110,7 +112,7 @@ const Navbar = () => {
             Products
           </Link>
           <Link
-            to="/about-us"
+            to="/about"
             className="block px-3 py-2 rounded-md text-gray-700 hover:bg-green-100 hover:text-green-600 transition duration-300 font-medium"
             onClick={() => setIsMenuOpen(false)}
           >
