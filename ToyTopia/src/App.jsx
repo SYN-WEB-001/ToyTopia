@@ -4,20 +4,25 @@ import Homepage from './pages/Homepage'
 import ProductsPage from './pages/ProductsPage'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
+import CartPage from './pages/CartPage'
+import { CartProvider } from './context/CartContext'
 
 export default function App() {
   
   return (
     <>
         <BrowserRouter>
-          <MainLayout>
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-            </Routes>
-          </MainLayout>
+            <CartProvider>
+              <MainLayout>
+                <Routes>
+                  <Route path="/" element={<Homepage />} />
+                  <Route path="/products" element={<ProductsPage />} />
+                  <Route path="/about-us" element={<AboutUs />} />
+                  <Route path="/contact-us" element={<ContactUs />} />
+                  <Route path="/cart" element={<CartPage />} />
+                </Routes>
+              </MainLayout>
+            </CartProvider>
         </BrowserRouter>
     </>
   )

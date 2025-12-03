@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { cartCount } = useCart();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -22,7 +24,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
               className="text-gray-700 hover:text-green-600 transition duration-300 font-medium"
@@ -46,6 +48,16 @@ const Navbar = () => {
               className="text-gray-700 hover:text-green-600 transition duration-300 font-medium"
             >
               Contact
+            </Link>
+
+            {/* Cart Icon */}
+            <Link to="/cart" className="relative text-gray-700 hover:text-green-600 transition duration-300">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
+                <circle cx="10" cy="20" r="1" />
+                <circle cx="18" cy="20" r="1" />
+              </svg>
+              <span className="absolute -top-2 -right-3 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartCount}</span>
             </Link>
           </div>
 
@@ -122,6 +134,15 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             Contact
+          </Link>
+
+          <Link
+            to="/cart"
+            className="block px-3 py-2 rounded-md text-gray-700 hover:bg-green-100 hover:text-green-600 transition duration-300 font-medium relative"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Warenkorb
+            <span className="absolute top-1 right-4 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartCount}</span>
           </Link>
         </div>
       </div>
