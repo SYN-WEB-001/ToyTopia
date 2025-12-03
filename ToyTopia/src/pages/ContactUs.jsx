@@ -1,76 +1,155 @@
-import { Box, Container, Typography, Stack } from '@mui/material';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import {
+  Box,
+  Container,
+  Typography,
+  Stack,
+  Link as MuiLink,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
+import LanguageIcon from "@mui/icons-material/Language";
 
-import ContactHeader from '../components/ContactPageComponents/ContactHeader';
-import ContactInfoCard from '../components/ContactPageComponents/ContactInfoCard';
-import ContactForm from '../components/ContactPageComponents/ContactForm';
+import ContactForm from "../components/ContactPageComponents/ContactForm";
 
-const ContactUs = () => {
+export default function ContactUs() {
+  const theme = useTheme();
+
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#f5f5f7' }}>
-      {/* Header with gradient */}
-      <ContactHeader />
+    <Box
+      sx={{
+        minHeight: "calc(100vh - 90px)", // desconta navbar
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        px: 2,
 
-      {/* Main content */}
-      <Container maxWidth="lg" sx={{ pb: { xs: 6, md: 8 } }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-          {/* Left side - cards */}
-          <div style={{ flex: 1 }}>
-            <div style={{ marginBottom: '1rem' }}>
-              <ContactInfoCard icon={ChatBubbleOutlineIcon} title="Chatte mit uns">
-                <Typography variant="body2" sx={{ mb: 2, color: 'rgba(0,0,0,0.7)', lineHeight: 1.8 }}>
-                  Du hast Fragen rund um deinen Einkauf, zur Lieferung oder zu
-                  unseren Spielsachen? Unser Kundenservice hilft dir gerne weiter.
-                  <br />
-                  Unser Kundenservice steht dir zu folgenden Zeiten zur Verfügung:
-                  <br />
-                  <span style={{ fontWeight: 'bold', padding: '0.5rem 0', display: 'block' }}>
-                    Mo. - Fr.: 9:00 bis 12:00 Uhr und 15:00 bis 17:00 Uhr.
-                  </span>
-                  An Feiertagen kann es zu abweichenden Servicezeiten kommen.
-                </Typography>
-              </ContactInfoCard>
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-              <ContactInfoCard icon={ChatBubbleOutlineIcon} title="Live-Chat">
-                <Typography variant="body2" sx={{ mb: 2, color: 'rgba(0,0,0,0.7)', lineHeight: 1.8 }}>
-                  <span style={{ fontWeight: 'bold', padding: '0.5rem 0', display: 'block' }}>
-                    Mo. – Fr.: 9:00–12:00 Uhr und 15:00–17:00 Uhr.
-                  </span>
-                  Klicke einfach auf das Chatsymbol im Shop, um mit uns zu schreiben.
-                  <br />
-                  Unser Team freut sich darauf, Ihnen zu helfen!
-                </Typography>
-              </ContactInfoCard>
-            </div>
-            <div>
-              <ContactInfoCard icon={MailOutlineIcon} title="Schreib uns eine E-Mail">
-                <Typography variant="body2" sx={{ color: 'rgba(0,0,0,0.7)', lineHeight: 1.8 }}>
-                  Fülle einfach das Formular aus, und unser Team meldet sich so
-                  schnell wie möglich bei dir zurück – meistens innerhalb von 1–2
-                  Werktagen.
-                  <br />
-                  <span style={{ fontWeight: 'bold', padding: '0.5rem 0', display: 'block' }}>
-                    Mo. - Fr.: 9:00 bis 19:00 Uhr.
-                  </span>
-                  <span style={{ fontWeight: 'bold', padding: '0.5rem 0', display: 'block' }}>
-                    Sa.: 10:00 bis 14:00 Uhr.
-                  </span>
-                  An Feiertagen kann es zu abweichenden Servicezeiten kommen.
-                </Typography>
-              </ContactInfoCard>
-            </div>
-          </div>
+        // 🌈 gradiente claro/escuro dependendo do tema
+        background:
+          theme.palette.mode === "light"
+            ? "linear-gradient(135deg, #ffe6e9 0%, #fff6e9 20%, #fff7d9 50%, #e3ffe4 80%, #e8e5ff 100%)"
+            : "linear-gradient(135deg, #0a0a0c 0%, #0f0f14 30%, #1a1a21 70%, #000000 100%)",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            gap: { xs: 4, md: 6 },
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {/* --- ESQUERDA (texto) --- */}
+          <Box
+            sx={{
+              flex: 1,
+              textAlign: "left",
+              px: 3,
+              py: 3,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "left",
+              color: theme.palette.mode === "light" ? "black" : "white",
+            }}
+          >
+            <Typography variant="h3" sx={{ fontWeight: 800, mb: 2 }}>
+              Kontaktiere uns
+            </Typography>
 
-          {/* Right side - form */}
-          <div style={{ flex: 1 }}>
-            <ContactForm />
-          </div>
-        </div>
+            <Typography
+              variant="body1"
+              sx={{ opacity: 0.8, mb: 3 }}
+            >
+              Nicht sicher, was du brauchst? Unser Team hilft dir gerne bei
+              Fragen zu Bestellung, Lieferung oder unseren Spielsachen.
+            </Typography>
+
+            <Typography
+              variant="body2"
+              sx={{ opacity: 0.65, mb: 4 }}
+            >
+              Schreib uns einfach – wir melden uns so schnell wie möglich bei dir.
+            </Typography>
+
+            <Stack spacing={2} sx={{ alignItems: "left" }}>
+              <Stack direction="row" spacing={1.5} alignItems="left">
+                <MailOutlineIcon />
+                <MuiLink
+                  href="mailto:support@toytopia.de"
+                  underline="hover"
+                  sx={{
+                    color: "inherit",
+                    fontWeight: 500,
+                    "&:hover": { opacity: 0.8 },
+                  }}
+                >
+                  support@toytopia.de
+                </MuiLink>
+              </Stack>
+
+              <Stack direction="row" spacing={1.5} alignItems="center">
+                <PhoneInTalkIcon />
+                <MuiLink
+                  href="tel:+492111234567"
+                  underline="hover"
+                  sx={{
+                    color: "inherit",
+                    fontWeight: 500,
+                    "&:hover": { opacity: 0.8 },
+                  }}
+                >
+                  +49 211 123 4567
+                </MuiLink>
+              </Stack>
+
+              <Stack direction="row" spacing={1.5} alignItems="center">
+                <LanguageIcon />
+                <MuiLink
+                  href="https://www.toytopia.de"
+                  target="_blank"
+                  rel="noopener"
+                  underline="hover"
+                  sx={{
+                    color: "inherit",
+                    fontWeight: 500,
+                    "&:hover": { opacity: 0.8 },
+                  }}
+                >
+                  www.toytopia.de
+                </MuiLink>
+              </Stack>
+            </Stack>
+          </Box>
+
+          {/* LINHA CENTRAL */}
+          <Box
+            sx={{
+              display: { xs: "none", md: "block" },
+              width: "1px",
+              alignSelf: "stretch",
+              background:
+                theme.palette.mode === "light"
+                  ? "linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.25), rgba(0,0,0,0))"
+                  : "linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.25), rgba(255,255,255,0))",
+            }}
+          />
+
+          {/* --- DIREITA (Formulário) --- */}
+          <Box
+            sx={{
+              flex: 1,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Box sx={{ width: "100%" }}>
+              <ContactForm />
+            </Box>
+          </Box>
+        </Box>
       </Container>
     </Box>
   );
-};
-
-export default ContactUs;
+}

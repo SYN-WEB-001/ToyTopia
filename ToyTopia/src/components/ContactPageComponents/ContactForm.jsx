@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Box,
   Paper,
@@ -8,29 +8,32 @@ import {
   Button,
   Typography,
   Divider,
-} from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
+  Alert,
+} from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 const SUBJECT_OPTIONS = [
-  'Frage zur Bestellung',
-  'Frage zu einem Produkt',
-  'Retoure / Reklamation',
-  'Technische Probleme',
-  'Sonstiges',
+  "Frage zur Bestellung",
+  "Frage zu einem Produkt",
+  "Retoure / Reklamation",
+  "Technische Probleme",
+  "Sonstiges",
 ];
 
+const initialFormData = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phonePrefix: "+49",
+  phone: "",
+  orderNumber: "",
+  subject: "",
+  message: "",
+};
+
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    emailConfirm: '',
-    phonePrefix: '+49',
-    phone: '',
-    orderNumber: '',
-    subject: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState(initialFormData);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -39,110 +42,119 @@ export default function ContactForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // Aqui depois você pode integrar com backend, EmailJS etc.
-    console.log('Form data:', formData);
-    alert('Danke! Deine Nachricht wurde gesendet (fake).');
+    console.log("Form data:", formData);
+
+    // aqui você conectaria com backend / EmailJS etc.
+    setIsSubmitted(true);
+    setFormData(initialFormData);
+
+    // se quiser desaparecer depois de alguns segundos:
+    // setTimeout(() => setIsSubmitted(false), 5000);
   }
 
   return (
     <Paper
-      elevation={1}
+      elevation={3}
       sx={{
-        p: { xs: 2.5, md: 3.5 },
-        borderRadius: 3,
+        p: { xs: 3, md: 4 },
+        borderRadius: 1,
+        backgroundColor: "#ffffff",
       }}
     >
-      <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
-        Schreibe uns eine Nachricht
+      <Typography variant="h5" sx={{ fontWeight: 700, mb: 1, textAlign: "left" }}>
+        Schreib uns eine Nachricht
       </Typography>
 
-      <Divider sx={{ mb: 2 }} />
+      <Typography
+        variant="body2"
+        sx={{ color: "rgba(0,0,0,0.6)", mb: 2, textAlign: "left" }}
+      >
+        Fülle das Formular aus und unser Team meldet sich so schnell wie möglich
+        bei dir zurück.
+      </Typography>
 
-      <Box component="form" noValidate onSubmit={handleSubmit}>
+      <Divider sx={{ mb: 3 }} />
+
+      {/* mensagem de agradecimento */}
+      {isSubmitted && (
+        <Alert severity="success" sx={{ mb: 2 }}>
+          Danke! Deine Nachricht wurde erfolgreich gesendet.
+        </Alert>
+      )}
+
+      <Box component="form" onSubmit={handleSubmit} noValidate>
         <Stack spacing={2.5}>
-          {/* Nome */}
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
             <TextField
-              label="Vorname"
+              fullWidth
+              label="Vorname *"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              fullWidth
-              required
+              size="small"
             />
             <TextField
-              label="Nachname"
+              fullWidth
+              label="Nachname *"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              fullWidth
-              required
+              size="small"
             />
           </Stack>
 
-          {/* Email */}
           <TextField
-            label="E-Mail-Adresse"
+            fullWidth
+            label="E-Mail-Adresse *"
             name="email"
             type="email"
             value={formData.email}
             onChange={handleChange}
-            fullWidth
-            required
+            size="small"
           />
 
-          <TextField
-            label="E-Mail-Adresse bestätigen"
-            name="emailConfirm"
-            type="email"
-            value={formData.emailConfirm}
-            onChange={handleChange}
-            fullWidth
-            required
-          />
-
-          {/* Telefone */}
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
             <TextField
               select
               label="Land"
               name="phonePrefix"
               value={formData.phonePrefix}
               onChange={handleChange}
-              sx={{ minWidth: 110 }}
+              size="small"
+              sx={{ width: { xs: "100%", sm: "35%" } }}
             >
               <MenuItem value="+49">🇩🇪 +49</MenuItem>
-              <MenuItem value="+41">🇨🇭 +41</MenuItem>
               <MenuItem value="+43">🇦🇹 +43</MenuItem>
+              <MenuItem value="+41">🇨🇭 +41</MenuItem>
             </TextField>
 
             <TextField
+              fullWidth
               label="Telefonnummer (optional)"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              fullWidth
+              size="small"
             />
           </Stack>
 
-          {/* Número do pedido */}
           <TextField
+            fullWidth
             label="Bestellnummer (optional)"
             name="orderNumber"
             value={formData.orderNumber}
             onChange={handleChange}
-            fullWidth
+            size="small"
           />
 
-          {/* Assunto */}
           <TextField
             select
+            fullWidth
             label="Betreff"
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            fullWidth
-            required
+            size="small"
           >
             {SUBJECT_OPTIONS.map((option) => (
               <MenuItem key={option} value={option}>
@@ -151,35 +163,35 @@ export default function ContactForm() {
             ))}
           </TextField>
 
-          {/* Mensagem */}
           <TextField
-            label="Bitte beschreibe dein Anliegen"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
             fullWidth
-            required
+            label="Bitte beschreibe dein Anliegen *"
+            name="message"
             multiline
             minRows={4}
+            value={formData.message}
+            onChange={handleChange}
+            size="small"
           />
 
-          <Box display="flex" justifyContent="flex-end">
+          <Box sx={{ textAlign: "right", mt: 1 }}>
             <Button
               type="submit"
               variant="contained"
               endIcon={<SendIcon />}
               sx={{
-                mt: 1,
+                borderRadius: 25,
                 px: 4,
-                py: 1.2,
-                borderRadius: 999,
-                textTransform: 'none',
-                fontWeight: 700,
-                background:
-                  'linear-gradient(135deg, #00c853 0%, #00b0ff 50%, #7c4dff 100%)',
+                py: 1,
+                fontWeight: "bold",
+                bgcolor: "#000000",
+                color: "#ffffff",
+                "&:hover": {
+                  bgcolor: "#333333",
+                },
               }}
             >
-              Absenden
+              ABSENDEN
             </Button>
           </Box>
         </Stack>
