@@ -4,9 +4,10 @@ export default function ContactHeader() {
   return (
     <Box
       sx={{
-        background: 'linear-gradient(135deg, #ffe6e9 0%, #fff7d9 35%, #e3ffe4 70%, #e8e5ff 100%)',
-        pb: { xs: 6, md: 8 },
+        background:
+          'linear-gradient(135deg, #ffe6e9 0%, #fff6e9 8%, #fff7d9 35%, #e3ffe4 70%, #e8e5ff 100%)',
         pt: { xs: 8, md: 10 },
+        pb: { xs: 6, md: 8 },
         mb: { xs: 4, md: 6 },
       }}
     >

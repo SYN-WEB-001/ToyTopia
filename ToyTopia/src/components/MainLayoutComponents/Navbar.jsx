@@ -1,132 +1,116 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Button,
+  IconButton,
+  Container,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { ColorModeContext } from "../../App"; // continua igual
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+export default function Navbar() {
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <div className="shrink-0">
-            <img 
-              src="/Logo.png" 
-              alt="ToyTopia Logo" 
-              className="h-14 md:h-16 w-auto"
+    <AppBar
+      position="fixed"
+      elevation={1}
+      sx={{
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor:
+          theme.palette.mode === "light" ? "#ffffff" : "#020617",
+        color: theme.palette.mode === "light" ? "#111827" : "#e5e7eb",
+        boxShadow:
+          theme.palette.mode === "light"
+            ? "0 2px 8px rgba(15,23,42,0.08)"
+            : "0 2px 10px rgba(0,0,0,0.6)",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Toolbar
+          disableGutters
+          sx={{
+            minHeight: 72,
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          {/* LOGO ORIGINAL À ESQUERDA */}
+          <Box
+            component={Link}
+            to="/"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+              gap: 1.5,
+            }}
+          >
+            <Box
+              component="img"
+              alt="ToyTopia Logo"
+              src="/Logo.png"           sx={{ height: 48 }}       // ajusta o tamanho se quiser
             />
-          </div>
+          </Box>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
-            <Link
+          {/* LINKS + TOGGLE À DIREITA */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <Button
+              component={Link}
               to="/"
-              className="text-gray-700 hover:text-green-600 transition duration-300 font-medium"
+              color="inherit"
+              sx={{ textTransform: "none", fontWeight: 500 }}
             >
               Home
-            </Link>
-            <Link
+            </Button>
+            <Button
+              component={Link}
               to="/products"
-              className="text-gray-700 hover:text-green-600 transition duration-300 font-medium"
+              color="inherit"
+              sx={{ textTransform: "none", fontWeight: 500 }}
             >
               Products
-            </Link>
-            <Link
-              to="/about-us"
-              className="text-gray-700 hover:text-green-600 transition duration-300 font-medium"
+            </Button>
+            <Button
+              component={Link}
+              to="/about"
+              color="inherit"
+              sx={{ textTransform: "none", fontWeight: 500 }}
             >
               About
-            </Link>
-            <Link
+            </Button>
+            <Button
+              component={Link}
               to="/contact-us"
-              className="text-gray-700 hover:text-green-600 transition duration-300 font-medium"
+              color="inherit"
+              sx={{ textTransform: "none", fontWeight: 500 }}
             >
               Contact
-            </Link>
-          </div>
+            </Button>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="text-gray-700 hover:text-green-600 focus:outline-none focus:text-green-600 transition duration-300"
-              aria-label="Toggle menu"
+            <IconButton
+              onClick={colorMode.toggleColorMode}
+              color="inherit"
+              sx={{ ml: 1 }}
+              aria-label="Toggle dark mode"
             >
-              {isMenuOpen ? (
-                // Close Icon
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M6 18L18 6M6 6l12 12" />
-                </svg>
+              {theme.palette.mode === "dark" ? (
+                <LightModeIcon />
               ) : (
-                // Hamburger Icon
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+                <DarkModeIcon />
               )}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-50">
-          <Link
-            to="/"
-            className="block px-3 py-2 rounded-md text-gray-700 hover:bg-green-100 hover:text-green-600 transition duration-300 font-medium"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            to="/products"
-            className="block px-3 py-2 rounded-md text-gray-700 hover:bg-green-100 hover:text-green-600 transition duration-300 font-medium"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Products
-          </Link>
-          <Link
-            to="/about-us"
-            className="block px-3 py-2 rounded-md text-gray-700 hover:bg-green-100 hover:text-green-600 transition duration-300 font-medium"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            About
-          </Link>
-          <Link
-            to="/contact-us"
-            className="block px-3 py-2 rounded-md text-gray-700 hover:bg-green-100 hover:text-green-600 transition duration-300 font-medium"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Contact
-          </Link>
-        </div>
-      </div>
-    </nav>
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
-};
-
-export default Navbar;
+}
