@@ -1,9 +1,18 @@
-import { useState } from 'react';
-import testimonialsData from '../../data/testimonialsData.json';
+import { useState, useContext } from 'react';
+import testimonialsDataEn from '../../data/testimonialsData.json';
+import testimonialsDataDe from '../../data/testimonialsData.de.json';
+import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import { translations } from '../../translations/translations';
 
 const TestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const testimonialsPerPage = 3;
+  const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  
+  const testimonialsData = language === 'de' ? testimonialsDataDe : testimonialsDataEn;
+  const t = translations[language].homepage;
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) => 
@@ -38,15 +47,22 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+    <section 
+      style={{
+        padding: '5rem 1rem',
+        background: darkMode 
+          ? 'linear-gradient(to bottom right, #1f2937, #111827, #1f2937)' 
+          : 'linear-gradient(to bottom right, #faf5ff, #fce7f3, #eff6ff)'
+      }}
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            What Our Customers Say
+          <h2 style={{ fontSize: '3rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1rem' }}>
+            {t.testimonials}
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Hear from happy parents, educators, and gift-givers who trust ToyTopia for quality toys
+          <p style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', maxWidth: '42rem', margin: '0 auto' }}>
+            {language === 'de' ? 'Höre von glücklichen Eltern, Pädagogen und Schenkenden, die ToyTopia für Qualitätsspielzeug vertrauen' : 'Hear from happy parents, educators, and gift-givers who trust ToyTopia for quality toys'}
           </p>
         </div>
 
@@ -79,23 +95,41 @@ const TestimonialsSection = () => {
             {visibleTestimonials.map((testimonial, index) => (
               <div
                 key={`${testimonial.name}-${index}`}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 transform hover:-translate-y-2 flex flex-col h-full"
+                style={{
+                  backgroundColor: darkMode ? '#1f2937' : '#ffffff',
+                  borderRadius: '1rem',
+                  boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+                  padding: '2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
+                  transition: 'all 0.3s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-0.5rem)';
+                  e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+                }}
               >
                 {/* Profile Section */}
                 <div className="flex items-center mb-6">
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-16 h-16 rounded-full object-cover border-4 border-blue-100"
+                    className="w-16 h-16 rounded-full object-cover"
+                    style={{ border: `4px solid ${darkMode ? '#1e3a8a' : '#dbeafe'}` }}
                     onError={(e) => {
                       e.target.src = 'https://via.placeholder.com/400x400?text=Avatar';
                     }}
                   />
                   <div className="ml-4">
-                    <h3 className="text-lg font-bold text-gray-900">
+                    <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827' }}>
                       {testimonial.name}
                     </h3>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                    <p style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#6b7280' }}>{testimonial.role}</p>
                   </div>
                 </div>
 
@@ -103,14 +137,14 @@ const TestimonialsSection = () => {
                 {renderStars(testimonial.rating)}
 
                 {/* Feedback */}
-                <p className="text-gray-700 leading-relaxed italic flex-grow">
+                <p style={{ color: darkMode ? '#d1d5db' : '#374151', lineHeight: '1.625', fontStyle: 'italic', flexGrow: 1 }}>
                   "{testimonial.feedback}"
                 </p>
 
                 {/* Quote Icon */}
                 <div className="mt-6 flex justify-center">
                   <svg
-                    className="w-8 h-8 text-blue-200"
+                    className="w-8 h-8 text-blue-200 dark:text-blue-800"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -176,10 +210,10 @@ const TestimonialsSection = () => {
             </svg>
             <div>
               <p className="text-sm font-semibold text-gray-900">
-                Trusted by 10,000+ Happy Families
+                {language === 'de' ? 'Vertraut von über 10.000 glücklichen Familien' : 'Trusted by 10,000+ Happy Families'}
               </p>
               <p className="text-xs text-gray-500">
-                4.9/5 Average Rating
+                {language === 'de' ? '4,9/5 Durchschnittsbewertung' : '4.9/5 Average Rating'}
               </p>
             </div>
           </div>

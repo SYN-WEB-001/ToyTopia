@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Sarah Johnson",
+    "role": "Mutter von Zwei",
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+    "rating": 5,
+    "feedback": "ToyTopia war eine Rettung! Die Qualität der Spielzeuge ist außergewöhnlich, und meine Kinder lieben absolut alles, was wir gekauft haben. Die LEGO-Sets sind authentisch und kommen schnell an. Sehr zu empfehlen!"
+  },
+  {
+    "name": "Michael Chen",
+    "role": "Vater von Drei",
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    "rating": 5,
+    "feedback": "Bester Online-Spielzeugladen! Die Hot Wheels Kollektion ist unglaublich, und mein Sohn ist begeistert von jedem Kauf. Toller Kundenservice und schneller Versand dazu."
+  },
+  {
+    "name": "Emily Rodriguez",
+    "role": "Mutter & Lehrerin",
+    "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
+    "rating": 5,
+    "feedback": "Als Lehrerin und Mutter schätze ich den pädagogischen Wert der Spielzeuge hier. Die Puzzles sind perfekt für die Entwicklung von Problemlösungsfähigkeiten. ToyTopia ist mein Lieblingsladen!"
+  },
+  {
+    "name": "David Thompson",
+    "role": "Onkel & Geschenkgeber",
+    "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+    "rating": 5,
+    "feedback": "Ich finde hier immer die perfekten Geschenke für meine Nichten und Neffen. Die Auswahl ist fantastisch, und die Preise sind sehr vernünftig. Jeder Kauf war ein Erfolg!"
+  },
+  {
+    "name": "Jessica Martinez",
+    "role": "Mutter von Vier",
+    "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop",
+    "rating": 5,
+    "feedback": "Mit vier Kindern brauche ich Qualitätsspielzeug, das hält. ToyTopia liefert jedes Mal! Die Bücherauswahl ist wunderbar, und die Spielzeuge sind langlebig. Danke, dass ihr das Elternsein einfacher macht!"
+  },
+  {
+    "name": "Robert Anderson",
+    "role": "Großvater",
+    "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+    "rating": 5,
+    "feedback": "Als Opa liebe ich es, meine Enkelkinder mit Qualitätsspielzeug zu verwöhnen. ToyTopia macht es einfach mit ihrer hervorragenden Auswahl und benutzerfreundlichen Website. Meine Enkelkinder sind immer begeistert!"
+  },
+  {
+    "name": "Amanda White",
+    "role": "Erstmama",
+    "image": "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&h=400&fit=crop",
+    "rating": 5,
+    "feedback": "Als neue Mutter war ich besorgt, sicheres und hochwertiges Spielzeug zu finden. ToyTopia hat meine Erwartungen übertroffen! Alles ist gut kuratiert, und die Kundenbewertungen sind so hilfreich."
+  },
+  {
+    "name": "James Wilson",
+    "role": "Vater & Sammler",
+    "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
+    "rating": 5,
+    "feedback": "Nicht nur meine Kinder lieben die Spielzeuge, sondern ich habe auch einige tolle Sammlerstücke gefunden! Die Hot Wheels Sammlung ist beeindruckend. Großartig sowohl zum Spielen als auch zum Ausstellen!"
+  },
+  {
+    "name": "Lisa Brown",
+    "role": "Tante & Pädagogin",
+    "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
+    "rating": 5,
+    "feedback": "Ich kaufe pädagogische Spielzeuge für meine Schüler und Familienmitglieder bei ToyTopia. Die Qualität ist konstant, und ich liebe es, wie sie sich auf Entwicklungsvorteile konzentrieren. Absolut fantastisch!"
+  },
+  {
+    "name": "Christopher Lee",
+    "role": "Elternteil & Ingenieur",
+    "image": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop",
+    "rating": 5,
+    "feedback": "Die LEGO-Sets hier sind perfekt, um Kreativität und technische Fähigkeiten bei meinen Kindern zu fördern. Schnelle Lieferung, authentische Produkte und ausgezeichnete Verpackung. ToyTopia ist einfach das Beste!"
+  }
+]

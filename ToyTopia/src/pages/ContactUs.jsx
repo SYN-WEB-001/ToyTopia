@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   Box,
   Container,
@@ -5,18 +6,23 @@ import {
   Stack,
   Link as MuiLink,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import LanguageIcon from "@mui/icons-material/Language";
 
 import ContactForm from "../components/ContactPageComponents/ContactForm";
+import { ThemeContext } from "../context/ThemeContext";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../translations/translations";
 
 export default function ContactUs() {
-  const theme = useTheme();
+  const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const t = translations[language].contactPage;
 
   return (
     <Box
+      className={darkMode ? "dark" : ""}
       sx={{
         minHeight: "calc(100vh - 90px)", // desconta navbar
         display: "flex",
@@ -25,10 +31,9 @@ export default function ContactUs() {
         px: 2,
 
         // 🌈 gradiente claro/escuro dependendo do tema
-        background:
-          theme.palette.mode === "light"
-            ? "linear-gradient(135deg, #ffe6e9 0%, #fff6e9 20%, #fff7d9 50%, #e3ffe4 80%, #e8e5ff 100%)"
-            : "linear-gradient(135deg, #0a0a0c 0%, #0f0f14 30%, #1a1a21 70%, #000000 100%)",
+        background: darkMode
+            ? "linear-gradient(135deg, #0a0a0c 0%, #0f0f14 30%, #1a1a21 70%, #000000 100%)"
+            : "linear-gradient(135deg, #ffe6e9 0%, #fff6e9 20%, #fff7d9 50%, #e3ffe4 80%, #e8e5ff 100%)",
       }}
     >
       <Container maxWidth="lg">
@@ -51,26 +56,25 @@ export default function ContactUs() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "left",
-              color: theme.palette.mode === "light" ? "black" : "white",
+              color: darkMode ? "white" : "black",
             }}
           >
-            <Typography variant="h3" sx={{ fontWeight: 800, mb: 2 }}>
-              Kontaktiere uns
+            <Typography variant="h3" sx={{ fontWeight: 800, mb: 2 }} className="dark:text-white">
+              {t.title}
             </Typography>
 
             <Typography
               variant="body1"
               sx={{ opacity: 0.8, mb: 3 }}
             >
-              Nicht sicher, was du brauchst? Unser Team hilft dir gerne bei
-              Fragen zu Bestellung, Lieferung oder unseren Spielsachen.
+              {t.subtitle}
             </Typography>
 
             <Typography
               variant="body2"
               sx={{ opacity: 0.65, mb: 4 }}
             >
-              Schreib uns einfach – wir melden uns so schnell wie möglich bei dir.
+              {t.description}
             </Typography>
 
             <Stack spacing={2} sx={{ alignItems: "left" }}>
@@ -129,10 +133,9 @@ export default function ContactUs() {
               display: { xs: "none", md: "block" },
               width: "1px",
               alignSelf: "stretch",
-              background:
-                theme.palette.mode === "light"
-                  ? "linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.25), rgba(0,0,0,0))"
-                  : "linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.25), rgba(255,255,255,0))",
+              background: darkMode
+                  ? "linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.25), rgba(255,255,255,0))"
+                  : "linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.25), rgba(0,0,0,0))",
             }}
           />
 

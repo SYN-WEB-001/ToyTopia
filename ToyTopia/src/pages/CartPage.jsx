@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useCart } from '../context/CartContext';
 import CartItem from '../components/Cart/CartItem';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
+import { LanguageContext } from '../context/LanguageContext';
+import { translations } from '../translations/translations';
 
 const CartPage = () => {
   const { cartItems, cartTotal, cartCount, clearCart } = useCart();
+  const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const t = translations[language].cartPage;
 
   return (
-    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div style={{ minHeight: '100vh', padding: '4rem 1rem', backgroundColor: darkMode ? '#111827' : '#ffffff' }}>
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">Warenkorb</h1>
+        <h1 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>{t.title}</h1>
 
         {cartItems.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-lg text-gray-600 mb-6">Dein Warenkorb ist leer.</p>
-            <Link to="/products" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md">Weiter einkaufen</Link>
+            <p style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', marginBottom: '1.5rem' }}>{t.empty}</p>
+            <Link to="/products" style={{ display: 'inline-block', backgroundColor: '#2563eb', color: '#ffffff', padding: '0.75rem 1.5rem', borderRadius: '0.375rem', textDecoration: 'none' }}>{t.continueShopping}</Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -24,18 +30,18 @@ const CartPage = () => {
               ))}
             </div>
 
-            <aside className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-2xl font-bold mb-4">Bestellung Zusammenfassung</h2>
+            <aside style={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff', borderRadius: '0.5rem', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)', padding: '1.5rem' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>{language === 'de' ? 'Bestellung Zusammenfassung' : 'Order Summary'}</h2>
               <div className="flex justify-between mb-2">
-                <span className="text-gray-600">Artikel</span>
-                <span className="font-medium">{cartCount}</span>
+                <span style={{ color: darkMode ? '#d1d5db' : '#4b5563' }}>{language === 'de' ? 'Artikel' : 'Items'}</span>
+                <span style={{ fontWeight: '500', color: darkMode ? '#ffffff' : '#111827' }}>{cartCount}</span>
               </div>
               <div className="flex justify-between mb-6">
-                <span className="text-gray-600">Zwischensumme</span>
-                <span className="font-bold">€{cartTotal.toFixed(2)}</span>
+                <span style={{ color: darkMode ? '#d1d5db' : '#4b5563' }}>{t.subtotal}</span>
+                <span style={{ fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827' }}>€{cartTotal.toFixed(2)}</span>
               </div>
-              <button className="w-full bg-green-600 text-white py-3 rounded-md mb-3">Zur Kasse</button>
-              <button onClick={clearCart} className="w-full border border-gray-300 py-2 rounded-md text-gray-700">Warenkorb leeren</button>
+              <button style={{ width: '100%', backgroundColor: '#16a34a', color: '#ffffff', padding: '0.75rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', marginBottom: '0.75rem' }}>{t.checkout}</button>
+              <button onClick={clearCart} style={{ width: '100%', border: `1px solid ${darkMode ? '#4b5563' : '#d1d5db'}`, padding: '0.5rem', borderRadius: '0.375rem', color: darkMode ? '#d1d5db' : '#374151', backgroundColor: 'transparent', cursor: 'pointer' }}>{language === 'de' ? 'Warenkorb leeren' : 'Clear Cart'}</button>
             </aside>
           </div>
         )}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Box,
   Paper,
@@ -11,14 +11,9 @@ import {
   Alert,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-
-const SUBJECT_OPTIONS = [
-  "Frage zur Bestellung",
-  "Frage zu einem Produkt",
-  "Retoure / Reklamation",
-  "Technische Probleme",
-  "Sonstiges",
-];
+import { ThemeContext } from "../../context/ThemeContext";
+import { LanguageContext } from "../../context/LanguageContext";
+import { translations } from "../../translations/translations";
 
 const initialFormData = {
   firstName: "",
@@ -34,6 +29,9 @@ const initialFormData = {
 export default function ContactForm() {
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const t = translations[language].contactPage;
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -55,30 +53,30 @@ export default function ContactForm() {
   return (
     <Paper
       elevation={3}
+      className={darkMode ? "dark:bg-gray-800" : ""}
       sx={{
         p: { xs: 3, md: 4 },
         borderRadius: 1,
-        backgroundColor: "#ffffff",
+        backgroundColor: darkMode ? "#1f2937" : "#ffffff",
       }}
     >
-      <Typography variant="h5" sx={{ fontWeight: 700, mb: 1, textAlign: "left" }}>
-        Schreib uns eine Nachricht
+      <Typography variant="h5" sx={{ fontWeight: 700, mb: 1, textAlign: "left", color: darkMode ? "white" : "inherit" }}>
+        {t.formTitle}
       </Typography>
 
       <Typography
         variant="body2"
-        sx={{ color: "rgba(0,0,0,0.6)", mb: 2, textAlign: "left" }}
+        sx={{ color: darkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)", mb: 2, textAlign: "left" }}
       >
-        Fülle das Formular aus und unser Team meldet sich so schnell wie möglich
-        bei dir zurück.
+        {t.formSubtitle}
       </Typography>
 
       <Divider sx={{ mb: 3 }} />
 
-      {/* mensagem de agradecimento */}
+      {/* thank you message */}
       {isSubmitted && (
         <Alert severity="success" sx={{ mb: 2 }}>
-          Danke! Deine Nachricht wurde erfolgreich gesendet.
+          {t.successMessage}
         </Alert>
       )}
 
@@ -87,7 +85,7 @@ export default function ContactForm() {
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
             <TextField
               fullWidth
-              label="Vorname *"
+              label={`${t.firstName} *`}
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
@@ -95,7 +93,7 @@ export default function ContactForm() {
             />
             <TextField
               fullWidth
-              label="Nachname *"
+              label={`${t.lastName} *`}
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
@@ -105,7 +103,7 @@ export default function ContactForm() {
 
           <TextField
             fullWidth
-            label="E-Mail-Adresse *"
+            label={`${t.email} *`}
             name="email"
             type="email"
             value={formData.email}
@@ -116,7 +114,7 @@ export default function ContactForm() {
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
             <TextField
               select
-              label="Land"
+              label={t.country}
               name="phonePrefix"
               value={formData.phonePrefix}
               onChange={handleChange}
@@ -130,7 +128,7 @@ export default function ContactForm() {
 
             <TextField
               fullWidth
-              label="Telefonnummer (optional)"
+              label={t.phone}
               name="phone"
               value={formData.phone}
               onChange={handleChange}
@@ -140,7 +138,7 @@ export default function ContactForm() {
 
           <TextField
             fullWidth
-            label="Bestellnummer (optional)"
+            label={t.orderNumber}
             name="orderNumber"
             value={formData.orderNumber}
             onChange={handleChange}
@@ -150,22 +148,22 @@ export default function ContactForm() {
           <TextField
             select
             fullWidth
-            label="Betreff"
+            label={t.subject}
             name="subject"
             value={formData.subject}
             onChange={handleChange}
             size="small"
           >
-            {SUBJECT_OPTIONS.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
+            <MenuItem value="order">{t.subjects.order}</MenuItem>
+            <MenuItem value="product">{t.subjects.product}</MenuItem>
+            <MenuItem value="return">{t.subjects.return}</MenuItem>
+            <MenuItem value="technical">{t.subjects.technical}</MenuItem>
+            <MenuItem value="other">{t.subjects.other}</MenuItem>
           </TextField>
 
           <TextField
             fullWidth
-            label="Bitte beschreibe dein Anliegen *"
+            label={`${t.message} *`}
             name="message"
             multiline
             minRows={4}
@@ -191,7 +189,7 @@ export default function ContactForm() {
                 },
               }}
             >
-              ABSENDEN
+              {t.sendButton}
             </Button>
           </Box>
         </Stack>

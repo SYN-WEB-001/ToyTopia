@@ -1,10 +1,24 @@
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
+
 const CategoryCard = ({ category, useNavigation, handleCategoryClick }) => {
   const isClickable = useNavigation || handleCategoryClick;
+  const { darkMode } = useContext(ThemeContext);
   
   return (
     <div
-      className={`bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl ${isClickable ? 'cursor-pointer' : ''}`}
+      style={{
+        backgroundColor: darkMode ? '#1f2937' : '#ffffff',
+        borderRadius: '0.5rem',
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        overflow: 'hidden',
+        transform: 'scale(1)',
+        transition: 'all 0.3s',
+        cursor: isClickable ? 'pointer' : 'default'
+      }}
       onClick={isClickable ? () => handleCategoryClick && handleCategoryClick(category.slug) : undefined}
+      onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+      onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
     >
       {/* Category Image */}
       <div className="relative h-48 overflow-hidden">
@@ -14,17 +28,17 @@ const CategoryCard = ({ category, useNavigation, handleCategoryClick }) => {
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
         />
         {/* Category Badge */}
-        <div className="absolute top-3 right-3 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+        <div className="absolute top-3 right-3 bg-green-600 dark:bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
           {category.category}
         </div>
       </div>
 
       {/* Card Content */}
       <div className="p-6">
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+        <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '0.5rem' }}>
           {category.name}
         </h3>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+        <p style={{ color: darkMode ? '#d1d5db' : '#4b5563', fontSize: '0.875rem', marginBottom: '1rem' }}>
           {category.description}
         </p>
         {isClickable ? (

@@ -1,6 +1,18 @@
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+
 const Footer = () => {
+  const { darkMode } = useContext(ThemeContext);
+  
   return (
-    <footer className="bg-white text-gray-700 mt-auto border-t border-gray-200">
+    <footer 
+      style={{
+        backgroundColor: darkMode ? '#111827' : '#ffffff',
+        color: darkMode ? '#d1d5db' : '#374151',
+        marginTop: 'auto',
+        borderTop: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo and Description */}
@@ -10,14 +22,14 @@ const Footer = () => {
               alt="ToyTopia Logo" 
               className="h-12 md:h-16 w-auto mb-4"
             />
-            <p className="text-sm text-center md:text-left text-gray-600">
+            <p style={{ fontSize: '0.875rem', textAlign: 'center', color: darkMode ? '#9ca3af' : '#4b5563' }} className="md:text-left">
               TOYTOPIA makes your kids <br></br>smarter and more creative!
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <a 
@@ -56,8 +68,8 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="text-center md:text-left">
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>Contact Us</h3>
+            <ul className="space-y-2" style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#4b5563' }}>
               <li>Email: info@toytopia.com</li>
               <li>Phone: +49 (555) 123-4567</li>
               <li>Address: Toytopiastraße 123, 12345 Berlin</li>
@@ -97,8 +109,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-200 mt-8 pt-6 text-center">
-          <p className="text-sm text-gray-600">
+        <div style={{ borderTop: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`, marginTop: '2rem', paddingTop: '1.5rem', textAlign: 'center' }}>
+          <p style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#4b5563' }}>
             &copy; {new Date().getFullYear()} ToyTopia. All rights reserved.
           </p>
         </div>
