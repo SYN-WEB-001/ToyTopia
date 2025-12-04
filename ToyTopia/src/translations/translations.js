@@ -240,7 +240,7 @@ export const translations = {
       recommendedProducts: "Empfohlene Produkte",
       inStock: "Auf Lager",
       outOfStock: "Nicht auf Lager",
-      pieces: "Stück"
+      pieces: "Stück",
       next: "Weiter →",
       page: "Seite",
       of: "von",
