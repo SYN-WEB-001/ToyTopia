@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import CategoryCard from './CategoryCard';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { LanguageContext } from '../../../context/LanguageContext';
+import { translations } from '../../../translations/translations';
 
 const CategoryCards = ({ showHeader = true, useNavigation = false, onCategoryClick }) => {
   const navigate = useNavigate();
@@ -32,16 +33,16 @@ const CategoryCards = ({ showHeader = true, useNavigation = false, onCategoryCli
         {showHeader && (
           <div className="text-center mb-12">
             <h2 style={{ fontSize: '3rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1rem' }}>
-              {language === 'de' ? 'Nach Kategorie einkaufen' : 'Shop by Category'}
+              {translations[language].homepage.shopByCategory}
             </h2>
             <p style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', maxWidth: '42rem', margin: '0 auto' }}>
-              {language === 'de' ? 'Entdecke unsere großartige Spielzeugsammlung nach Kategorien organisiert' : 'Discover our amazing collection of toys organized by category'}
+              {translations[language].homepage.shopByCategoryDescription}
             </p>
           </div>
         )}
 
         {/* Category Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {categoryData.map((category) => (
             <CategoryCard
               key={category.slug}

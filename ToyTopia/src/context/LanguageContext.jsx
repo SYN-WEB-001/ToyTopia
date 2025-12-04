@@ -13,8 +13,8 @@ export const LanguageProvider = ({ children }) => {
     localStorage.setItem("language", language);
   }, [language]);
 
-  const toggleLanguage = (lang) => {
-    setLanguage(lang);
+  const toggleLanguage = () => {
+    setLanguage(prevLang => prevLang === 'en' ? 'de' : 'en');
   };
 
   return (

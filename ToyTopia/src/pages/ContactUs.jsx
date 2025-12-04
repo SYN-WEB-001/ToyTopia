@@ -24,13 +24,13 @@ export default function ContactUs() {
     <Box
       className={darkMode ? "dark" : ""}
       sx={{
-        minHeight: "calc(100vh - 90px)", // desconta navbar
+        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         px: 2,
 
-        // 🌈 gradiente claro/escuro dependendo do tema
+        // 🌈 light/dark gradient depending on theme
         background: darkMode
             ? "linear-gradient(135deg, #0a0a0c 0%, #0f0f14 30%, #1a1a21 70%, #000000 100%)"
             : "linear-gradient(135deg, #ffe6e9 0%, #fff6e9 20%, #fff7d9 50%, #e3ffe4 80%, #e8e5ff 100%)",
@@ -46,7 +46,7 @@ export default function ContactUs() {
             justifyContent: "center",
           }}
         >
-          {/* --- ESQUERDA (texto) --- */}
+          {/* --- LEFT (text) --- */}
           <Box
             sx={{
               flex: 1,
@@ -127,7 +127,7 @@ export default function ContactUs() {
             </Stack>
           </Box>
 
-          {/* LINHA CENTRAL */}
+          {/* CENTRAL LINE */}
           <Box
             sx={{
               display: { xs: "none", md: "block" },
@@ -139,7 +139,7 @@ export default function ContactUs() {
             }}
           />
 
-          {/* --- DIREITA (Formulário) --- */}
+          {/* --- RIGHT (Form) --- */}
           <Box
             sx={{
               flex: 1,

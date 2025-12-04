@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Container } from '@mui/material';
 import { ThemeContext } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import aboutDataEn from '../data/aboutData.json';
@@ -21,19 +22,21 @@ const AboutUs = () => {
             : 'linear-gradient(to bottom right, #eff6ff, #faf5ff, #fce7f3)'
         }}
       >
-        <div className="max-w-7xl mx-auto text-center">
+        <Container maxWidth="lg">
+          <div className="text-center">
           <h1 style={{ fontSize: '3.75rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>
             {data.hero.title} <span style={{ background: 'linear-gradient(to right, #2563eb, #9333ea)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{data.hero.highlightedText}</span>
           </h1>
           <p style={{ fontSize: '1.25rem', color: darkMode ? '#d1d5db' : '#4b5563', maxWidth: '48rem', margin: '0 auto' }}>
             {data.hero.subtitle}
           </p>
-        </div>
+          </div>
+        </Container>
       </section>
 
       {/* Our Story Section */}
       <section style={{ padding: '4rem 1rem', backgroundColor: darkMode ? '#111827' : '#ffffff' }}>
-        <div className="max-w-7xl mx-auto">
+        <Container maxWidth="lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>
@@ -53,12 +56,12 @@ const AboutUs = () => {
               />
             </div>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Our Values Section */}
       <section style={{ padding: '4rem 1rem', backgroundColor: darkMode ? '#1f2937' : '#f9fafb' }}>
-        <div className="max-w-7xl mx-auto">
+        <Container maxWidth="lg">
           <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', textAlign: 'center', marginBottom: '4rem' }}>
             {data.coreValues.title}
           </h2>
@@ -90,12 +93,12 @@ const AboutUs = () => {
               );
             })}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Team Section */}
       <section style={{ padding: '4rem 1rem', backgroundColor: darkMode ? '#111827' : '#ffffff' }}>
-        <div className="max-w-7xl mx-auto">
+        <Container maxWidth="lg">
           <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', textAlign: 'center', marginBottom: '1rem' }}>
             {data.team.title}
           </h2>
@@ -121,12 +124,12 @@ const AboutUs = () => {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Stats Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-blue-600 to-purple-600">
-        <div className="max-w-7xl mx-auto">
+        <Container maxWidth="lg">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             {data.stats.map((stat, index) => (
               <div key={index}>
@@ -135,12 +138,13 @@ const AboutUs = () => {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Mission Statement */}
       <section style={{ padding: '4rem 1rem', backgroundColor: darkMode ? '#1f2937' : '#f9fafb' }}>
-        <div className="max-w-4xl mx-auto text-center">
+        <Container maxWidth="lg">
+          <div className="max-w-4xl mx-auto text-center">
           <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>
             {data.mission.title}
           </h2>
@@ -152,7 +156,8 @@ const AboutUs = () => {
               "{data.mission.quote}"
             </p>
           </div>
-        </div>
+          </div>
+        </Container>
       </section>
     </div>
   );

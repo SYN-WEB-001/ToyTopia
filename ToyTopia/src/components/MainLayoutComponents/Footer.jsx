@@ -1,9 +1,14 @@
 import { useContext } from 'react';
+import { Container } from '@mui/material';
 import { Link } from "react-router-dom";
 import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import { translations } from '../../translations/translations';
 
 const Footer = () => {
   const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const t = translations[language].footer;
   
   return (
     <footer 
@@ -14,7 +19,8 @@ const Footer = () => {
         borderTop: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <Container maxWidth="lg">
+        <div className="py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo and Description */}
           <div className="flex flex-col items-center md:items-start">
@@ -26,21 +32,20 @@ const Footer = () => {
               />
             </Link>
             <p style={{ fontSize: '0.875rem', textAlign: 'center', color: darkMode ? '#9ca3af' : '#4b5563' }} className="md:text-left">
-              TOYTOPIA makes your kids <br />
-              smarter and more creative!
+              {t.tagline}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>Quick Links</h3>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>{t.quickLinks}</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   to="/"
                   className="hover:text-green-600 transition duration-300"
                 >
-                  Home
+                  {t.home}
                 </Link>
               </li>
               <li>
@@ -48,7 +53,7 @@ const Footer = () => {
                   to="/products"
                   className="hover:text-green-600 transition duration-300"
                 >
-                  Products
+                  {t.products}
                 </Link>
               </li>
               <li>
@@ -56,7 +61,7 @@ const Footer = () => {
                   to="/about"
                   className="hover:text-green-600 transition duration-300"
                 >
-                  About Us
+                  {t.about}
                 </Link>
               </li>
               <li>
@@ -64,7 +69,7 @@ const Footer = () => {
                   to="/contact-us"
                   className="hover:text-green-600 transition duration-300"
                 >
-                  Contact
+                  {t.contact}
                 </Link>
               </li>
             </ul>
@@ -72,7 +77,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="text-center md:text-left">
-            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>Contact Us</h3>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>{t.contactUs}</h3>
             <ul className="space-y-2" style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#4b5563' }}>
               <li>Email: info@toytopia.com</li>
               <li>Phone: +49 (555) 123-4567</li>
@@ -115,10 +120,11 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div style={{ borderTop: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`, marginTop: '2rem', paddingTop: '1.5rem', textAlign: 'center' }}>
           <p style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#4b5563' }}>
-            &copy; {new Date().getFullYear()} ToyTopia. All rights reserved.
+            {t.copyright}
           </p>
         </div>
-      </div>
+        </div>
+      </Container>
     </footer>
   );
 };

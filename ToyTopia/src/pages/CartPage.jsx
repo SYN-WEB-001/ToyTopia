@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Container } from '@mui/material';
 import { useCart } from '../context/CartContext';
 import CartItem from '../components/Cart/CartItem';
 import { Link } from 'react-router-dom';
@@ -13,8 +14,8 @@ const CartPage = () => {
   const t = translations[language].cartPage;
 
   return (
-    <div style={{ minHeight: '100vh', padding: '4rem 1rem', backgroundColor: darkMode ? '#111827' : '#ffffff' }}>
-      <div className="max-w-7xl mx-auto">
+    <div style={{ minHeight: '100vh', padding: '4rem 0', backgroundColor: darkMode ? '#111827' : '#ffffff' }}>
+      <Container maxWidth="lg">
         <h1 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>{t.title}</h1>
 
         {cartItems.length === 0 ? (
@@ -31,9 +32,9 @@ const CartPage = () => {
             </div>
 
             <aside style={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff', borderRadius: '0.5rem', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)', padding: '1.5rem' }}>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>{language === 'de' ? 'Bestellung Zusammenfassung' : 'Order Summary'}</h2>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>{t.orderSummary}</h2>
               <div className="flex justify-between mb-2">
-                <span style={{ color: darkMode ? '#d1d5db' : '#4b5563' }}>{language === 'de' ? 'Artikel' : 'Items'}</span>
+                <span style={{ color: darkMode ? '#d1d5db' : '#4b5563' }}>{t.items}</span>
                 <span style={{ fontWeight: '500', color: darkMode ? '#ffffff' : '#111827' }}>{cartCount}</span>
               </div>
               <div className="flex justify-between mb-6">
@@ -41,11 +42,11 @@ const CartPage = () => {
                 <span style={{ fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827' }}>€{cartTotal.toFixed(2)}</span>
               </div>
               <button style={{ width: '100%', backgroundColor: '#16a34a', color: '#ffffff', padding: '0.75rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', marginBottom: '0.75rem' }}>{t.checkout}</button>
-              <button onClick={clearCart} style={{ width: '100%', border: `1px solid ${darkMode ? '#4b5563' : '#d1d5db'}`, padding: '0.5rem', borderRadius: '0.375rem', color: darkMode ? '#d1d5db' : '#374151', backgroundColor: 'transparent', cursor: 'pointer' }}>{language === 'de' ? 'Warenkorb leeren' : 'Clear Cart'}</button>
+              <button onClick={clearCart} style={{ width: '100%', border: `1px solid ${darkMode ? '#4b5563' : '#d1d5db'}`, padding: '0.5rem', borderRadius: '0.375rem', color: darkMode ? '#d1d5db' : '#374151', backgroundColor: 'transparent', cursor: 'pointer' }}>{t.clearCart}</button>
             </aside>
           </div>
         )}
-      </div>
+      </Container>
     </div>
   );
 };

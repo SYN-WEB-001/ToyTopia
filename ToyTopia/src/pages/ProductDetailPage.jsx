@@ -1,15 +1,27 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { Container } from '@mui/material';
 import { useCart } from '../context/CartContext';
-import categoryData from '../data/categoryData.json';
+import { useNotification } from '../context/NotificationContext';
+import categoryDataEn from '../data/categoryData.json';
+import categoryDataDe from '../data/categoryData.de.json';
+import { LanguageContext } from '../context/LanguageContext';
+import { translations } from '../translations/translations';
 
 export default function ProductDetailPage() {
   const { categorySlug, productSlug } = useParams();
   const navigate = useNavigate();
   const { addItem } = useCart();
+  const { showNotification } = useNotification();
+  const { language } = useContext(LanguageContext);
   const [product, setProduct] = useState(null);
   const [category, setCategory] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  const categoryData = language === 'de' ? categoryDataDe : categoryDataEn;
+  const t = translations[language];
+  const tNav = t.nav;
+  const tProductDetail = t.productDetail;
 
   useEffect(() => {
     // Decode URL parameters
@@ -36,19 +48,19 @@ export default function ProductDetailPage() {
         setProduct(foundProduct);
       }
     }
-  }, [categorySlug, productSlug]);
+  }, [categorySlug, productSlug, categoryData]);
 
   if (!product || !category) {
     return (
-      <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="min-h-screen py-16">
+        <Container maxWidth="lg">
           <div className="text-center py-20">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Produkt nicht gefunden</h1>
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">{t.productsPage.productNotFound}</h1>
             <Link to="/products" className="text-green-600 hover:text-green-700">
-              Zurück zu den Produkten
+              {t.productsPage.backToProducts}
             </Link>
           </div>
-        </div>
+        </Container>
       </div>
     );
   }
@@ -81,17 +93,18 @@ export default function ProductDetailPage() {
       Altersempfehlung: product.Altersempfehlung
     };
     addItem(cartProduct, 1);
+    showNotification(t.cartPage.itemAdded, 'success');
   };
 
   return (
-    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen py-16 bg-gray-50">
+      <Container maxWidth="lg">
         {/* Breadcrumb */}
         <nav className="mb-6">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Link to="/" className="hover:text-green-600">Home</Link>
+            <Link to="/" className="hover:text-green-600">{tNav.home}</Link>
             <span>/</span>
-            <Link to="/products" className="hover:text-green-600">Products</Link>
+            <Link to="/products" className="hover:text-green-600">{tNav.products}</Link>
             <span>/</span>
             <Link to={`/products?category=${categorySlug}`} className="hover:text-green-600">
               {category.name}
@@ -106,7 +119,7 @@ export default function ProductDetailPage() {
           onClick={() => navigate(-1)}
           className="mb-6 text-green-600 hover:text-green-700 font-semibold flex items-center gap-2"
         >
-          ← Zurück
+          {tProductDetail.back}
         </button>
 
         {/* Product Details */}
@@ -164,7 +177,7 @@ export default function ProductDetailPage() {
               {product.Altersempfehlung !== undefined && (
                 <div className="mb-4">
                   <span className="inline-block bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                    Ab {product.Altersempfehlung} Jahren
+                    {tProductDetail.ageRecommendation} {product.Altersempfehlung} {t.homepage.years}
                   </span>
                 </div>
               )}
@@ -173,8 +186,8 @@ export default function ProductDetailPage() {
               <div className="mb-6">
                 <span className={`text-lg font-semibold ${product.stock > 0 ? 'text-green-600' : 'text-red-600'}`}>
                   {product.stock > 0 
-                    ? `✓ Auf Lager: ${product.stock} Stück verfügbar`
-                    : '✗ Nicht auf Lager'
+                    ? `✓ ${tProductDetail.stockAvailable}: ${product.stock} ${tProductDetail.piecesAvailable}`
+                    : `✗ ${tProductDetail.stockUnavailable}`
                   }
                 </span>
               </div>
@@ -182,7 +195,7 @@ export default function ProductDetailPage() {
               {/* Description */}
               {product.description && (
                 <div className="mb-6">
-                  <h2 className="text-xl font-bold text-gray-900 mb-3">Beschreibung</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-3">{t.productsPage.description}</h2>
                   <p className="text-gray-700 leading-relaxed whitespace-pre-line">
                     {product.description}
                   </p>
@@ -203,7 +216,7 @@ export default function ProductDetailPage() {
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
-                  In den Warenkorb
+                  {tProductDetail.addToCart}
                 </button>
               </div>
 
@@ -213,13 +226,13 @@ export default function ProductDetailPage() {
                   to={`/products?category=${categorySlug}`}
                   className="text-green-600 hover:text-green-700 font-medium"
                 >
-                  ← Zurück zu {category.name}
+                  {tProductDetail.backToCategory} {category.name}
                 </Link>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

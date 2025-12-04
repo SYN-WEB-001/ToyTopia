@@ -49,7 +49,13 @@ export const translations = {
       shopNow: "Shop Now",
       categories: "Categories",
       testimonials: "What Our Customers Say",
-      featuredProducts: "Featured Products"
+      featuredProducts: "Featured Products",
+      shopByCategory: "Shop by Category",
+      shopByCategoryDescription: "Discover our amazing collection of toys organized by category",
+      explore: "Explore",
+      viewProduct: "View Product",
+      age: "Age",
+      years: "years"
     },
     
     // Products Page
@@ -60,7 +66,17 @@ export const translations = {
       filterByCategory: "Filter by Category",
       addToCart: "Add to Cart",
       price: "Price",
-      description: "Description"
+      description: "Description",
+      recommendedProducts: "Recommended Products",
+      inStock: "In Stock",
+      pieces: "pieces",
+      outOfStock: "Out of Stock",
+      noProductsAvailable: "No products available in this category.",
+      next: "Next →",
+      page: "Page",
+      of: "of",
+      productNotFound: "Product not found",
+      backToProducts: "Back to Products"
     },
     
     // About Page
@@ -117,7 +133,11 @@ export const translations = {
       checkout: "Proceed to Checkout",
       continueShopping: "Continue Shopping",
       removeItem: "Remove",
-      quantity: "Quantity"
+      quantity: "Quantity",
+      orderSummary: "Order Summary",
+      items: "Items",
+      clearCart: "Clear Cart",
+      itemAdded: "Item added to cart"
     },
     
     // Footer
@@ -138,7 +158,20 @@ export const translations = {
       returns: "Returns",
       privacy: "Privacy Policy",
       followUs: "Follow Us",
-      copyright: "© 2025 ToyTopia. All rights reserved."
+      copyright: "© 2025 ToyTopia. All rights reserved.",
+      contactUs: "Contact Us",
+      tagline: "TOYTOPIA makes your kids smarter and more creative!"
+    },
+    
+    // Product Detail Page
+    productDetail: {
+      back: "← Back",
+      ageRecommendation: "Age",
+      stockAvailable: "In Stock",
+      stockUnavailable: "Out of Stock",
+      piecesAvailable: "pieces available",
+      addToCart: "Add to Cart",
+      backToCategory: "← Back to"
     }
   },
   
@@ -192,7 +225,13 @@ export const translations = {
       shopNow: "Jetzt einkaufen",
       categories: "Kategorien",
       testimonials: "Was unsere Kunden sagen",
-      featuredProducts: "Empfohlene Produkte"
+      featuredProducts: "Empfohlene Produkte",
+      shopByCategory: "Nach Kategorie einkaufen",
+      shopByCategoryDescription: "Entdecke unsere großartige Spielzeugsammlung nach Kategorien organisiert",
+      explore: "Entdecken",
+      viewProduct: "Produkt ansehen",
+      age: "Ab",
+      years: "Jahren"
     },
     
     // Products Page
@@ -203,7 +242,17 @@ export const translations = {
       filterByCategory: "Nach Kategorie filtern",
       addToCart: "In den Warenkorb",
       price: "Preis",
-      description: "Beschreibung"
+      description: "Beschreibung",
+      recommendedProducts: "Empfohlene Produkte",
+      inStock: "Auf Lager",
+      pieces: "Stück",
+      outOfStock: "Nicht auf Lager",
+      noProductsAvailable: "Keine Produkte in dieser Kategorie verfügbar.",
+      next: "Weiter →",
+      page: "Seite",
+      of: "von",
+      productNotFound: "Produkt nicht gefunden",
+      backToProducts: "Zurück zu den Produkten"
     },
     
     // About Page
@@ -260,7 +309,11 @@ export const translations = {
       checkout: "Zur Kasse",
       continueShopping: "Weiter einkaufen",
       removeItem: "Entfernen",
-      quantity: "Menge"
+      quantity: "Menge",
+      orderSummary: "Bestellung Zusammenfassung",
+      items: "Artikel",
+      clearCart: "Warenkorb leeren",
+      itemAdded: "Artikel wurde zum Warenkorb hinzugefügt"
     },
     
     // Footer
@@ -281,7 +334,20 @@ export const translations = {
       returns: "Rücksendungen",
       privacy: "Datenschutz",
       followUs: "Folge uns",
-      copyright: "© 2025 ToyTopia. Alle Rechte vorbehalten."
+      copyright: "© 2025 ToyTopia. Alle Rechte vorbehalten.",
+      contactUs: "Kontakt",
+      tagline: "TOYTOPIA macht deine Kinder schlauer und kreativer!"
+    },
+    
+    // Product Detail Page
+    productDetail: {
+      back: "← Zurück",
+      ageRecommendation: "Ab",
+      stockAvailable: "Auf Lager",
+      stockUnavailable: "Nicht auf Lager",
+      piecesAvailable: "Stück verfügbar",
+      addToCart: "In den Warenkorb",
+      backToCategory: "← Zurück zu"
     }
   }
 };

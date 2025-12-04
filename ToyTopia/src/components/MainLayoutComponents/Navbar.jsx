@@ -21,7 +21,7 @@ export default function Navbar() {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const { language, toggleLanguage } = useContext(LanguageContext);
   const { cartCount } = useCart();
-  const t = translations[language].navbar;
+  const t = translations[language].nav;
 
   return (
     <AppBar
@@ -47,7 +47,7 @@ export default function Navbar() {
             justifyContent: "space-between",
           }}
         >
-          {/* LOGO ORIGINAL À ESQUERDA */}
+          {/* ORIGINAL LOGO ON THE LEFT */}
           <Box
             component={Link}
             to="/"
@@ -61,11 +61,11 @@ export default function Navbar() {
             <Box
               component="img"
               alt="ToyTopia Logo"
-              src="/Logo.png"           sx={{ height: 48 }}       // ajusta o tamanho se quiser
+              src="/Logo.png"           sx={{ height: 48 }}       // adjust the size if needed
             />
           </Box>
 
-          {/* LINKS + TOGGLE À DIREITA */}
+          {/* LINKS + TOGGLE ON THE RIGHT */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Button
               component={Link}
