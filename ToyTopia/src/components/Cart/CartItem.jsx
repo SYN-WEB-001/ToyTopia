@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useCart } from '../../context/CartContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import { translations } from '../../translations/translations';
 
 const CartItem = ({ item }) => {
   const { updateQuantity, removeItem } = useCart();
+  const { language } = useContext(LanguageContext);
+  const t = translations[language].cartPage;
   
   const maxQuantity = item.stock || 0;
   const currentQuantity = item.quantity || 1;
@@ -33,13 +37,13 @@ const CartItem = ({ item }) => {
         <div className="mt-2 flex items-center gap-4">
           <div className="text-gray-900 font-bold">€{(item.price || 0).toFixed(2)}</div>
           <div className="flex items-center gap-2">
-            <label className="text-sm text-gray-500">Menge:</label>
+            <label className="text-sm text-gray-500">{t.quantity}:</label>
             <div className="flex items-center border border-gray-300 rounded-md">
               <button
                 onClick={handleDecrement}
                 disabled={currentQuantity <= 1}
                 className="px-3 py-1 text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                aria-label="Menge verringern"
+                aria-label={language === 'de' ? 'Menge verringern' : 'Decrease quantity'}
               >
                 −
               </button>
@@ -50,14 +54,14 @@ const CartItem = ({ item }) => {
                 onClick={handleIncrement}
                 disabled={currentQuantity >= maxQuantity}
                 className="px-3 py-1 text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                aria-label="Menge erhöhen"
+                aria-label={language === 'de' ? 'Menge erhöhen' : 'Increase quantity'}
               >
                 +
               </button>
             </div>
             {maxQuantity < 999 && (
               <span className="text-xs text-gray-500">
-                (max. {maxQuantity} auf Lager)
+                {language === 'de' ? `(max. ${maxQuantity} auf Lager)` : `(max. ${maxQuantity} in stock)`}
               </span>
             )}
           </div>
@@ -69,7 +73,7 @@ const CartItem = ({ item }) => {
           onClick={() => removeItem(item.id)}
           className="mt-2 text-sm text-red-600 hover:underline"
         >
-          Entfernen
+          {t.removeItem}
         </button>
       </div>
     </div>

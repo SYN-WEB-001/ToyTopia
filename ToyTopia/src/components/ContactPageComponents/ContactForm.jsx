@@ -42,11 +42,11 @@ export default function ContactForm() {
     event.preventDefault();
     console.log("Form data:", formData);
 
-    // aqui você conectaria com backend / EmailJS etc.
+    // here you would connect to backend / EmailJS etc.
     setIsSubmitted(true);
     setFormData(initialFormData);
 
-    // se quiser desaparecer depois de alguns segundos:
+    // if you want it to disappear after a few seconds:
     // setTimeout(() => setIsSubmitted(false), 5000);
   }
 

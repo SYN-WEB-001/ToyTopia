@@ -1,12 +1,20 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Container } from '@mui/material';
 import heroImage from '../../../assets/images/Category-Images/GalleryHero/category-landing-mattel-xmas-2025-hot-wheels-0c99d6-DESKTOP.jpg';
-import categoryData from '../../../data/categoryData.json';
+import categoryDataEn from '../../../data/categoryData.json';
+import categoryDataDe from '../../../data/categoryData.de.json';
 import { ThemeContext } from '../../../context/ThemeContext';
+import { LanguageContext } from '../../../context/LanguageContext';
+import { translations } from '../../../translations/translations';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+
+  const categoryData = language === 'de' ? categoryDataDe : categoryDataEn;
+  const t = translations[language].homepage;
 
   // Collect all products from all categories
   const allProducts = categoryData.flatMap(category => 
@@ -54,13 +62,13 @@ const HeroSection = () => {
       <div 
         style={{
           background: darkMode 
-            ? 'linear-gradient(to right, #1f2937, #111827)' 
-            : 'linear-gradient(to right, #eff6ff, #faf5ff)',
-          padding: '3rem 1rem',
+            ? 'linear-gradient(to bottom right, #1f2937, #111827)' 
+            : 'linear-gradient(to bottom right, #eff6ff, #faf5ff)',
+          padding: '3rem 0',
           position: 'relative'
         }}
       >
-        <div className="max-w-7xl mx-auto">
+        <Container maxWidth="lg">
           <div className="relative" style={{ position: 'relative' }}>
             {/* Previous Button */}
             <button
@@ -131,11 +139,17 @@ const HeroSection = () => {
             {/* Carousel Track */}
             <div 
               style={{ 
-                display: 'flex',
-                transition: 'transform 0.5s ease-in-out',
-                transform: `translateX(-${currentSlide * 100}%)`
+                overflow: 'hidden',
+                width: '100%'
               }}
             >
+              <div
+                style={{ 
+                  display: 'flex',
+                  transition: 'transform 0.5s ease-in-out',
+                  transform: `translateX(-${currentSlide * 100}%)`
+                }}
+              >
               {allProducts.map((product) => (
                 <div 
                   key={`${product.categorySlug}-${product.index}`}
@@ -209,7 +223,7 @@ const HeroSection = () => {
                           </span>
                           {product.Altersempfehlung > 0 && (
                             <span style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#6b7280' }}>
-                              Age {product.Altersempfehlung}+
+                              {t.age} {product.Altersempfehlung}+
                             </span>
                           )}
                         </div>
@@ -237,13 +251,14 @@ const HeroSection = () => {
                             e.currentTarget.style.transform = 'scale(1)';
                           }}
                         >
-                          View Product
+                          {t.viewProduct}
                         </Link>
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
+              </div>
             </div>
 
             {/* Carousel Indicators */}
@@ -262,7 +277,7 @@ const HeroSection = () => {
               ))}
             </div>
           </div>
-        </div>
+        </Container>
       </div>
     </section>
   );

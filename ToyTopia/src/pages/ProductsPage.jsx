@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { useState, useMemo, useContext, useRef, useEffect } from 'react';
+import { Container } from '@mui/material';
 import CategoryCards from '../components/HomePageComponents/sections/CategoryCardsSection.jsx';
 import ProductItemCard from '../components/ProductPageComponents/ProductItemCard.jsx';
 import categoryDataEn from '../data/categoryData.json';
@@ -89,8 +90,8 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className={`min-h-screen py-16 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <Container maxWidth="lg">
         {/* Top Section: Categories (always visible) */}
         <div className="mb-12">
           {selectedCategory ? (
@@ -98,15 +99,15 @@ export default function ProductsPage() {
               <button
                 onClick={handleBackToCategories}
                 className="mb-4 text-green-600 hover:text-green-700 font-semibold flex items-center gap-2">
-                ← Zurück zur Übersicht
+                {t.backButton}
               </button>
-              <h1 className="text-4xl font-bold text-gray-900 mb-6">Alle Kategorien</h1>
+              <h1 className={`text-4xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.allProducts}</h1>
             </>
           ) : (
             <>
-              <h1 className="text-4xl font-bold text-gray-900 mb-8">Products</h1>
-              <p className="text-lg text-gray-600 mb-8">
-                Wähle eine Kategorie aus, um die Produkte in dieser Kategorie anzusehen.
+              <h1 className={`text-4xl font-bold mb-8 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.title}</h1>
+              <p className={`text-lg mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                {t.filterByCategory}
               </p>
             </>
           )}
@@ -116,11 +117,11 @@ export default function ProductsPage() {
         {/* Bottom Section: Products */}
         {selectedCategory ? (
           <>
-            <div className="mt-16 pt-8 border-t border-gray-200">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <div className={`mt-16 pt-8 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+              <h2 className={`text-3xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 {selectedCategory.name}
               </h2>
-              <p className="text-lg text-gray-600 mb-6">
+              <p className={`text-lg mb-6 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 {selectedCategory.description}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
@@ -132,7 +133,7 @@ export default function ProductsPage() {
                       categorySlug={selectedCategory.slug}/>
                   ))
                 ) : (
-                  <p className="text-gray-600">Keine Produkte in dieser Kategorie verfügbar.</p>
+                  <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>{t.noProductsAvailable}</p>
                 )}
               </div>
 
@@ -143,9 +144,13 @@ export default function ProductsPage() {
                     <button
                       onClick={() => handlePageChange(currentPage - 1)}
                       disabled={currentPage === 1}
-                      className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className={`px-4 py-2 border rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                        darkMode 
+                          ? 'border-gray-600 text-gray-300 hover:bg-gray-800' 
+                          : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                      }`}
                     >
-                      ← Zurück
+                      {t.backButton}
                     </button>
                     
                     <div className="flex gap-1">
@@ -159,7 +164,9 @@ export default function ProductsPage() {
                               className={`px-4 py-2 border rounded-md transition-colors ${
                                 currentPage === page
                                   ? 'bg-green-600 text-white border-green-600'
-                                  : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                                  : darkMode
+                                    ? 'border-gray-600 text-gray-300 hover:bg-gray-800'
+                                    : 'border-gray-300 text-gray-700 hover:bg-gray-50'
                               }`}
                             >
                               {page}
@@ -200,15 +207,19 @@ export default function ProductsPage() {
                     <button
                       onClick={() => handlePageChange(currentPage + 1)}
                       disabled={currentPage === totalPages}
-                      className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className={`px-4 py-2 border rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                        darkMode 
+                          ? 'border-gray-600 text-gray-300 hover:bg-gray-800' 
+                          : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                      }`}
                     >
-                      Weiter →
+                      {t.next}
                     </button>
                   </div>
                   
                   {/* Page info */}
-                  <p className="text-sm text-gray-600">
-                    Seite {currentPage} von {totalPages}
+                  <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    {t.page} {currentPage} {t.of} {totalPages}
                   </p>
                 </div>
               )}
@@ -218,8 +229,8 @@ export default function ProductsPage() {
         ) : (
           <>
             {/* Bottom Section: Random Products */}
-            <div className="mt-16 pt-8 border-t border-gray-200">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">{t.recommendedProducts}</h2>
+            <div className={`mt-16 pt-8 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+              <h2 className={`text-3xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.recommendedProducts}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {randomProducts.map((product, index) => (
                   <ProductItemCard
@@ -232,7 +243,7 @@ export default function ProductsPage() {
             </div>
           </>
         )}
-      </div>
+      </Container>
     </div>
   );
 }

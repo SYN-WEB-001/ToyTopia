@@ -14,6 +14,7 @@ import Footer from "./components/MainLayoutComponents/Footer";
 import { ThemeProvider, ThemeContext } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
 import { CartProvider } from "./context/CartContext";
+import { NotificationProvider } from "./context/NotificationContext";
 
 function AppContent() {
   const { darkMode } = useContext(ThemeContext);
@@ -22,12 +23,11 @@ function AppContent() {
     <>
       <CssBaseline />
       <Router>
-        {/* NAVBAR FIXO EM TODAS AS PÁGINAS */}
+        {/* FIXED NAVBAR ON ALL PAGES */}
         <Navbar />
 
-        {/* empurra o conteúdo pra baixo do AppBar (170px) */}
         <Box 
-          sx={{ pt: { xs: 22, md: 23 }, minHeight: "100vh" }} 
+          sx={{ pt: { xs: 10, md: 10 }, minHeight: "100vh" }} 
           className={darkMode ? 'dark bg-gray-900' : 'bg-white'}
         >
           <Routes>
@@ -40,7 +40,7 @@ function AppContent() {
           </Routes>
         </Box>
 
-        {/* opcional: footer global */}
+        {/* optional: global footer */}
         <Footer />
       </Router>
     </>
@@ -51,9 +51,11 @@ export default function App() {
   return (
     <LanguageProvider>
       <ThemeProvider>
-        <CartProvider>
-          <AppContent />
-        </CartProvider>
+        <NotificationProvider>
+          <CartProvider>
+            <AppContent />
+          </CartProvider>
+        </NotificationProvider>
       </ThemeProvider>
     </LanguageProvider>
   );
