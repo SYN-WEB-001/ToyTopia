@@ -12,6 +12,7 @@ import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 
 import Navbar from "./components/MainLayoutComponents/Navbar";
 import Footer from "./components/MainLayoutComponents/Footer";
@@ -69,6 +70,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/products" element={<ProductsPage />} />
+                <Route path="/product/:categorySlug/:productSlug" element={<ProductDetailPage />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact-us" element={<ContactUs />} />
                 <Route path="/cart" element={<CartPage />} />
