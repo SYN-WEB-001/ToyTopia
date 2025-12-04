@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect, useMemo, useContext } from 'react';
+import { useState, useMemo, useContext, useRef, useEffect } from 'react';
 import CategoryCards from '../components/HomePageComponents/sections/CategoryCardsSection.jsx';
 import ProductItemCard from '../components/ProductPageComponents/ProductItemCard.jsx';
 import categoryDataEn from '../data/categoryData.json';
@@ -10,7 +10,6 @@ import { translations } from '../translations/translations';
 
 export default function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
@@ -19,28 +18,30 @@ export default function ProductsPage() {
   const categoryData = language === 'de' ? categoryDataDe : categoryDataEn;
   const categorySlug = searchParams.get('category');
   const itemsPerPage = 8;
-
+  
+  const prevCategorySlugRef = useRef(categorySlug);
+  
   useEffect(() => {
-    if (categorySlug) {
-      const category = categoryData.find(cat => cat.slug === categorySlug);
-      setSelectedCategory(category);
-      setCurrentPage(1); // Reset to first page when category changes
-    } else {
-      setSelectedCategory(null);
+    if (prevCategorySlugRef.current !== categorySlug) {
       setCurrentPage(1);
+      prevCategorySlugRef.current = categorySlug;
     }
+  }, [categorySlug]);
+
+  const selectedCategory = useMemo(() => {
+    if (categorySlug) {
+      return categoryData.find(cat => cat.slug === categorySlug);
+    }
+    return null;
   }, [categorySlug, categoryData]);
 
   const handleBackToCategories = () => {
     setSearchParams({});
-    setSelectedCategory(null);
     setCurrentPage(1);
   };
 
-  // Function to get random products from different categories
-  const [randomProducts, setRandomProducts] = useState([]);
-  
-  useEffect(() => {
+  // Function to get featured products from different categories
+  const randomProducts = useMemo(() => {
     const allProducts = [];
     
     // Collect all products from all categories with their category slug
@@ -57,9 +58,8 @@ export default function ProductsPage() {
       }
     });
 
-    // Shuffle array and get 8 random products
-    const shuffled = [...allProducts].sort(() => 0.5 - Math.random());
-    setRandomProducts(shuffled.slice(0, 8));
+    // Get first 8 products as featured
+    return allProducts.slice(0, 8);
   }, [categoryData]);
 
   // Pagination logic for category products
