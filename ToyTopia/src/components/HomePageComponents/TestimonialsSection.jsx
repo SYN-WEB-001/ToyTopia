@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import testimonials from "../../data/testimonialsData.json";
 
 const gradientBg =
-  "linear-gradient(135deg,#ffe9cf 0%,#fff4e3 25%,#f8ffe9 50%,#e9fff9 75%,#fce9ff 100%)";
+  "linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%)";
 
 const itemsPerSlide = 3;
 
