@@ -69,14 +69,8 @@ export const translations = {
       description: "Description",
       recommendedProducts: "Recommended Products",
       inStock: "In Stock",
-      pieces: "pieces",
       outOfStock: "Out of Stock",
-      noProductsAvailable: "No products available in this category.",
-      next: "Next →",
-      page: "Page",
-      of: "of",
-      productNotFound: "Product not found",
-      backToProducts: "Back to Products"
+      pieces: "pieces"
     },
     
     // About Page
@@ -245,9 +239,8 @@ export const translations = {
       description: "Beschreibung",
       recommendedProducts: "Empfohlene Produkte",
       inStock: "Auf Lager",
-      pieces: "Stück",
       outOfStock: "Nicht auf Lager",
-      noProductsAvailable: "Keine Produkte in dieser Kategorie verfügbar.",
+      pieces: "Stück"
       next: "Weiter →",
       page: "Seite",
       of: "von",
