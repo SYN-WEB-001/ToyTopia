@@ -1,9 +1,13 @@
 import { useContext } from 'react';
 import { Link } from "react-router-dom";
 import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import { translations } from '../../translations/translations';
 
 const Footer = () => {
   const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const t = translations[language].footer;
   
   return (
     <footer 
@@ -33,38 +37,44 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>Quick Links</h3>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>
+              {t.quickLinks}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   to="/"
                   className="hover:text-green-600 transition duration-300"
+                  style={{ color: darkMode ? '#d1d5db' : '#374151' }}
                 >
-                  Home
+                  {t.home}
                 </Link>
               </li>
               <li>
                 <Link
                   to="/products"
                   className="hover:text-green-600 transition duration-300"
+                  style={{ color: darkMode ? '#d1d5db' : '#374151' }}
                 >
-                  Products
+                  {t.products}
                 </Link>
               </li>
               <li>
                 <Link
                   to="/about"
                   className="hover:text-green-600 transition duration-300"
+                  style={{ color: darkMode ? '#d1d5db' : '#374151' }}
                 >
-                  About Us
+                  {t.about}
                 </Link>
               </li>
               <li>
                 <Link
                   to="/contact-us"
                   className="hover:text-green-600 transition duration-300"
+                  style={{ color: darkMode ? '#d1d5db' : '#374151' }}
                 >
-                  Contact
+                  {t.contact}
                 </Link>
               </li>
             </ul>
@@ -72,7 +82,9 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="text-center md:text-left">
-            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>Contact Us</h3>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>
+              {t.contactUs || 'Contact Us'}
+            </h3>
             <ul className="space-y-2" style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#4b5563' }}>
               <li>Email: info@toytopia.com</li>
               <li>Phone: +49 (555) 123-4567</li>
@@ -82,7 +94,9 @@ const Footer = () => {
             {/* Social Media Icons */}
             <div className="flex justify-center md:justify-start space-x-4 mt-4">
               <a
-                href="#"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-green-600 transition duration-300"
                 aria-label="Facebook"
               >
@@ -91,7 +105,9 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-green-600 transition duration-300"
                 aria-label="Twitter"
               >
@@ -100,7 +116,9 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-green-600 transition duration-300"
                 aria-label="Instagram"
               >
