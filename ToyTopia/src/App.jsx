@@ -11,11 +11,15 @@ import Homepage from "./pages/Homepage";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import ProductsPage from "./pages/ProductsPage";
+import CartPage from "./pages/CartPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 
 import Navbar from "./components/MainLayoutComponents/Navbar";
 import Footer from "./components/MainLayoutComponents/Footer";
+import { CartProvider } from "./context/CartContext";
 
 // 🔥 Contexto para o dark mode
+
 export const ColorModeContext = createContext({
   toggleColorMode: () => {},
 });
@@ -56,23 +60,27 @@ export default function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Router>
-          {/* NAVBAR FIXO EM TODAS AS PÁGINAS */}
-          <Navbar />
+        <CartProvider>
+          <Router>
+            {/* NAVBAR FIXO EM TODAS AS PÁGINAS */}
+            <Navbar />
 
-          {/* empurra o conteúdo pra baixo do AppBar (64–72px) */}
-          <Box sx={{ pt: { xs: 8, md: 9 }, minHeight: "100vh" }}>
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-            </Routes>
-          </Box>
+            {/* empurra o conteúdo pra baixo do AppBar (64–72px) */}
+            <Box sx={{ pt: { xs: 8, md: 9 }, minHeight: "100vh" }}>
+              <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/products" element={<ProductsPage />} />
+                <Route path="/product/:categorySlug/:productSlug" element={<ProductDetailPage />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/cart" element={<CartPage />} />
+              </Routes>
+            </Box>
 
-          {/* opcional: footer global */}
-          <Footer />
-        </Router>
+            {/* opcional: footer global */}
+            <Footer />
+          </Router>
+        </CartProvider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

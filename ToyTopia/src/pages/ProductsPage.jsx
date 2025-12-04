@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import CategoryCards from '../components/HomePageComponents/sections/CategoryCardsSection.jsx';
 import ProductItemCard from '../components/ProductPageComponents/ProductItemCard.jsx';
 import categoryData from '../data/categoryData.json';
@@ -7,61 +7,219 @@ import categoryData from '../data/categoryData.json';
 export default function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const categorySlug = searchParams.get('category');
+  const itemsPerPage = 8;
 
   useEffect(() => {
     if (categorySlug) {
       const category = categoryData.find(cat => cat.slug === categorySlug);
       setSelectedCategory(category);
+      setCurrentPage(1); // Reset to first page when category changes
     } else {
       setSelectedCategory(null);
+      setCurrentPage(1);
     }
   }, [categorySlug]);
 
   const handleBackToCategories = () => {
     setSearchParams({});
     setSelectedCategory(null);
+    setCurrentPage(1);
+  };
+
+  // Function to get random products from different categories
+  const getRandomProducts = useMemo(() => {
+    const allProducts = [];
+    
+    // Collect all products from all categories with their category slug
+    categoryData.forEach(category => {
+      if (category.products && Array.isArray(category.products)) {
+        category.products.forEach(product => {
+          if (product.name && product.name.trim() !== '') {
+            allProducts.push({
+              ...product,
+              categorySlug: category.slug
+            });
+          }
+        });
+      }
+    });
+
+    // Shuffle array and get 8 random products
+    const shuffled = [...allProducts].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 8);
+  }, []);
+
+  // Pagination logic for category products
+  const getPaginatedProducts = useMemo(() => {
+    if (!selectedCategory || !selectedCategory.products) return [];
+    
+    const validProducts = selectedCategory.products.filter(
+      product => product.name && product.name.trim() !== ''
+    );
+    
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return validProducts.slice(startIndex, endIndex);
+  }, [selectedCategory, currentPage, itemsPerPage]);
+
+  const totalPages = selectedCategory && selectedCategory.products
+    ? Math.ceil(
+        selectedCategory.products.filter(
+          product => product.name && product.name.trim() !== ''
+        ).length / itemsPerPage
+      )
+    : 0;
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {selectedCategory ? (
-          <>
-            <div className="mb-8">
+        {/* Top Section: Categories (always visible) */}
+        <div className="mb-12">
+          {selectedCategory ? (
+            <>
               <button
                 onClick={handleBackToCategories}
                 className="mb-4 text-green-600 hover:text-green-700 font-semibold flex items-center gap-2">
                 ← Zurück zur Übersicht
               </button>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-4xl font-bold text-gray-900 mb-6">Alle Kategorien</h1>
+            </>
+          ) : (
+            <>
+              <h1 className="text-4xl font-bold text-gray-900 mb-8">Products</h1>
+              <p className="text-lg text-gray-600 mb-8">
+                Wähle eine Kategorie aus, um die Produkte in dieser Kategorie anzusehen.
+              </p>
+            </>
+          )}
+          <CategoryCards showHeader={false} useNavigation={true} />
+        </div>
+
+        {/* Bottom Section: Products */}
+        {selectedCategory ? (
+          <>
+            <div className="mt-16 pt-8 border-t border-gray-200">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">
                 {selectedCategory.name}
-              </h1>
-              <p className="text-lg text-gray-600">
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
                 {selectedCategory.description}
               </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {selectedCategory.products && selectedCategory.products.length > 0 ? (
-                selectedCategory.products.map((product) => (
-                  <ProductItemCard
-                    key={product.slug || product.index}
-                    product={product}
-                    categorySlug={selectedCategory.slug}/>
-                ))
-              ) : (
-                <p className="text-gray-600">Keine Produkte in dieser Kategorie verfügbar.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                {getPaginatedProducts.length > 0 ? (
+                  getPaginatedProducts.map((product) => (
+                    <ProductItemCard
+                      key={product.slug || product.index}
+                      product={product}
+                      categorySlug={selectedCategory.slug}/>
+                  ))
+                ) : (
+                  <p className="text-gray-600">Keine Produkte in dieser Kategorie verfügbar.</p>
+                )}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex flex-col items-center gap-4 mt-8">
+                  <div className="flex justify-center items-center gap-2">
+                    <button
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      ← Zurück
+                    </button>
+                    
+                    <div className="flex gap-1">
+                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                        // Show all pages if 10 or less, otherwise show smart pagination
+                        if (totalPages <= 10) {
+                          return (
+                            <button
+                              key={page}
+                              onClick={() => handlePageChange(page)}
+                              className={`px-4 py-2 border rounded-md transition-colors ${
+                                currentPage === page
+                                  ? 'bg-green-600 text-white border-green-600'
+                                  : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                              }`}
+                            >
+                              {page}
+                            </button>
+                          );
+                        } else {
+                          // Smart pagination for many pages
+                          if (
+                            page === 1 ||
+                            page === totalPages ||
+                            (page >= currentPage - 1 && page <= currentPage + 1)
+                          ) {
+                            return (
+                              <button
+                                key={page}
+                                onClick={() => handlePageChange(page)}
+                                className={`px-4 py-2 border rounded-md transition-colors ${
+                                  currentPage === page
+                                    ? 'bg-green-600 text-white border-green-600'
+                                    : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                                }`}
+                              >
+                                {page}
+                              </button>
+                            );
+                          } else if (page === currentPage - 2 || page === currentPage + 2) {
+                            return (
+                              <span key={page} className="px-2 text-gray-500">
+                                ...
+                              </span>
+                            );
+                          }
+                          return null;
+                        }
+                      })}
+                    </div>
+
+                    <button
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Weiter →
+                    </button>
+                  </div>
+                  
+                  {/* Page info */}
+                  <p className="text-sm text-gray-600">
+                    Seite {currentPage} von {totalPages}
+                  </p>
+                </div>
               )}
+
             </div>
           </>
         ) : (
           <>
-            <h1 className="text-4xl font-bold text-gray-900 mb-8">Products</h1>
-            <p className="text-lg text-gray-600 mb-8">
-              Wähle eine Kategorie aus, um die Produkte in dieser Kategorie anzusehen.
-            </p>
-            <CategoryCards showHeader={false} useNavigation={true} />
+            {/* Bottom Section: Random Products */}
+            <div className="mt-16 pt-8 border-t border-gray-200">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Empfohlene Produkte</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {getRandomProducts.map((product, index) => (
+                  <ProductItemCard
+                    key={`random-${product.slug || product.index || index}`}
+                    product={product}
+                    categorySlug={product.categorySlug}
+                  />
+                ))}
+              </div>
+            </div>
           </>
         )}
       </div>

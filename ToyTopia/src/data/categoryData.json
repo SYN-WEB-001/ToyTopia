@@ -165,6 +165,28 @@
       "image": "TOPModel_Tagebuch_mit_geheimem_Code_My_bff.webp",
       "category":"Books",
       "slug":"topmodel-tagebuch-mit-geheimem-code-my-bff"
+    },
+    {
+      "index": 12,
+      "name":"Marvel Spidey und seine Super-Freunde 5 Minuten Geschichten",
+      "description":"Spidey, Ghost-Spider und Spin müssen New York nicht nur vor Rhino, Doc Ock und dem Grünen Kobold retten, sondern bekommen es auch mit einem Seeungeheuer und einem Robo-Dino zu tun! Zum Glück stehen den freundlichen Helden aus der Nachbarschaft ihre Superhelden-Freunde Black Panther, Ant-Man, Ms. Marvel und Reptil zur Seite.",
+      "price":9.99,
+      "stock":10,
+      "Altersempfehlung":6,
+      "image": "Marvel_Spidey_und_seine_Super-Freunde_5_Minuten_Geschichten.webp",
+      "category":"Books",
+      "slug":"marvel-spidey-und-seine-super-freunde-5-minuten-geschichten"
+    },
+    {
+      "index": 11,
+      "name":"",
+      "description":"",
+      "price":9.99,
+      "stock":10,
+      "Altersempfehlung":6,
+      "image": "Marvel_Spidey_und_seine_Super-Freunde_5_Minuten_Geschichten.webp",
+      "category":"Books",
+      "slug":""
     }
     ]
   },
