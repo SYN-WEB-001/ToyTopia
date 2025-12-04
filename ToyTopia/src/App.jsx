@@ -6,11 +6,14 @@ import Homepage from "./pages/Homepage";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import ProductsPage from "./pages/ProductsPage";
+import CartPage from "./pages/CartPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 
 import Navbar from "./components/MainLayoutComponents/Navbar";
 import Footer from "./components/MainLayoutComponents/Footer";
 import { ThemeProvider, ThemeContext } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
+import { CartProvider } from "./context/CartContext";
 
 function AppContent() {
   const { darkMode } = useContext(ThemeContext);
@@ -30,8 +33,10 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/products" element={<ProductsPage />} />
+            <Route path="/product/:categorySlug/:productSlug" element={<ProductDetailPage />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/cart" element={<CartPage />} />
           </Routes>
         </Box>
 
@@ -46,7 +51,9 @@ export default function App() {
   return (
     <LanguageProvider>
       <ThemeProvider>
-        <AppContent />
+        <CartProvider>
+          <AppContent />
+        </CartProvider>
       </ThemeProvider>
     </LanguageProvider>
   );

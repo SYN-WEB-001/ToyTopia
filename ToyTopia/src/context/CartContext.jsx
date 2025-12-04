@@ -1,22 +1,32 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, useRef } from 'react';
 
 const CartContext = createContext(null);
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-
-  // load from localStorage
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem('toy_cart');
-      if (raw) setCartItems(JSON.parse(raw));
-    } catch (e) {
-      // ignore
+// Function to load cart from localStorage
+const loadCartFromStorage = () => {
+  try {
+    const raw = localStorage.getItem('toy_cart');
+    if (raw) {
+      return JSON.parse(raw);
     }
-  }, []);
+  } catch (e) {
+    // ignore
+  }
+  return [];
+};
 
-  // persist
+export const CartProvider = ({ children }) => {
+  // Initialize state from localStorage immediately
+  const [cartItems, setCartItems] = useState(loadCartFromStorage);
+  const isFirstRender = useRef(true);
+
+  // Persist to localStorage (skip on first render to avoid overwriting)
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    
     try {
       localStorage.setItem('toy_cart', JSON.stringify(cartItems));
     } catch (e) {
