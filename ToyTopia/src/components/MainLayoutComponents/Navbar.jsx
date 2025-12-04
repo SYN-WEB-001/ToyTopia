@@ -6,16 +6,20 @@ import {
   Button,
   IconButton,
   Container,
+  Badge,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import { ColorModeContext } from "../../App"; // continua igual
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ColorModeContext } from "../../App";
+import { useCart } from "../../context/CartContext";
 
 export default function Navbar() {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
+  const { cartCount } = useCart();
 
   return (
     <AppBar
@@ -95,6 +99,18 @@ export default function Navbar() {
             >
               Contact
             </Button>
+
+            <IconButton
+              component={Link}
+              to="/cart"
+              color="inherit"
+              sx={{ ml: 1 }}
+              aria-label="Shopping cart"
+            >
+              <Badge badgeContent={cartCount} color="error">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
 
             <IconButton
               onClick={colorMode.toggleColorMode}
