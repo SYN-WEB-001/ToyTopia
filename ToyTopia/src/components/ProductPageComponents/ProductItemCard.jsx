@@ -9,7 +9,7 @@ export default function ProductItemCard({ product, categorySlug }) {
   const { addItem } = useCart();
   const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
-  const t = translations[language].products;
+  const t = translations[language].productsPage;
 
   if (!product) {
     return null;

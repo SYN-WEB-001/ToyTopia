@@ -21,7 +21,7 @@ export default function Navbar() {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const { language, toggleLanguage } = useContext(LanguageContext);
   const { cartCount } = useCart();
-  const t = translations[language].navbar;
+  const t = translations[language].nav;
 
   return (
     <AppBar

@@ -60,7 +60,11 @@ export const translations = {
       filterByCategory: "Filter by Category",
       addToCart: "Add to Cart",
       price: "Price",
-      description: "Description"
+      description: "Description",
+      recommendedProducts: "Recommended Products",
+      inStock: "In Stock",
+      outOfStock: "Out of Stock",
+      pieces: "pieces"
     },
     
     // About Page
@@ -203,7 +207,11 @@ export const translations = {
       filterByCategory: "Nach Kategorie filtern",
       addToCart: "In den Warenkorb",
       price: "Preis",
-      description: "Beschreibung"
+      description: "Beschreibung",
+      recommendedProducts: "Empfohlene Produkte",
+      inStock: "Auf Lager",
+      outOfStock: "Nicht auf Lager",
+      pieces: "Stück"
     },
     
     // About Page

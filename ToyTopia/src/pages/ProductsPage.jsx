@@ -13,7 +13,7 @@ export default function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
-  const t = translations[language].products;
+  const t = translations[language].productsPage;
 
   const categoryData = language === 'de' ? categoryDataDe : categoryDataEn;
   const categorySlug = searchParams.get('category');
