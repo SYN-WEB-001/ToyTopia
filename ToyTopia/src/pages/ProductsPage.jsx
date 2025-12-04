@@ -38,7 +38,9 @@ export default function ProductsPage() {
   };
 
   // Function to get random products from different categories
-  const getRandomProducts = useMemo(() => {
+  const [randomProducts, setRandomProducts] = useState([]);
+  
+  useEffect(() => {
     const allProducts = [];
     
     // Collect all products from all categories with their category slug
@@ -57,8 +59,8 @@ export default function ProductsPage() {
 
     // Shuffle array and get 8 random products
     const shuffled = [...allProducts].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 8);
-  }, []);
+    setRandomProducts(shuffled.slice(0, 8));
+  }, [categoryData]);
 
   // Pagination logic for category products
   const getPaginatedProducts = useMemo(() => {
@@ -217,9 +219,9 @@ export default function ProductsPage() {
           <>
             {/* Bottom Section: Random Products */}
             <div className="mt-16 pt-8 border-t border-gray-200">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Empfohlene Produkte</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">{t.recommendedProducts}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {getRandomProducts.map((product, index) => (
+                {randomProducts.map((product, index) => (
                   <ProductItemCard
                     key={`random-${product.slug || product.index || index}`}
                     product={product}
