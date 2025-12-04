@@ -1,6 +1,8 @@
-import handleAddToCart from './handleAddToCart.jsx';
+import { useCart } from '../../context/CartContext';
 
 export default function ProductItemCard({ product, categorySlug }) {
+  const { addItem } = useCart();
+
   if (!product) {
     return null;
   }
@@ -24,6 +26,19 @@ export default function ProductItemCard({ product, categorySlug }) {
   
   // Form the image path
   const imagePath = `/src/assets/images/Category-Images/${categoryFolder}/${productImage}`;
+
+  const handleAddToCart = () => {
+    // Prepare product data for cart
+    const cartProduct = {
+      id: product.slug || product.index || `${categorySlug}-${product.name}`,
+      name: product.name,
+      price: product.price,
+      image: imagePath,
+      stock: product.stock,
+      Altersempfehlung: product.Altersempfehlung
+    };
+    addItem(cartProduct, 1);
+  };
 
   return (
     <div className=" flex justify-between flex-col bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
@@ -49,7 +64,7 @@ export default function ProductItemCard({ product, categorySlug }) {
         {product.stock > 0 ? `Auf Lager: ${product.stock} Stück` : 'Nicht auf Lager'}
           </span>
         </div>
-        <button onClick={() => handleAddToCart(product)}
+        <button onClick={handleAddToCart}
           disabled={product.stock === 0}
           className="w-full text-center px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
             In den Warenkorb 
