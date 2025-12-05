@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo, useContext } from "react";
 import { Container } from '@mui/material';
 import testimonialsDataBilingual from "../../data/testimonialsData.json";
 import { LanguageContext } from '../../context/LanguageContext';
+import { ThemeContext } from '../../context/ThemeContext';
 import { translations } from '../../translations/translations';
 
 const gradientBg =
@@ -15,6 +16,7 @@ export default function TestimonialsSection() {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
   const { language } = useContext(LanguageContext);
+  const { darkMode } = useContext(ThemeContext);
 
   const testimonials = testimonialsDataBilingual[language];
   const t = translations[language].homepage;
@@ -71,10 +73,10 @@ export default function TestimonialsSection() {
     >
       <Container maxWidth="lg">
         <div className="text-center px-4">
-          <h2 className="mt-2 section-title text-gray-900">
+          <h2 className="mt-2 section-title" style={{ color: darkMode ? '#f9fafb' : '#111827' }}>
             {t.testimonials}
           </h2>
-          <p className="mt-3 subtitle text-gray-600 max-w-2xl mx-auto">
+          <p className="mt-3 subtitle max-w-2xl mx-auto" style={{ color: darkMode ? '#d1d5db' : '#4b5563' }}>
             {language === 'de' 
               ? 'Höre von glücklichen Eltern, Pädagogen und Schenkenden, die ToyTopia für Qualitätsspielzeug vertrauen'
               : 'Hear from happy parents, educators, and gift-givers who trust ToyTopia for quality toys'}
