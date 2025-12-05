@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
 import { Container } from '@mui/material';
-import testimonialsDataEn from "../../data/testimonialsData.json";
-import testimonialsDataDe from "../../data/testimonialsData.de.json";
+import testimonialsDataBilingual from "../../data/testimonialsData.json";
 import { ThemeContext } from '../../context/ThemeContext';
 import { LanguageContext } from '../../context/LanguageContext';
 import { translations } from '../../translations/translations';
@@ -19,7 +18,7 @@ export default function TestimonialsSection() {
   const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
   
-  const testimonials = language === 'de' ? testimonialsDataDe : testimonialsDataEn;
+  const testimonials = testimonialsDataBilingual[language];
   const t = translations[language].homepage;
 
   const total = testimonials.length;

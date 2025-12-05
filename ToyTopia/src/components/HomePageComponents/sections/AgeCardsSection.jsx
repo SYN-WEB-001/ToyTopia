@@ -1,8 +1,11 @@
-import { useState } from 'react';
-import categoryData from '../../../data/categoryData.json';
+import { useState, useContext } from 'react';
+import categoryDataBilingual from '../../../data/categoryData.json';
 import ProductItemCard from '../../ProductPageComponents/ProductItemCard';
+import { LanguageContext } from '../../../context/LanguageContext';
 
 const AgeCardsSection = () => {
+  const { language } = useContext(LanguageContext);
+  const categoryData = categoryDataBilingual[language];
   const [selectedAgeGroup, setSelectedAgeGroup] = useState(null);
 
   // Age Categories Definition

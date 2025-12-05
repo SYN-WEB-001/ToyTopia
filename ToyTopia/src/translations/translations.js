@@ -18,28 +18,17 @@ export const translations = {
       }
     },
     
-    // Sign In Modal
-    signInModal: {
-      title: "Sign In",
-      email: "Email",
-      password: "Password",
-      submitButton: "Sign In",
-      noAccount: "Don't have an account?",
-      registerLink: "Register here"
-    },
-    
-    // Register Modal
-    registerModal: {
-      title: "Register",
-      fullName: "Full Name",
+    // Authentication
+    auth: {
+      signIn: "Sign In",
+      signUp: "Sign Up",
       email: "Email",
       password: "Password",
       confirmPassword: "Confirm Password",
-      submitButton: "Register",
-      hasAccount: "Already have an account?",
-      signInLink: "Sign in here",
-      passwordMismatch: "Passwords do not match!",
-      successMessage: "Registration functionality - Connect to your backend!"
+      fullName: "Full Name",
+      dontHaveAccount: "Don't have an account?",
+      alreadyHaveAccount: "Already have an account?",
+      passwordMismatch: "Passwords do not match!"
     },
     
     // Homepage
@@ -154,7 +143,6 @@ export const translations = {
       privacy: "Privacy Policy",
       followUs: "Follow Us",
       copyright: "© 2025 ToyTopia. All rights reserved.",
-      contactUs: "Contact Us",
       tagline: "TOYTOPIA makes your kids smarter and more creative!"
     },
     
@@ -189,28 +177,17 @@ export const translations = {
       }
     },
     
-    // Sign In Modal
-    signInModal: {
-      title: "Anmelden",
-      email: "E-Mail",
-      password: "Passwort",
-      submitButton: "Anmelden",
-      noAccount: "Noch kein Konto?",
-      registerLink: "Hier registrieren"
-    },
-    
-    // Register Modal
-    registerModal: {
-      title: "Registrieren",
-      fullName: "Vollständiger Name",
+    // Authentication
+    auth: {
+      signIn: "Anmelden",
+      signUp: "Registrieren",
       email: "E-Mail",
       password: "Passwort",
       confirmPassword: "Passwort bestätigen",
-      submitButton: "Registrieren",
-      hasAccount: "Bereits ein Konto?",
-      signInLink: "Hier anmelden",
-      passwordMismatch: "Passwörter stimmen nicht überein!",
-      successMessage: "Registrierungsfunktion - Mit Backend verbinden!"
+      fullName: "Vollständiger Name",
+      dontHaveAccount: "Noch kein Konto?",
+      alreadyHaveAccount: "Bereits ein Konto?",
+      passwordMismatch: "Passwörter stimmen nicht überein!"
     },
     
     // Homepage
@@ -330,7 +307,6 @@ export const translations = {
       privacy: "Datenschutz",
       followUs: "Folge uns",
       copyright: "© 2025 ToyTopia. Alle Rechte vorbehalten.",
-      contactUs: "Kontakt",
       tagline: "TOYTOPIA macht deine Kinder schlauer und kreativer!"
     },
     
