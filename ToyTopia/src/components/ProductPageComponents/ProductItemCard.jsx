@@ -1,8 +1,17 @@
+import { useContext } from 'react';
 import { useCart } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import { useNotification } from '../../context/NotificationContext';
+import { translations } from '../../translations/translations';
 
 export default function ProductItemCard({ product, categorySlug }) {
   const { addItem } = useCart();
+  const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const { showNotification } = useNotification();
+  const t = translations[language];
 
   if (!product) {
     return null;
@@ -45,11 +54,14 @@ export default function ProductItemCard({ product, categorySlug }) {
       Altersempfehlung: product.Altersempfehlung
     };
     addItem(cartProduct, 1);
+    showNotification(t.cartPage.itemAdded, 'success');
   };
 
   return (
     <Link to={productUrl} className="block h-full">
-      <div className="flex flex-col h-full bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
+      <div className={`flex flex-col h-full rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer ${
+        darkMode ? 'bg-gray-800' : 'bg-white'
+      }`}>
         {/* Image Section - Fixed Height */}
         <div className="relative h-64 overflow-hidden shrink-0">
           <img
@@ -66,14 +78,22 @@ export default function ProductItemCard({ product, categorySlug }) {
         {/* Card Content - Flexible with fixed spacing */}
         <div className="flex flex-col grow p-6">
           {/* Product Name - Limited to 2 lines */}
-          <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 min-h-14">
+          <h3 className={`text-xl font-bold mb-2 line-clamp-2 min-h-14 ${
+            darkMode ? 'text-white' : 'text-gray-900'
+          }`}>
             {product.name}
           </h3>
           
           {/* Stock Info - Fixed height */}
           <div className="flex justify-start items-center mb-4 min-h-6">
-            <span className={`text-sm ${product.stock > 0 ? 'text-gray-500' : 'text-red-500'}`}>
-          {product.stock > 0 ? `Auf Lager: ${product.stock} Stück` : 'Nicht auf Lager'}
+            <span className={`text-sm ${
+              product.stock > 0 
+                ? (darkMode ? 'text-gray-400' : 'text-gray-500')
+                : 'text-red-500'
+            }`}>
+              {product.stock > 0 
+                ? `${t.productsPage.inStock}: ${product.stock} ${t.productsPage.pieces}` 
+                : t.productsPage.outOfStock}
             </span>
           </div>
           
@@ -88,7 +108,7 @@ export default function ProductItemCard({ product, categorySlug }) {
                   : 'bg-green-600 text-white hover:bg-green-700'
               }`}
             >
-              In den Warenkorb 
+              {t.productsPage.addToCart}
             </button>
           </div>
         </div>

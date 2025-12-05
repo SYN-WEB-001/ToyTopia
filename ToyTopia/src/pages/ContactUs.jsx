@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   Box,
   Container,
@@ -5,25 +6,31 @@ import {
   Stack,
   Link as MuiLink,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import LanguageIcon from "@mui/icons-material/Language";
 
 import ContactForm from "../components/ContactPageComponents/ContactForm";
+import { ThemeContext } from "../context/ThemeContext";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../translations/translations";
 
 export default function ContactUs() {
-  const theme = useTheme();
+  const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const t = translations[language].contactPage;
 
   return (
     <Box
+      className={darkMode ? "dark" : ""}
       sx={{
-        minHeight: "calc(100vh - 90px)", // Navbar-Höhe abziehen
+        minHeight: "calc(100vh - 90px)", // desconta navbar
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        px: { xs: 1.5, sm: 2, md: 4 },
-        py: { xs: 4, sm: 6, md: 8 },
+        px: 2,
+
+        // 🌈 gradiente claro/escuro dependendo do tema
         background:
           theme.palette.mode === "light"
             ? "linear-gradient(135deg, #ffe6e9 0%, #fff6e9 20%, #fff7d9 50%, #e3ffe4 80%, #e8e5ff 100%)"
@@ -40,7 +47,7 @@ export default function ContactUs() {
             justifyContent: "center",
           }}
         >
-          {/* --- ESQUERDA (texto) --- */}
+          {/* --- LEFT (text) --- */}
           <Box
             sx={{
               flex: 1,
@@ -48,25 +55,11 @@ export default function ContactUs() {
               py: { xs: 1, sm: 2, md: 3 },
               display: "flex",
               flexDirection: "column",
-              alignItems: { xs: "center", md: "flex-start" },
-              textAlign: { xs: "center", md: "left" },
+              justifyContent: "left",
               color: theme.palette.mode === "light" ? "black" : "white",
-              maxWidth: { xs: 420, md: "none" },
-              mx: { xs: "auto", md: 0 },
             }}
           >
-            <Typography
-              variant="h3"
-              sx={{
-                fontWeight: 800,
-                mb: 2,
-                fontSize: {
-                  xs: "1.8rem", // ~ 28–30px em 320px
-                  sm: "2.1rem",
-                  md: "2.4rem",
-                },
-              }}
-            >
+            <Typography variant="h3" sx={{ fontWeight: 800, mb: 2 }}>
               Kontaktiere uns
             </Typography>
 
@@ -79,8 +72,7 @@ export default function ContactUs() {
                 maxWidth: { xs: 360, sm: 420, md: "none" },
               }}
             >
-              Nicht sicher, was du brauchst? Unser Team hilft dir gerne bei
-              Fragen zu Bestellung, Lieferung oder unseren Spielsachen.
+              {t.subtitle}
             </Typography>
 
             <Typography
@@ -92,7 +84,7 @@ export default function ContactUs() {
                 maxWidth: { xs: 360, sm: 420, md: "none" },
               }}
             >
-              Schreib uns einfach – wir melden uns so schnell wie möglich bei dir.
+              {t.description}
             </Typography>
 
             <Stack
@@ -171,20 +163,19 @@ export default function ContactUs() {
             </Stack>
           </Box>
 
-          {/* LINHA CENTRAL */}
+          {/* CENTRAL LINE */}
           <Box
             sx={{
               display: { xs: "none", md: "block" },
               width: "1px",
               alignSelf: "stretch",
-              background:
-                theme.palette.mode === "light"
-                  ? "linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.25), rgba(0,0,0,0))"
-                  : "linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.25), rgba(255,255,255,0))",
+              background: darkMode
+                  ? "linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.25), rgba(255,255,255,0))"
+                  : "linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.25), rgba(0,0,0,0))",
             }}
           />
 
-          {/* --- DIREITA (Formulário) --- */}
+          {/* --- RIGHT (Form) --- */}
           <Box
             sx={{
               flex: 1,

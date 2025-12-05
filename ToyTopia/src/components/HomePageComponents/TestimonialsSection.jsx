@@ -1,5 +1,10 @@
-import React, { useEffect, useState, useMemo } from "react";
-import testimonials from "../../data/testimonialsData.json";
+import React, { useEffect, useState, useMemo, useContext } from "react";
+import { Container } from '@mui/material';
+import testimonialsDataEn from "../../data/testimonialsData.json";
+import testimonialsDataDe from "../../data/testimonialsData.de.json";
+import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import { translations } from '../../translations/translations';
 
 const gradientBg =
   "linear-gradient(to Bottom, #00d2ff 0%, #3a7bd5 100%)";
@@ -7,14 +12,19 @@ const gradientBg =
 const itemsPerSlide = 3;
 
 export default function TestimonialsSection() {
-  // currentIndex = índice do PRIMEIRO card visível
+  // currentIndex = index of the FIRST visible card
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
+  const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  
+  const testimonials = language === 'de' ? testimonialsDataDe : testimonialsDataEn;
+  const t = translations[language].homepage;
 
   const total = testimonials.length;
 
-  // Monta os 3 cards visíveis a partir do índice atual
+  // Builds the 3 visible cards from the current index
   const visibleTestimonials = useMemo(() => {
     if (total === 0) return [];
 
@@ -24,9 +34,9 @@ export default function TestimonialsSection() {
       result.push({ ...testimonials[idx], _originalIndex: idx });
     }
     return result;
-  }, [currentIndex, total]);
+  }, [currentIndex, total, testimonials]);
 
-  // Auto-play: a cada 3s anda 1 posição para a direita (loop infinito)
+  // Auto-play: every 3s moves 1 position to the right (infinite loop)
   useEffect(() => {
     if (isHovered || total <= itemsPerSlide) return;
 
@@ -47,7 +57,7 @@ export default function TestimonialsSection() {
 
   const handleCardEnter = (index) => {
     setIsHovered(true);
-    setHoveredCardIndex(index); // 0, 1 ou 2 (posição dentro do slide)
+    setHoveredCardIndex(index); // 0, 1 or 2 (position within the slide)
   };
 
   const handleCardLeave = () => {
@@ -58,8 +68,11 @@ export default function TestimonialsSection() {
   return (
     <section
       className="w-full py-20"
-      style={{ backgroundImage: gradientBg }}
+      style={{ 
+        backgroundImage: gradientBg
+      }}
     >
+<<<<<<< HEAD
       <div className="max-w-6xl mx-auto px-4 lg:px-0 text-center">
         <p className="text-sm font-semibold text-black uppercase tracking-wide">
           Was unsere Kunden sagen
@@ -72,10 +85,23 @@ export default function TestimonialsSection() {
           for quality toys.
         </p>
       </div>
+=======
+      <Container maxWidth="lg">
+        <div className="text-center px-4">
+          <h2 className="mt-2 text-3xl md:text-4xl font-bold text-gray-900">
+            {t.testimonials}
+          </h2>
+          <p className="mt-3 text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
+            {language === 'de' 
+              ? 'Höre von glücklichen Eltern, Pädagogen und Schenkenden, die ToyTopia für Qualitätsspielzeug vertrauen'
+              : 'Hear from happy parents, educators, and gift-givers who trust ToyTopia for quality toys'}
+          </p>
+        </div>
+>>>>>>> origin/main
 
-      {/* Área principal com setas externas e cards */}
-      <div className="relative max-w-6xl mx-auto mt-10 flex items-center justify-center gap-8 px-4 lg:px-0">
-        {/* Seta Esquerda (fora do carrossel) */}
+        {/* Main area with external arrows and cards */}
+        <div className="relative mt-10 flex items-center justify-center gap-8 px-4">
+        {/* Left Arrow (outside carousel) */}
         <button
           type="button"
           onClick={handleArrowPrev}
@@ -97,16 +123,16 @@ export default function TestimonialsSection() {
                   hoveredCardIndex === index ? "translateY(-4px)" : "none",
               }}
             >
-              {/* Wrapper que vira borda gradiente quando hover */}
+              {/* Wrapper that becomes gradient border on hover */}
               <div
-                className="rounded-2xl p-[2px] h-full transition-all"
+                className="rounded-2xl p-0.5 h-full transition-all"
                 style={
                   hoveredCardIndex === index
                     ? { backgroundImage: gradientBg }
                     : { backgroundColor: "transparent" }
                 }
               >
-                {/* Card branco */}
+                {/* White card */}
                 <div className="h-full rounded-2xl bg-white shadow-lg px-6 py-6 flex flex-col">
                   <div className="flex items-center gap-4">
                     <img
@@ -140,7 +166,7 @@ export default function TestimonialsSection() {
           ))}
         </div>
 
-        {/* Seta Direita (fora do carrossel) */}
+        {/* Right Arrow (outside carousel) */}
         <button
           type="button"
           onClick={handleArrowNext}
@@ -150,21 +176,22 @@ export default function TestimonialsSection() {
         </button>
       </div>
 
-      {/* Dots – um por testimonial, marcando o primeiro visível */}
-      <div className="mt-6 flex justify-center gap-2">
-        {testimonials.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => setCurrentIndex(index)}
-            className={`h-2.5 rounded-full transition-all ${
-              index === currentIndex
-                ? "w-7 bg-blue-500"
-                : "w-2 bg-gray-300"
-            }`}
-          />
-        ))}
-      </div>
+        {/* Dots – one per testimonial, marking the first visible */}
+        <div className="mt-6 flex justify-center gap-2">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => setCurrentIndex(index)}
+              className={`h-2.5 rounded-full transition-all ${
+                index === currentIndex
+                  ? "w-7 bg-blue-500"
+                  : "w-2 bg-gray-300"
+              }`}
+            />
+          ))}
+        </div>
+      </Container>
     </section>
   );
 }

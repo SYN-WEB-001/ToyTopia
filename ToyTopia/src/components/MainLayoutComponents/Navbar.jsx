@@ -9,17 +9,19 @@ import {
   Badge,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { ColorModeContext } from "../../App";
 import { useCart } from "../../context/CartContext";
+import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import { translations } from '../../translations/translations';
 
 export default function Navbar() {
-  const theme = useTheme();
-  const colorMode = useContext(ColorModeContext);
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+  const { language, toggleLanguage } = useContext(LanguageContext);
   const { cartCount } = useCart();
+  const t = translations[language].nav;
 
   return (
     <AppBar
@@ -29,13 +31,11 @@ export default function Navbar() {
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor:
-          theme.palette.mode === "light" ? "#ffffff" : "#020617",
-        color: theme.palette.mode === "light" ? "#111827" : "#e5e7eb",
-        boxShadow:
-          theme.palette.mode === "light"
-            ? "0 2px 8px rgba(15,23,42,0.08)"
-            : "0 2px 10px rgba(0,0,0,0.6)",
+        backgroundColor: darkMode ? "#020617" : "#ffffff",
+        color: darkMode ? "#e5e7eb" : "#111827",
+        boxShadow: darkMode
+          ? "0 2px 10px rgba(0,0,0,0.6)"
+          : "0 2px 8px rgba(15,23,42,0.08)",
       }}
     >
       <Container maxWidth="lg">
@@ -47,7 +47,7 @@ export default function Navbar() {
             justifyContent: "space-between",
           }}
         >
-          {/* LOGO ORIGINAL À ESQUERDA */}
+          {/* ORIGINAL LOGO ON THE LEFT */}
           <Box
             component={Link}
             to="/"
@@ -61,11 +61,11 @@ export default function Navbar() {
             <Box
               component="img"
               alt="ToyTopia Logo"
-              src="/Logo.png"           sx={{ height: 48 }}       // ajusta o tamanho se quiser
+              src="/Logo.png"           sx={{ height: 48 }}       // adjust the size if needed
             />
           </Box>
 
-          {/* LINKS + TOGGLE À DIREITA */}
+          {/* LINKS + TOGGLE ON THE RIGHT */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Button
               component={Link}
@@ -73,7 +73,7 @@ export default function Navbar() {
               color="inherit"
               sx={{ textTransform: "none", fontWeight: 500 }}
             >
-              Home
+              {t.home}
             </Button>
             <Button
               component={Link}
@@ -81,7 +81,7 @@ export default function Navbar() {
               color="inherit"
               sx={{ textTransform: "none", fontWeight: 500 }}
             >
-              Products
+              {t.products}
             </Button>
             <Button
               component={Link}
@@ -89,7 +89,7 @@ export default function Navbar() {
               color="inherit"
               sx={{ textTransform: "none", fontWeight: 500 }}
             >
-              About
+              {t.about}
             </Button>
             <Button
               component={Link}
@@ -97,7 +97,7 @@ export default function Navbar() {
               color="inherit"
               sx={{ textTransform: "none", fontWeight: 500 }}
             >
-              Contact
+              {t.contact}
             </Button>
 
             <IconButton
@@ -113,17 +113,22 @@ export default function Navbar() {
             </IconButton>
 
             <IconButton
-              onClick={colorMode.toggleColorMode}
+              onClick={toggleDarkMode}
               color="inherit"
               sx={{ ml: 1 }}
               aria-label="Toggle dark mode"
             >
-              {theme.palette.mode === "dark" ? (
-                <LightModeIcon />
-              ) : (
-                <DarkModeIcon />
-              )}
+              {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
+            
+            <Button
+              onClick={toggleLanguage}
+              variant="text"
+              sx={{ ml: 1, color: 'inherit' }}
+              aria-label="Toggle language"
+            >
+              {language === 'en' ? 'DE' : 'EN'}
+            </Button>
           </Box>
         </Toolbar>
       </Container>

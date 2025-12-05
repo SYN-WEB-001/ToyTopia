@@ -1,0 +1,84 @@
+{
+  "hero": {
+    "title": "About",
+    "highlightedText": "ToyTopia",
+    "subtitle": "Discover the magic of quality toys and the joy they bring to children everywhere"
+  },
+  "ourStory": {
+    "title": "Our Story",
+    "paragraphs": [
+      "ToyTopia was founded with a simple mission: to provide children and families with high-quality, engaging, and educational toys that spark creativity and imagination.",
+      "What started as a small passion project has grown into a thriving community dedicated to making childhood memorable, fun, and enriching. We believe that play is essential to development, and every toy we curate is selected with care.",
+      "Today, ToyTopia serves thousands of happy families across the region, and we continue to grow while maintaining our core values of quality, safety, and customer satisfaction."
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&h=400&fit=crop",
+    "imageAlt": "ToyTopia store"
+  },
+  "coreValues": {
+    "title": "Our Core Values",
+    "values": [
+      {
+        "title": "Quality",
+        "description": "We carefully select every toy in our collection to ensure it meets the highest standards of quality, safety, and durability.",
+        "icon": "star"
+      },
+      {
+        "title": "Safety",
+        "description": "Your child's safety is our top priority. All our toys comply with international safety standards and regulations.",
+        "icon": "lock"
+      },
+      {
+        "title": "Innovation",
+        "description": "We stay ahead of trends and continuously seek out innovative toys that inspire learning and creative play.",
+        "icon": "lightbulb"
+      }
+    ]
+  },
+  "team": {
+    "title": "Meet Our Team",
+    "subtitle": "Passionate individuals dedicated to bringing joy and learning to children everywhere",
+    "members": [
+      {
+        "name": "Sarah Johnson",
+        "role": "Founder & CEO",
+        "description": "A passionate advocate for child development with 15+ years of experience in the toy industry.",
+        "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop"
+      },
+      {
+        "name": "Michael Chen",
+        "role": "Product Manager",
+        "description": "Expert in identifying and curating the best toys that combine fun, safety, and educational value.",
+        "imageUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop"
+      },
+      {
+        "name": "Emma Williams",
+        "role": "Customer Experience Lead",
+        "description": "Committed to ensuring every customer has a delightful experience with our brand and products.",
+        "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop"
+      }
+    ]
+  },
+  "stats": [
+    {
+      "value": "10,000+",
+      "label": "Happy Families"
+    },
+    {
+      "value": "5,000+",
+      "label": "Products"
+    },
+    {
+      "value": "15+",
+      "label": "Years Experience"
+    },
+    {
+      "value": "4.9★",
+      "label": "Customer Rating"
+    }
+  ],
+  "mission": {
+    "title": "Our Mission",
+    "description": "At ToyTopia, our mission is to inspire joy, creativity, and learning in every child through carefully curated, safe, and innovative toys. We believe that play is the foundation of childhood development, and we're committed to providing families with products that make those precious moments count.",
+    "quote": "Every child deserves access to toys that spark imagination, encourage learning, and create lasting memories."
+  }
+}

@@ -1,9 +1,26 @@
+import { useContext } from 'react';
+import { Container } from '@mui/material';
 import { Link } from "react-router-dom";
+import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import { translations } from '../../translations/translations';
 
 const Footer = () => {
+  const { darkMode } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const t = translations[language].footer;
+  
   return (
-    <footer className="bg-white text-gray-700 mt-auto border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <footer 
+      style={{
+        backgroundColor: darkMode ? '#111827' : '#ffffff',
+        color: darkMode ? '#d1d5db' : '#374151',
+        marginTop: 'auto',
+        borderTop: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`
+      }}
+    >
+      <Container maxWidth="lg">
+        <div className="py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo and Description */}
           <div className="flex flex-col items-center md:items-start">
@@ -14,46 +31,49 @@ const Footer = () => {
                 className="h-12 md:h-16 w-auto mb-4"
               />
             </Link>
-            <p className="text-sm text-center md:text-left text-gray-600">
-              TOYTOPIA makes your kids <br />
-              smarter and more creative!
+            <p style={{ fontSize: '0.875rem', textAlign: 'center', color: darkMode ? '#9ca3af' : '#4b5563' }} className="md:text-left">
+              {t.tagline}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   to="/"
                   className="hover:text-green-600 transition duration-300"
+                  style={{ color: darkMode ? '#d1d5db' : '#374151' }}
                 >
-                  Home
+                  {t.home}
                 </Link>
               </li>
               <li>
                 <Link
                   to="/products"
                   className="hover:text-green-600 transition duration-300"
+                  style={{ color: darkMode ? '#d1d5db' : '#374151' }}
                 >
-                  Products
+                  {t.products}
                 </Link>
               </li>
               <li>
                 <Link
                   to="/about"
                   className="hover:text-green-600 transition duration-300"
+                  style={{ color: darkMode ? '#d1d5db' : '#374151' }}
                 >
-                  About Us
+                  {t.about}
                 </Link>
               </li>
               <li>
                 <Link
                   to="/contact-us"
                   className="hover:text-green-600 transition duration-300"
+                  style={{ color: darkMode ? '#d1d5db' : '#374151' }}
                 >
-                  Contact
+                  {t.contact}
                 </Link>
               </li>
             </ul>
@@ -61,8 +81,8 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="text-center md:text-left">
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>Contact Us</h3>
+            <ul className="space-y-2" style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#4b5563' }}>
               <li>Email: info@toytopia.com</li>
               <li>Phone: +49 (555) 123-4567</li>
               <li>Address: Toytopiastraße 123, 12345 Berlin</li>
@@ -71,7 +91,9 @@ const Footer = () => {
             {/* Social Media Icons */}
             <div className="flex justify-center md:justify-start space-x-4 mt-4">
               <a
-                href="#"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-green-600 transition duration-300"
                 aria-label="Facebook"
               >
@@ -80,7 +102,9 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-green-600 transition duration-300"
                 aria-label="Twitter"
               >
@@ -89,7 +113,9 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-green-600 transition duration-300"
                 aria-label="Instagram"
               >
@@ -102,12 +128,13 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-200 mt-8 pt-6 text-center">
-          <p className="text-sm text-gray-600">
-            &copy; {new Date().getFullYear()} ToyTopia. All rights reserved.
+        <div style={{ borderTop: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`, marginTop: '2rem', paddingTop: '1.5rem', textAlign: 'center' }}>
+          <p style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#4b5563' }}>
+            {t.copyright}
           </p>
         </div>
-      </div>
+        </div>
+      </Container>
     </footer>
   );
 };
