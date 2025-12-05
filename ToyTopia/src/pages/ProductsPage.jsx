@@ -139,64 +139,38 @@ export default function ProductsPage() {
   return (
     <div className={`min-h-screen py-16 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <Container maxWidth="lg">
-        {/* Top Section: Categories (always visible unless age filter) */}
-        {minAge === null && maxAge === null && (
-          <div className="mb-12">
-            {selectedCategory ? (
-              <>
-                <button
-                  onClick={handleBackToCategories}
-                  className="mb-4 text-green-600 hover:text-green-700 font-semibold flex items-center gap-2">
-                  {t.backButton}
-                </button>
-                <h1 className={`text-4xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.allProducts}</h1>
-              </>
-            ) : (
-              <>
-                <h1 className={`text-4xl font-bold mb-8 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.title}</h1>
-                <p className={`text-lg mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  {t.filterByCategory}
-                </p>
-              </>
-            )}
-            <CategoryCards showHeader={false} useNavigation={true} />
-          </div>
-        )}
-
-        {/* Age Filter Section Header */}
-        {minAge !== null && maxAge !== null && (
-          <div className="mb-12">
-            <button
-              onClick={() => {
-                // Navigate back to homepage and scroll to the age-cards section
-                navigate('/#age-cards');
-              }}
-              className="mb-4 text-green-600 hover:text-green-700 font-semibold flex items-center gap-2">
-              ← {t.backButton}
-            </button>
-            <h1 className={`text-4xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-              {getAgeRangeLabel()}
-            </h1>
-            <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              {getProductsByAge.length} Produkte verfügbar
-            </p>
-          </div>
-        )}
+        {/* Top Section: Categories (always visible) */}
+        <div className="mb-12">
+          {selectedCategory ? (
+            <>
+              <button
+                onClick={handleBackToCategories}
+                className="mb-4 text-green-600 hover:text-green-700 font-semibold flex items-center gap-2">
+                {t.backButton}
+              </button>
+              <h1 className="h1-style" style={{ fontSize: '2.5rem', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>{t.allProducts}</h1>
+            </>
+          ) : (
+            <>
+              <h1 className="h1-style" style={{ fontSize: '2.5rem', color: darkMode ? '#ffffff' : '#111827', marginBottom: '2rem' }}>{t.title}</h1>
+              <p className="p-style-small" style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', marginBottom: '2rem' }}>
+                {t.filterByCategory}
+              </p>
+            </>
+          )}
+          <CategoryCards showHeader={false} useNavigation={true} />
+        </div>
 
         {/* Bottom Section: Products */}
         {selectedCategory || (minAge !== null && maxAge !== null) ? (
           <>
             <div className={`mt-16 pt-8 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-              {selectedCategory && (
-                <>
-                  <h2 className={`text-3xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    {selectedCategory.name}
-                  </h2>
-                  <p className={`text-lg mb-6 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                    {selectedCategory.description}
-                  </p>
-                </>
-              )}
+              <h2 className="h2-style" style={{ fontSize: '1.875rem', color: darkMode ? '#ffffff' : '#111827', marginBottom: '0.5rem' }}>
+                {selectedCategory.name}
+              </h2>
+              <p className="p-style-small" style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', marginBottom: '1.5rem' }}>
+                {selectedCategory.description}
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
                 {selectedCategory ? (
                   getPaginatedProducts.length > 0 ? (
@@ -317,7 +291,7 @@ export default function ProductsPage() {
           <>
             {/* Bottom Section: Random Products */}
             <div className={`mt-16 pt-8 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-              <h2 className={`text-3xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.recommendedProducts}</h2>
+              <h2 className="h2-style" style={{ fontSize: '1.875rem', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>{t.recommendedProducts}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {randomProducts.map((product, index) => (
                   <ProductItemCard

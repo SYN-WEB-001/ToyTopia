@@ -200,9 +200,7 @@ const HeroSection = () => {
                         >
                           {product.categoryName}
                         </span>
-                        <h3 style={{ 
-                          fontSize: '1.5rem', 
-                          fontWeight: 'bold', 
+                        <h3 className="h4-style" style={{ 
                           color: darkMode ? '#ffffff' : '#111827', 
                           marginBottom: '0.75rem',
                           overflow: 'hidden',
@@ -213,7 +211,7 @@ const HeroSection = () => {
                         }}>
                           {product.name}
                         </h3>
-                        <p style={{ 
+                        <p className="p-style-small" style={{ 
                           color: darkMode ? '#d1d5db' : '#4b5563', 
                           marginBottom: '1rem',
                           overflow: 'hidden',
@@ -221,7 +219,6 @@ const HeroSection = () => {
                           display: '-webkit-box',
                           WebkitLineClamp: 2,
                           WebkitBoxOrient: 'vertical',
-                          fontSize: '0.875rem',
                           lineHeight: '1.5'
                         }}>
                           {product.description}

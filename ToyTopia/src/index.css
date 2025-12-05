@@ -4,3 +4,166 @@
 .dark {
   color-scheme: dark;
 }
+
+.h1-style {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .h1-style {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .h1-style {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .h1-style {
+    font-size: 3.75rem;
+  }
+}
+
+.h2-style {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .h2-style {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .h2-style {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .h2-style {
+    font-size: 2.5rem;
+  }
+}
+
+.h3-style {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .h3-style {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .h3-style {
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .h3-style {
+    font-size: 1.875rem;
+  }
+}
+
+.h4-style {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .h4-style {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .h4-style {
+    font-size: 1.375rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .h4-style {
+    font-size: 1.5rem;
+  }
+}
+
+.h5-style {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .h5-style {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .h5-style {
+    font-size: 1.25rem;
+  }
+}
+
+.h6-style {
+  font-size: 0.875rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .h6-style {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .h6-style {
+    font-size: 1rem;
+  }
+}
+
+.p-style {
+  font-size: 1rem;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .p-style {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .p-style {
+    font-size: 1.25rem;
+  }
+}
+
+.p-style-small {
+  font-size: 1rem; /* 16px - minimum size for readability */
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+/* Only for very small screens (320px and below) */
+@media (max-width: 320px) {
+  .p-style-small {
+    font-size: 0.875rem; /* 14px only for very small screens */
+  }
+}
