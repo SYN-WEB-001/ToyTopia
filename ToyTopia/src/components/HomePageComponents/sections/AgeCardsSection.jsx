@@ -100,10 +100,10 @@ const AgeCardsSection = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="section-title text-gray-900">
             Spielzeug nach Alter
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="subtitle text-gray-600 max-w-2xl mx-auto">
             Finde das perfekte Spielzeug für jedes Alter
           </p>
         </div>
@@ -126,7 +126,7 @@ const AgeCardsSection = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-1">
+                <h3 className="text-gray-900 mb-1">
                   {ageCategory.name}
                 </h3>
 

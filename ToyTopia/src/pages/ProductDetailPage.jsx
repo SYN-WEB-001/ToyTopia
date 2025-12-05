@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import { useNotification } from '../context/NotificationContext';
 import categoryDataBilingual from '../data/categoryData.json';
 import { LanguageContext } from '../context/LanguageContext';
+import { ThemeContext } from '../context/ThemeContext';
 import { translations } from '../translations/translations';
 
 export default function ProductDetailPage() {
@@ -13,6 +14,7 @@ export default function ProductDetailPage() {
   const { addItem } = useCart();
   const { showNotification } = useNotification();
   const { language } = useContext(LanguageContext);
+  const { darkMode } = useContext(ThemeContext);
   const [product, setProduct] = useState(null);
   const [category, setCategory] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -51,10 +53,10 @@ export default function ProductDetailPage() {
 
   if (!product || !category) {
     return (
-      <div className="min-h-screen py-16">
+      <div className={`min-h-screen py-16 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         <Container maxWidth="lg">
           <div className="text-center py-20">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">{t.productsPage.productNotFound}</h1>
+            <h1 className={darkMode ? 'text-white' : 'text-gray-900'}>{t.productsPage.productNotFound}</h1>
             <Link to="/products" className="text-green-600 hover:text-green-700">
               {t.productsPage.backToProducts}
             </Link>
@@ -96,11 +98,11 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="min-h-screen py-16 bg-gray-50">
+    <div className={`min-h-screen py-16 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <Container maxWidth="lg">
         {/* Breadcrumb */}
         <nav className="mb-6">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          <div className={`flex items-center gap-2 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
             <Link to="/" className="hover:text-green-600">{tNav.home}</Link>
             <span>/</span>
             <Link to="/products" className="hover:text-green-600">{tNav.products}</Link>
@@ -109,7 +111,7 @@ export default function ProductDetailPage() {
               {category.name}
             </Link>
             <span>/</span>
-            <span className="text-gray-900">{product.name}</span>
+            <span className={darkMode ? 'text-white' : 'text-gray-900'}>{product.name}</span>
           </div>
         </nav>
 
@@ -122,7 +124,7 @@ export default function ProductDetailPage() {
         </button>
 
         {/* Product Details */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-lg overflow-hidden`}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
             {/* Images Section */}
             <div>
@@ -142,10 +144,12 @@ export default function ProductDetailPage() {
                     <button
                       key={index}
                       onClick={() => setSelectedImageIndex(index)}
-                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                      className={`shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
                         selectedImageIndex === index
                           ? 'border-green-600 ring-2 ring-green-200'
-                          : 'border-gray-200 hover:border-gray-300'
+                          : darkMode 
+                            ? 'border-gray-600 hover:border-gray-500'
+                            : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
                       <img
@@ -161,7 +165,7 @@ export default function ProductDetailPage() {
 
             {/* Product Info Section */}
             <div className="flex flex-col">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              <h1 className={darkMode ? 'text-white' : 'text-gray-900'}>
                 {product.name}
               </h1>
 
@@ -194,8 +198,8 @@ export default function ProductDetailPage() {
               {/* Description */}
               {product.description && (
                 <div className="mb-6">
-                  <h2 className="text-xl font-bold text-gray-900 mb-3">{t.productsPage.description}</h2>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  <h2 className={darkMode ? 'text-white' : 'text-gray-900'}>{t.productsPage.description}</h2>
+                  <p className={`leading-relaxed whitespace-pre-line ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                     {product.description}
                   </p>
                 </div>

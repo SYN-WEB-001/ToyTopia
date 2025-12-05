@@ -43,8 +43,6 @@ const CategoryCard = ({ category, useNavigation, handleCategoryClick }) => {
         <h3 
           className="line-clamp-2 mb-2"
           style={{ 
-            fontSize: '1.5rem', 
-            fontWeight: 'bold', 
             color: darkMode ? '#ffffff' : '#111827',
             minHeight: '3.75rem'
           }}
@@ -52,10 +50,9 @@ const CategoryCard = ({ category, useNavigation, handleCategoryClick }) => {
           {category.name}
         </h3>
         <p 
-          className="line-clamp-3 mb-4 flex-grow"
+          className="text-sm line-clamp-3 mb-4 flex-grow"
           style={{ 
             color: darkMode ? '#d1d5db' : '#4b5563', 
-            fontSize: '0.875rem',
             minHeight: '4.125rem'
           }}
         >

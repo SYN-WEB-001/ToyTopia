@@ -78,7 +78,7 @@ export default function ProductItemCard({ product, categorySlug }) {
         {/* Card Content - Flexible with fixed spacing */}
         <div className="flex flex-col grow p-6">
           {/* Product Name - Limited to 2 lines */}
-          <h3 className={`text-xl font-bold mb-2 line-clamp-2 min-h-14 ${
+          <h3 className={`line-clamp-2 min-h-14 mb-2 ${
             darkMode ? 'text-white' : 'text-gray-900'
           }`}>
             {product.name}
@@ -104,8 +104,10 @@ export default function ProductItemCard({ product, categorySlug }) {
               disabled={product.stock === 0}
               className={`w-full text-center px-4 py-2 font-semibold rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 ${
                 product.stock === 0
-                  ? 'bg-gray-400 text-white cursor-not-allowed'
-                  : 'bg-green-600 text-white hover:bg-green-700'
+                  ? darkMode
+                    ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                    : 'bg-gray-400 text-white cursor-not-allowed'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
               }`}
             >
               {t.productsPage.addToCart}

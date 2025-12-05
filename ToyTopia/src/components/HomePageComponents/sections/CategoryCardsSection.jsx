@@ -31,10 +31,10 @@ const CategoryCards = ({ showHeader = true, useNavigation = false, onCategoryCli
       <div className="max-w-7xl mx-auto">
         {showHeader && (
           <div className="text-center mb-12">
-            <h2 style={{ fontSize: '3rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1rem' }}>
+            <h2 className="section-title" style={{ color: darkMode ? '#ffffff' : '#111827' }}>
               {translations[language].homepage.shopByCategory}
             </h2>
-            <p style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', maxWidth: '42rem', margin: '0 auto' }}>
+            <p className="subtitle" style={{ color: darkMode ? '#d1d5db' : '#4b5563', maxWidth: '42rem', margin: '0 auto' }}>
               {translations[language].homepage.shopByCategoryDescription}
             </p>
           </div>

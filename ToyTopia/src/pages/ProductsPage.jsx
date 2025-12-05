@@ -149,11 +149,11 @@ export default function ProductsPage() {
                   className="mb-4 text-green-600 hover:text-green-700 font-semibold flex items-center gap-2">
                   {t.backButton}
                 </button>
-                <h1 className={`text-4xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.allProducts}</h1>
+                <h1 className={darkMode ? 'text-white' : 'text-gray-900'}>{t.allProducts}</h1>
               </>
             ) : (
               <>
-                <h1 className={`text-4xl font-bold mb-8 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.title}</h1>
+                <h1 className={darkMode ? 'text-white' : 'text-gray-900'}>{t.title}</h1>
                 <p className={`text-lg mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                   {t.filterByCategory}
                 </p>
@@ -174,7 +174,7 @@ export default function ProductsPage() {
               className="mb-4 text-green-600 hover:text-green-700 font-semibold flex items-center gap-2">
               ← {t.backButton}
             </button>
-            <h1 className={`text-4xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+            <h1 className={darkMode ? 'text-white' : 'text-gray-900'}>
               {getAgeRangeLabel()}
             </h1>
             <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -189,7 +189,7 @@ export default function ProductsPage() {
             <div className={`mt-16 pt-8 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
               {selectedCategory && (
                 <>
-                  <h2 className={`text-3xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                  <h2 className={darkMode ? 'text-white' : 'text-gray-900'}>
                     {selectedCategory.name}
                   </h2>
                   <p className={`text-lg mb-6 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -273,7 +273,9 @@ export default function ProductsPage() {
                                 className={`px-4 py-2 border rounded-md transition-colors ${
                                   currentPage === page
                                     ? 'bg-green-600 text-white border-green-600'
-                                    : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                                    : darkMode
+                                      ? 'border-gray-600 text-gray-300 hover:bg-gray-800'
+                                      : 'border-gray-300 text-gray-700 hover:bg-gray-50'
                                 }`}
                               >
                                 {page}
@@ -281,7 +283,7 @@ export default function ProductsPage() {
                             );
                           } else if (page === currentPage - 2 || page === currentPage + 2) {
                             return (
-                              <span key={page} className="px-2 text-gray-500">
+                              <span key={page} className={`px-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                                 ...
                               </span>
                             );
@@ -317,7 +319,7 @@ export default function ProductsPage() {
           <>
             {/* Bottom Section: Random Products */}
             <div className={`mt-16 pt-8 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-              <h2 className={`text-3xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.recommendedProducts}</h2>
+              <h2 className={darkMode ? 'text-white' : 'text-gray-900'}>{t.recommendedProducts}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {randomProducts.map((product, index) => (
                   <ProductItemCard

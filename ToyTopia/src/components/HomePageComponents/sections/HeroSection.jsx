@@ -15,6 +15,17 @@ const HeroSection = () => {
   const categoryData = categoryDataBilingual[language];
   const t = translations[language].homepage;
 
+  // Helper function to map category slug to folder name
+  const getCategoryFolderName = (slug) => {
+    const folderMap = {
+      'books': 'Books',
+      'lego': 'Lego',
+      'hot-wheels': 'Hotwheels',
+      'puzzles': 'Puzzles'
+    };
+    return folderMap[slug] || slug.charAt(0).toUpperCase() + slug.slice(1);
+  };
+
   // Collect all products from all categories
   const allProducts = categoryData.flatMap(category => 
     category.products.map(product => ({
@@ -35,7 +46,8 @@ const HeroSection = () => {
 
   const getProductImage = (product) => {
     const imageName = Array.isArray(product.image) ? product.image[0] : product.image;
-    return `/src/assets/images/Category-Images/${product.categoryName}/${imageName}`;
+    const categoryFolder = getCategoryFolderName(product.categorySlug);
+    return `/src/assets/images/Category-Images/${categoryFolder}/${imageName}`;
   };
 
   const goToNextSlide = () => {
@@ -48,19 +60,21 @@ const HeroSection = () => {
 
   return (
     <section className="relative w-full overflow-hidden">
-      {/* Full-width Background Image */}
-      <div className="relative w-full overflow-hidden h-[300px] md:h-auto">
+      {/* Full-width Background Image - Hidden on mobile */}
+      <div className="hidden md:block relative w-full overflow-hidden" style={{ 
+        height: '180px',
+        maxHeight: '180px'
+      }}>
         <img 
           src={heroImage} 
           alt="Hot Wheels Collection" 
-          className="w-full h-full object-cover object-center md:object-contain md:h-auto"
+          className="w-full h-full object-cover object-center"
           style={{
-            transform: 'scale(1.5)',
-          }}
-          onLoad={(e) => {
-            if (window.innerWidth >= 768) {
-              e.target.style.transform = 'none';
-            }
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            display: 'block'
           }}
         />
       </div>
@@ -71,9 +85,10 @@ const HeroSection = () => {
           background: darkMode 
             ? 'linear-gradient(to bottom right, #1f2937, #111827)' 
             : 'linear-gradient(to bottom right, #eff6ff, #faf5ff)',
-          padding: '3rem 0',
+          padding: '1.5rem 0',
           position: 'relative'
         }}
+        className="px-2 sm:px-4 md:px-0"
       >
         <Container maxWidth="lg">
           <div className="relative" style={{ position: 'relative' }}>
@@ -176,16 +191,16 @@ const HeroSection = () => {
                   >
                     <div className="flex flex-col md:flex-row items-center">
                       {/* Product Image */}
-                      <div className="w-full md:w-1/2 p-6">
+                      <div className="w-full md:w-1/2 p-3 sm:p-4 md:p-6">
                         <img 
                           src={getProductImage(product)}
                           alt={product.name}
-                          className="w-full h-64 object-contain rounded-lg"
+                          className="w-full h-48 sm:h-56 md:h-64 object-contain rounded-lg"
                         />
                       </div>
                       
                       {/* Product Info */}
-                      <div className="w-full md:w-1/2 p-6">
+                      <div className="w-full md:w-1/2 p-3 sm:p-4 md:p-6">
                         <span 
                           style={{
                             display: 'inline-block',
@@ -201,10 +216,7 @@ const HeroSection = () => {
                           {product.categoryName}
                         </span>
                         <h3 style={{ 
-                          fontSize: '1.5rem', 
-                          fontWeight: 'bold', 
                           color: darkMode ? '#ffffff' : '#111827', 
-                          marginBottom: '0.75rem',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                           display: '-webkit-box',
@@ -213,16 +225,14 @@ const HeroSection = () => {
                         }}>
                           {product.name}
                         </h3>
-                        <p style={{ 
+                        <p className="text-sm hidden md:block" style={{ 
                           color: darkMode ? '#d1d5db' : '#4b5563', 
                           marginBottom: '1rem',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                           display: '-webkit-box',
                           WebkitLineClamp: 2,
-                          WebkitBoxOrient: 'vertical',
-                          fontSize: '0.875rem',
-                          lineHeight: '1.5'
+                          WebkitBoxOrient: 'vertical'
                         }}>
                           {product.description}
                         </p>
@@ -238,25 +248,11 @@ const HeroSection = () => {
                         </div>
                         <Link
                           to={`/products/${product.categorySlug}/${product.slug}`}
-                          style={{
-                            display: 'block',
-                            width: '100%',
-                            padding: '0.75rem 1.5rem',
-                            background: 'linear-gradient(to right, #2563eb, #9333ea)',
-                            color: 'white',
-                            fontWeight: 'bold',
-                            textAlign: 'center',
-                            borderRadius: '0.5rem',
-                            textDecoration: 'none',
-                            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-                            transition: 'all 0.3s'
-                          }}
+                          className="block w-full px-6 py-3 bg-blue-600 text-white font-bold text-center rounded-lg no-underline shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-300"
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.2)';
                             e.currentTarget.style.transform = 'scale(1.05)';
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
                             e.currentTarget.style.transform = 'scale(1)';
                           }}
                         >

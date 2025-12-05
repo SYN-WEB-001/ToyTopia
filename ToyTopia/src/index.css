@@ -4,3 +4,132 @@
 .dark {
   color-scheme: dark;
 }
+
+/* Typography Styles - Unified styles for headings and text */
+
+/* Main headings */
+h1 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700; /* bold */
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700; /* bold */
+  line-height: 1.3;
+  margin-bottom: 0.875rem;
+}
+
+h3 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600; /* semibold */
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+
+h4 {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600; /* semibold */
+  line-height: 1.4;
+  margin-bottom: 0.625rem;
+}
+
+h5 {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600; /* semibold */
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+h6 {
+  font-size: 1rem; /* 16px */
+  font-weight: 600; /* semibold */
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+/* Main text */
+p {
+  font-size: 1rem; /* 16px */
+  font-weight: 400; /* normal */
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Subtitles */
+.subtitle {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 400; /* normal */
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.subtitle-large {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 400; /* normal */
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Small text */
+.text-sm {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5;
+}
+
+.text-xs {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.4;
+}
+
+/* Large text */
+.text-lg {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.6;
+}
+
+.text-xl {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.5;
+}
+
+/* Extra large heading (for hero sections) */
+.hero-title {
+  font-size: 3.75rem; /* 60px */
+  font-weight: 700; /* bold */
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+/* Section heading */
+.section-title {
+  font-size: 3rem; /* 48px */
+  font-weight: 700; /* bold */
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.875rem; /* 30px */
+  }
+  
+  h2 {
+    font-size: 1.5rem; /* 24px */
+  }
+  
+  h3 {
+    font-size: 1.25rem; /* 20px */
+  }
+  
+  .hero-title {
+    font-size: 2.5rem; /* 40px */
+  }
+  
+  .section-title {
+    font-size: 2rem; /* 32px */
+  }
+}
