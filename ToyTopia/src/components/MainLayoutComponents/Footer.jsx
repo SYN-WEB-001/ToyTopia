@@ -36,29 +36,16 @@ const Footer = () => {
                 className="md:h-16"
               />
             </Link>
-            <p style={{ 
-              fontSize: '0.75rem',
-              lineHeight: '1rem',
-              textAlign: 'center', 
-              color: darkMode ? '#9ca3af' : '#4b5563',
-              maxWidth: '180px'
-            }} className="md:text-left md:text-sm md:max-w-none md:leading-normal">
+            <p className="p-style-small" style={{ textAlign: 'center', color: darkMode ? '#9ca3af' : '#4b5563' }} className="md:text-left">
               {t.tagline}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 style={{ 
-              fontSize: '0.875rem',
-              fontWeight: '600', 
-              marginBottom: '0.75rem', 
-              color: darkMode ? '#ffffff' : '#111827' 
-            }} className="md:text-lg">
-              {t.quickLinks}
-            </h3>
-            <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }} className="md:gap-2">
-              <li style={{ fontSize: '0.75rem', lineHeight: '1rem' }} className="md:text-sm md:leading-normal">
+            <h3 className="h5-style" style={{ fontWeight: '600', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1rem' }}>Quick Links</h3>
+            <ul className="space-y-2">
+              <li>
                 <Link
                   to="/"
                   className="hover:text-green-600 transition duration-300"
@@ -99,22 +86,8 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="text-center md:text-left">
-            <h3 style={{ 
-              fontSize: '0.875rem',
-              fontWeight: '600', 
-              marginBottom: '0.75rem', 
-              color: darkMode ? '#ffffff' : '#111827' 
-            }} className="md:text-lg">
-              {t.contactUs}
-            </h3>
-            <ul style={{ 
-              display: 'flex', 
-              flexDirection: 'column', 
-              gap: '0.5rem',
-              fontSize: '0.75rem',
-              lineHeight: '1rem',
-              color: darkMode ? '#9ca3af' : '#4b5563' 
-            }} className="md:text-sm md:leading-normal">
+            <h3 className="h5-style" style={{ fontWeight: '600', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1rem' }}>Contact Us</h3>
+            <ul className="space-y-2 p-style-small" style={{ color: darkMode ? '#9ca3af' : '#4b5563' }}>
               <li>Email: info@toytopia.com</li>
               <li>Phone: +49 (555) 123-4567</li>
               <li>Address: Toytopiastraße 123, 12345 Berlin</li>
@@ -165,17 +138,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div style={{ 
-          borderTop: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`, 
-          marginTop: '1.5rem', 
-          paddingTop: '1rem', 
-          textAlign: 'center' 
-        }} className="md:mt-8 md:pt-6">
-          <p style={{ 
-            fontSize: '0.6875rem',
-            lineHeight: '1rem',
-            color: darkMode ? '#9ca3af' : '#4b5563' 
-          }} className="md:text-sm md:leading-normal">
+        <div style={{ borderTop: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`, marginTop: '2rem', paddingTop: '1.5rem', textAlign: 'center' }}>
+          <p className="p-style-small" style={{ color: darkMode ? '#9ca3af' : '#4b5563' }}>
             {t.copyright}
           </p>
         </div>

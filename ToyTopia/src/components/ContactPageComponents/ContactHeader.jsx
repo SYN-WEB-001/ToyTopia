@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 export default function ContactHeader() {
   return (
@@ -12,31 +12,14 @@ export default function ContactHeader() {
       }}
     >
       <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          component="h1"
-          align="center"
-          sx={{
-            fontWeight: 800,
-            letterSpacing: '0.08em',
-            mb: 1,
-          }}
-        >
+        <h1 className="h3-style" style={{ textAlign: 'center', letterSpacing: '0.08em', marginBottom: '0.25rem', color: '#111827' }}>
           Kontaktiere uns
-        </Typography>
+        </h1>
 
-        <Typography
-          variant="subtitle1"
-          align="center"
-          sx={{
-            color: 'rgba(0,0,0,0.7)',
-            maxWidth: 520,
-            mx: 'auto',
-          }}
-        >
+        <p className="p-style-small" style={{ textAlign: 'center', color: 'rgba(0,0,0,0.7)', maxWidth: '520px' }}>
           Wie können wir helfen? Schreib uns einfach eine Nachricht zu deiner
           Bestellung, Lieferung oder zu unseren Spielsachen.
-        </Typography>
+        </p>
       </Container>
     </Box>
   );

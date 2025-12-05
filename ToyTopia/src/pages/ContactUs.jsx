@@ -66,33 +66,17 @@ export default function ContactUs() {
               color: theme.palette.mode === "light" ? "black" : "white",
             }}
           >
-            <Typography variant="h3" sx={{ fontWeight: 800, mb: 2 }}>
-              Kontaktiere uns
-            </Typography>
+            <h1 className="h3-style" style={{ fontWeight: 800, marginBottom: '0.5rem', color: darkMode ? '#ffffff' : '#111827' }}>
+              {t.title}
+            </h1>
 
-            <Typography
-              variant="body1"
-              sx={{
-                opacity: 0.8,
-                mb: 2,
-                fontSize: { xs: "0.9rem", sm: "1rem" },
-                maxWidth: { xs: 360, sm: 420, md: "none" },
-              }}
-            >
+            <p className="p-style" style={{ opacity: 0.8, marginBottom: '0.75rem', color: darkMode ? '#ffffff' : '#111827' }}>
               {t.subtitle}
-            </Typography>
+            </p>
 
-            <Typography
-              variant="body2"
-              sx={{
-                opacity: 0.7,
-                mb: 3,
-                fontSize: { xs: "0.85rem", sm: "0.9rem" },
-                maxWidth: { xs: 360, sm: 420, md: "none" },
-              }}
-            >
+            <p className="p-style-small" style={{ opacity: 0.65, marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>
               {t.description}
-            </Typography>
+            </p>
 
             <Stack
               spacing={2}
