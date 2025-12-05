@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import categoryDataBilingual from '../../../data/categoryData.json';
 import ProductItemCard from '../../ProductPageComponents/ProductItemCard';
 import { LanguageContext } from '../../../context/LanguageContext';
+import { ThemeContext } from '../../../context/ThemeContext';
 
 const AgeCardsSection = () => {
   const { language } = useContext(LanguageContext);
+  const { darkMode } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState(null);
   
@@ -108,7 +110,15 @@ const AgeCardsSection = () => {
   };
 
   return (
-  <section id="age-cards" className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-gray-50 to-blue-50">
+  <section
+    id="age-cards"
+    className={`py-16 px-4 sm:px-6 lg:px-8 ${darkMode ? '' : 'bg-linear-to-r from-gray-50 to-blue-50'}`}
+    style={
+      darkMode
+        ? { background: 'linear-gradient(135deg, #0b1220 0%, #0f1724 100%)' }
+        : undefined
+    }
+  >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
