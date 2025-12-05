@@ -1,9 +1,16 @@
-import { useState } from 'react';
-import categoryData from '../../../data/categoryData.json';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import categoryDataBilingual from '../../../data/categoryData.json';
 import ProductItemCard from '../../ProductPageComponents/ProductItemCard';
+import { LanguageContext } from '../../../context/LanguageContext';
 
 const AgeCardsSection = () => {
+  const { language } = useContext(LanguageContext);
+  const navigate = useNavigate();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState(null);
+  
+  // Get the correct language data
+  const categoryData = categoryDataBilingual[language];
 
   // Age Categories Definition
   const ageCategories = [
