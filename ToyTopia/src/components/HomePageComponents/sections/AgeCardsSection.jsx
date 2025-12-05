@@ -1,8 +1,9 @@
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import categoryData from '../../../data/categoryData.json';
+import ProductItemCard from '../../ProductPageComponents/ProductItemCard';
 
 const AgeCardsSection = () => {
-  const navigate = useNavigate();
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState(null);
 
   // Age Categories Definition
   const ageCategories = [
@@ -74,8 +75,32 @@ const AgeCardsSection = () => {
     return count;
   };
 
-  const handleAgeClick = (minAge, maxAge) => {
-    navigate(`/products?minAge=${minAge}&maxAge=${maxAge}`);
+  // Get all products for a specific age group
+  const getProductsByAge = (minAge, maxAge) => {
+    const products = [];
+    categoryData.forEach((category) => {
+      if (category.products) {
+        category.products.forEach((product) => {
+          const age = product.Altersempfehlung;
+          if (age >= minAge && age <= maxAge) {
+            products.push({
+              ...product,
+              categoryName: category.name,
+              categorySlug: category.slug,
+            });
+          }
+        });
+      }
+    });
+    return products;
+  };
+
+  const handleAgeClick = (ageGroup) => {
+    setSelectedAgeGroup(ageGroup);
+  };
+
+  const closeModal = () => {
+    setSelectedAgeGroup(null);
   };
 
   return (
@@ -99,7 +124,7 @@ const AgeCardsSection = () => {
               <button
                 key={ageCategory.id}
                 onClick={() =>
-                  handleAgeClick(ageCategory.minAge, ageCategory.maxAge)
+                  handleAgeClick(ageCategory)
                 }
                 className={`group bg-linear-to-br ${ageCategory.color} rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 ${ageCategory.borderColor} cursor-pointer text-left`}
               >
@@ -179,6 +204,77 @@ const AgeCardsSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal für Produkte nach Alter */}
+      {selectedAgeGroup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-linear-to-r from-blue-600 to-purple-600 text-white p-6 flex justify-between items-center">
+              <div>
+                <h2 className="text-3xl font-bold mb-2">
+                  {selectedAgeGroup.name}
+                </h2>
+                <p className="text-blue-100">
+                  {getProductsByAge(selectedAgeGroup.minAge, selectedAgeGroup.maxAge).length} Produkte verfügbar
+                </p>
+              </div>
+              <button
+                onClick={closeModal}
+                className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 transition-all duration-300"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Modal Content - Products Grid */}
+            <div className="p-6">
+              {getProductsByAge(selectedAgeGroup.minAge, selectedAgeGroup.maxAge).length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {getProductsByAge(selectedAgeGroup.minAge, selectedAgeGroup.maxAge).map((product) => (
+                    <ProductItemCard
+                      key={`${product.categorySlug}-${product.slug}`}
+                      product={product}
+                      categorySlug={product.categorySlug}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <svg
+                    className="w-16 h-16 text-gray-300 mx-auto mb-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1}
+                      d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+                    />
+                  </svg>
+                  <p className="text-gray-500 text-lg">
+                    Keine Produkte für diese Altersgruppe verfügbar
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
