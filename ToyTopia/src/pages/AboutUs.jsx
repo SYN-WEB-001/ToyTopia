@@ -24,7 +24,7 @@ const AboutUs = () => {
         <Container maxWidth="lg">
           <div className="text-center">
           <h1 style={{ fontSize: '3.75rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>
-            {data.hero.title} <span style={{ background: 'linear-gradient(to right, #2563eb, #9333ea)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{data.hero.highlightedText}</span>
+            <span style={{ color: '#2563eb' }}>Toy</span><span style={{ color: '#16a34a' }}>Topia</span>
           </h1>
           <p style={{ fontSize: '1.25rem', color: darkMode ? '#d1d5db' : '#4b5563', maxWidth: '48rem', margin: '0 auto' }}>
             {data.hero.subtitle}
@@ -127,7 +127,7 @@ const AboutUs = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-blue-600 to-purple-600">
+      <section style={{ padding: '4rem 1rem', background: 'linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%)' }}>
         <Container maxWidth="lg">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             {data.stats.map((stat, index) => (
