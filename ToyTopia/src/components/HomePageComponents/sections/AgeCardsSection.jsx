@@ -1,13 +1,14 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import categoryDataBilingual from '../../../data/categoryData.json';
 import ProductItemCard from '../../ProductPageComponents/ProductItemCard';
 import { LanguageContext } from '../../../context/LanguageContext';
+import { ThemeContext } from '../../../context/ThemeContext';
 
 const AgeCardsSection = () => {
   const { language } = useContext(LanguageContext);
+  const { darkMode } = useContext(ThemeContext);
   const navigate = useNavigate();
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState(null);
   
   // Get the correct language data
   const categoryData = categoryDataBilingual[language];
@@ -83,32 +84,19 @@ const AgeCardsSection = () => {
   };
 
   // Get all products for a specific age group
-  const getProductsByAge = (minAge, maxAge) => {
-    const products = [];
-    categoryData.forEach((category) => {
-      if (category.products) {
-        category.products.forEach((product) => {
-          const age = product.Altersempfehlung;
-          if (age >= minAge && age <= maxAge) {
-            products.push({
-              ...product,
-              categoryName: category.name,
-              categorySlug: category.slug,
-            });
-          }
-        });
-      }
-    });
-    return products;
-  };
-
   const handleAgeClick = (ageGroup) => {
     // Navigate to products page with age filter
     navigate(`/products?minAge=${ageGroup.minAge}&maxAge=${ageGroup.maxAge}`);
   };
 
   return (
-  <section id="age-cards" className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-gray-50 to-blue-50">
+  <section
+    id="age-cards"
+    className="py-16 px-4 sm:px-6 lg:px-8"
+    style={{
+      backgroundColor: darkMode ? '#1f2937' : '#f9fafb',
+    }}
+  >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
