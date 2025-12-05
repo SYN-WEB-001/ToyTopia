@@ -3,8 +3,7 @@ import { useState, useMemo, useContext, useRef, useEffect } from 'react';
 import { Container } from '@mui/material';
 import CategoryCards from '../components/HomePageComponents/sections/CategoryCardsSection.jsx';
 import ProductItemCard from '../components/ProductPageComponents/ProductItemCard.jsx';
-import categoryDataEn from '../data/categoryData.json';
-import categoryDataDe from '../data/categoryData.de.json';
+import categoryDataBilingual from '../data/categoryData.json';
 import { ThemeContext } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import { translations } from '../translations/translations';
@@ -16,7 +15,7 @@ export default function ProductsPage() {
   const { language } = useContext(LanguageContext);
   const t = translations[language].productsPage;
 
-  const categoryData = language === 'de' ? categoryDataDe : categoryDataEn;
+  const categoryData = categoryDataBilingual[language];
   const categorySlug = searchParams.get('category');
   const minAge = searchParams.get('minAge') ? parseInt(searchParams.get('minAge')) : null;
   const maxAge = searchParams.get('maxAge') ? parseInt(searchParams.get('maxAge')) : null;

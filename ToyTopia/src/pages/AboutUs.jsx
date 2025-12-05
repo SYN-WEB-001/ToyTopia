@@ -2,14 +2,13 @@ import { useContext } from 'react';
 import { Container } from '@mui/material';
 import { ThemeContext } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
-import aboutDataEn from '../data/aboutData.json';
-import aboutDataDe from '../data/aboutData.de.json';
+import aboutDataBilingual from '../data/aboutData.json';
 
 const AboutUs = () => {
   const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
   
-  const data = language === 'de' ? aboutDataDe : aboutDataEn;
+  const data = aboutDataBilingual[language];
   
   return (
     <div style={{ backgroundColor: darkMode ? '#111827' : '#ffffff', minHeight: '100vh' }}>
