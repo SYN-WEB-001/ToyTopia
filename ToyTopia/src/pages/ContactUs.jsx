@@ -6,6 +6,7 @@ import {
   Stack,
   Link as MuiLink,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import LanguageIcon from "@mui/icons-material/Language";
@@ -15,7 +16,10 @@ import { ThemeContext } from "../context/ThemeContext";
 import { LanguageContext } from "../context/LanguageContext";
 import { translations } from "../translations/translations";
 
+const gradientBg = "linear-gradient(180deg, #00d2ff 0%, #3a7bd5 40%, #f7faff 90%)";
+
 export default function ContactUs() {
+  const theme = useTheme();
   const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
   const t = translations[language].contactPage;
@@ -24,68 +28,94 @@ export default function ContactUs() {
     <Box
       className={darkMode ? "dark" : ""}
       sx={{
-        minHeight: "100vh",
+        minHeight: "calc(100vh - 90px)", // desconta navbar
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         px: 2,
 
-        // 🌈 light/dark gradient depending on theme
-        background: darkMode
-            ? "linear-gradient(135deg, #0a0a0c 0%, #0f0f14 30%, #1a1a21 70%, #000000 100%)"
-            : "linear-gradient(135deg, #ffe6e9 0%, #fff6e9 20%, #fff7d9 50%, #e3ffe4 80%, #e8e5ff 100%)",
+        // mesmo gradiente usado nos cards
+        background: gradientBg,
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2, md: 3 } }}>
         <Box
           sx={{
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
-            gap: { xs: 4, md: 6 },
-            alignItems: "center",
+            gap: { xs: 4, sm: 5, md: 6 },
+            alignItems: { xs: "stretch", md: "center" },
             justifyContent: "center",
+            background: "rgba(255,255,255,0.85)",
+            backdropFilter: "blur(6px)",
+            border: "1px solid rgba(255,255,255,0.4)",
+            borderRadius: "24px",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.12)",
+            p: { xs: 2.5, sm: 3, md: 4 },
           }}
         >
           {/* --- LEFT (text) --- */}
           <Box
             sx={{
               flex: 1,
-              textAlign: "left",
-              px: 3,
-              py: 3,
+              px: { xs: 1, sm: 2, md: 3 },
+              py: { xs: 1, sm: 2, md: 3 },
               display: "flex",
               flexDirection: "column",
               justifyContent: "left",
-              color: darkMode ? "white" : "black",
+              color: theme.palette.mode === "light" ? "black" : "white",
             }}
           >
-            <Typography variant="h3" sx={{ fontWeight: 800, mb: 2 }} className="dark:text-white">
-              {t.title}
+            <Typography variant="h3" sx={{ fontWeight: 800, mb: 2 }}>
+              Kontaktiere uns
             </Typography>
 
             <Typography
               variant="body1"
-              sx={{ opacity: 0.8, mb: 3 }}
+              sx={{
+                opacity: 0.8,
+                mb: 2,
+                fontSize: { xs: "0.9rem", sm: "1rem" },
+                maxWidth: { xs: 360, sm: 420, md: "none" },
+              }}
             >
               {t.subtitle}
             </Typography>
 
             <Typography
               variant="body2"
-              sx={{ opacity: 0.65, mb: 4 }}
+              sx={{
+                opacity: 0.7,
+                mb: 3,
+                fontSize: { xs: "0.85rem", sm: "0.9rem" },
+                maxWidth: { xs: 360, sm: 420, md: "none" },
+              }}
             >
               {t.description}
             </Typography>
 
-            <Stack spacing={2} sx={{ alignItems: "left" }}>
-              <Stack direction="row" spacing={1.5} alignItems="left">
-                <MailOutlineIcon />
+            <Stack
+              spacing={2}
+              sx={{
+                alignItems: { xs: "center", md: "flex-start" },
+                width: "100%",
+              }}
+            >
+              <Stack
+                direction="row"
+                spacing={1.5}
+                alignItems="center"
+                sx={{ justifyContent: { xs: "center", md: "flex-start" } }}
+              >
+                <MailOutlineIcon fontSize="small" />
                 <MuiLink
                   href="mailto:support@toytopia.de"
                   underline="hover"
                   sx={{
                     color: "inherit",
                     fontWeight: 500,
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                    wordBreak: "break-all",
                     "&:hover": { opacity: 0.8 },
                   }}
                 >
@@ -93,14 +123,20 @@ export default function ContactUs() {
                 </MuiLink>
               </Stack>
 
-              <Stack direction="row" spacing={1.5} alignItems="center">
-                <PhoneInTalkIcon />
+              <Stack
+                direction="row"
+                spacing={1.5}
+                alignItems="center"
+                sx={{ justifyContent: { xs: "center", md: "flex-start" } }}
+              >
+                <PhoneInTalkIcon fontSize="small" />
                 <MuiLink
                   href="tel:+492111234567"
                   underline="hover"
                   sx={{
                     color: "inherit",
                     fontWeight: 500,
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
                     "&:hover": { opacity: 0.8 },
                   }}
                 >
@@ -108,8 +144,13 @@ export default function ContactUs() {
                 </MuiLink>
               </Stack>
 
-              <Stack direction="row" spacing={1.5} alignItems="center">
-                <LanguageIcon />
+              <Stack
+                direction="row"
+                spacing={1.5}
+                alignItems="center"
+                sx={{ justifyContent: { xs: "center", md: "flex-start" } }}
+              >
+                <LanguageIcon fontSize="small" />
                 <MuiLink
                   href="https://www.toytopia.de"
                   target="_blank"
@@ -118,6 +159,8 @@ export default function ContactUs() {
                   sx={{
                     color: "inherit",
                     fontWeight: 500,
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                    wordBreak: "break-all",
                     "&:hover": { opacity: 0.8 },
                   }}
                 >
@@ -145,9 +188,16 @@ export default function ContactUs() {
               flex: 1,
               display: "flex",
               justifyContent: "center",
+              px: { xs: 1, sm: 2, md: 0 },
             }}
           >
-            <Box sx={{ width: "100%" }}>
+            <Box
+              sx={{
+                width: "100%",
+                maxWidth: { xs: 420, sm: 480, md: 520 },
+                mx: { xs: "auto", md: 0 },
+              }}
+            >
               <ContactForm />
             </Box>
           </Box>
