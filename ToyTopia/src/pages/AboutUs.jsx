@@ -9,6 +9,8 @@ const AboutUs = () => {
   const { language } = useContext(LanguageContext);
   
   const data = aboutDataBilingual[language];
+  const gradientBg = "linear-gradient(to bottom, #00d2ff 0%, #3a7bd5 100%)";
+  const heroTextShadow = "0 2px 12px rgba(0,0,0,0.25)";
   
   return (
     <div style={{ backgroundColor: darkMode ? '#111827' : '#ffffff', minHeight: '100vh' }}>
@@ -16,17 +18,15 @@ const AboutUs = () => {
       <section 
         style={{
           padding: '5rem 1rem',
-          background: darkMode 
-            ? 'linear-gradient(to bottom right, #1f2937, #111827, #111827)' 
-            : 'linear-gradient(to bottom right, #eff6ff, #faf5ff, #fce7f3)'
+          background: gradientBg
         }}
       >
         <Container maxWidth="lg">
           <div className="text-center">
-          <h1 style={{ fontSize: '3.75rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>
-            <span style={{ color: '#2563eb' }}>Toy</span><span style={{ color: '#16a34a' }}>Topia</span>
+          <h1 style={{ fontSize: '3.75rem', fontWeight: 'bold', color: '#ffffff', marginBottom: '1.5rem', textShadow: heroTextShadow }}>
+            <span style={{ color: '#2563eb' }}>Toy</span><span style={{ color: '#0d7f44' }}>Topia</span>
           </h1>
-          <p style={{ fontSize: '1.25rem', color: darkMode ? '#d1d5db' : '#4b5563', maxWidth: '48rem', margin: '0 auto' }}>
+          <p style={{ fontSize: '1.25rem', color: '#0f172a', maxWidth: '48rem', margin: '0 auto', textShadow: '0 1px 8px rgba(0,0,0,0.12)' }}>
             {data.hero.subtitle}
           </p>
           </div>
