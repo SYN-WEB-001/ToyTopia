@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import testimonials from "../../data/testimonialsData.json";
 
 const gradientBg =
-  "linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%)";
+  "linear-gradient(to Bottom, #00d2ff 0%, #3a7bd5 100%)";
 
 const itemsPerSlide = 3;
 
@@ -61,7 +61,7 @@ export default function TestimonialsSection() {
       style={{ backgroundImage: gradientBg }}
     >
       <div className="max-w-6xl mx-auto px-4 lg:px-0 text-center">
-        <p className="text-sm font-semibold text-emerald-600 uppercase tracking-wide">
+        <p className="text-sm font-semibold text-black uppercase tracking-wide">
           Was unsere Kunden sagen
         </p>
         <h2 className="mt-2 text-3xl md:text-4xl font-bold text-gray-900">
