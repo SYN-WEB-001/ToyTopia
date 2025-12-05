@@ -2,14 +2,15 @@ import { useContext } from 'react';
 import { Container } from '@mui/material';
 import { ThemeContext } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
-import aboutDataEn from '../data/aboutData.json';
-import aboutDataDe from '../data/aboutData.de.json';
+import aboutDataBilingual from '../data/aboutData.json';
 
 const AboutUs = () => {
   const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
   
-  const data = language === 'de' ? aboutDataDe : aboutDataEn;
+  const data = aboutDataBilingual[language];
+  const gradientBg = "linear-gradient(to bottom, #00d2ff 0%, #3a7bd5 100%)";
+  const heroTextShadow = "0 2px 12px rgba(0,0,0,0.25)";
   
   return (
     <div style={{ backgroundColor: darkMode ? '#111827' : '#ffffff', minHeight: '100vh' }}>
@@ -17,9 +18,7 @@ const AboutUs = () => {
       <section 
         style={{
           padding: '5rem 1rem',
-          background: darkMode 
-            ? 'linear-gradient(to bottom right, #1f2937, #111827, #111827)' 
-            : 'linear-gradient(to bottom right, #eff6ff, #faf5ff, #fce7f3)'
+          background: gradientBg
         }}
       >
         <Container maxWidth="lg">
@@ -128,7 +127,7 @@ const AboutUs = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-blue-600 to-purple-600">
+      <section style={{ padding: '4rem 1rem', background: 'linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%)' }}>
         <Container maxWidth="lg">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             {data.stats.map((stat, index) => (

@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
 import { Container } from '@mui/material';
-import testimonialsDataEn from "../../data/testimonialsData.json";
-import testimonialsDataDe from "../../data/testimonialsData.de.json";
-import { ThemeContext } from '../../context/ThemeContext';
+import testimonialsDataBilingual from "../../data/testimonialsData.json";
 import { LanguageContext } from '../../context/LanguageContext';
 import { translations } from '../../translations/translations';
 
 const gradientBg =
-  "linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%)";
+  "linear-gradient(to bottom, #00d2ff 0%, #3a7bd5 100%)";
 
 const itemsPerSlide = 3;
 
@@ -16,10 +14,9 @@ export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
-  const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
-  
-  const testimonials = language === 'de' ? testimonialsDataDe : testimonialsDataEn;
+
+  const testimonials = testimonialsDataBilingual[language];
   const t = translations[language].homepage;
 
   const total = testimonials.length;

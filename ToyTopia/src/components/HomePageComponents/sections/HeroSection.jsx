@@ -2,8 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@mui/material';
 import heroImage from '../../../assets/images/Category-Images/GalleryHero/category-landing-mattel-xmas-2025-hot-wheels-0c99d6-DESKTOP.jpg';
-import categoryDataEn from '../../../data/categoryData.json';
-import categoryDataDe from '../../../data/categoryData.de.json';
+import categoryDataBilingual from '../../../data/categoryData.json';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { LanguageContext } from '../../../context/LanguageContext';
 import { translations } from '../../../translations/translations';
@@ -13,7 +12,7 @@ const HeroSection = () => {
   const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
 
-  const categoryData = language === 'de' ? categoryDataDe : categoryDataEn;
+  const categoryData = categoryDataBilingual[language];
   const t = translations[language].homepage;
 
   // Collect all products from all categories
@@ -50,11 +49,19 @@ const HeroSection = () => {
   return (
     <section className="relative w-full overflow-hidden">
       {/* Full-width Background Image */}
-      <div className="relative w-full">
+      <div className="relative w-full overflow-hidden h-[300px] md:h-auto">
         <img 
           src={heroImage} 
           alt="Hot Wheels Collection" 
-          className="w-full h-auto object-contain"
+          className="w-full h-full object-cover object-center md:object-contain md:h-auto"
+          style={{
+            transform: 'scale(1.5)',
+          }}
+          onLoad={(e) => {
+            if (window.innerWidth >= 768) {
+              e.target.style.transform = 'none';
+            }
+          }}
         />
       </div>
       
@@ -73,6 +80,7 @@ const HeroSection = () => {
             {/* Previous Button */}
             <button
               onClick={goToPrevSlide}
+              className="hidden md:block"
               style={{
                 position: 'absolute',
                 left: '-1rem',
@@ -106,6 +114,7 @@ const HeroSection = () => {
             {/* Next Button */}
             <button
               onClick={goToNextSlide}
+              className="hidden md:block"
               style={{
                 position: 'absolute',
                 right: '-1rem',

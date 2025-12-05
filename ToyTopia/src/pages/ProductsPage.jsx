@@ -1,10 +1,9 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useState, useMemo, useContext, useRef, useEffect } from 'react';
 import { Container } from '@mui/material';
 import CategoryCards from '../components/HomePageComponents/sections/CategoryCardsSection.jsx';
 import ProductItemCard from '../components/ProductPageComponents/ProductItemCard.jsx';
-import categoryDataEn from '../data/categoryData.json';
-import categoryDataDe from '../data/categoryData.de.json';
+import categoryDataBilingual from '../data/categoryData.json';
 import { ThemeContext } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import { translations } from '../translations/translations';
@@ -16,8 +15,10 @@ export default function ProductsPage() {
   const { language } = useContext(LanguageContext);
   const t = translations[language].productsPage;
 
-  const categoryData = language === 'de' ? categoryDataDe : categoryDataEn;
+  const categoryData = categoryDataBilingual[language];
   const categorySlug = searchParams.get('category');
+  const minAge = searchParams.get('minAge') ? parseInt(searchParams.get('minAge')) : null;
+  const maxAge = searchParams.get('maxAge') ? parseInt(searchParams.get('maxAge')) : null;
   const itemsPerPage = 8;
   
   const prevCategorySlugRef = useRef(categorySlug);
@@ -28,6 +29,41 @@ export default function ProductsPage() {
       prevCategorySlugRef.current = categorySlug;
     }
   }, [categorySlug]);
+
+  const navigate = useNavigate();
+
+  // Get products filtered by age (when minAge/maxAge params are set)
+  const getProductsByAge = useMemo(() => {
+    if (minAge === null || maxAge === null) return [];
+    
+    const allProducts = [];
+    categoryData.forEach(category => {
+      if (category.products && Array.isArray(category.products)) {
+        category.products.forEach(product => {
+          if (product.name && product.name.trim() !== '') {
+            const productAge = product.Altersempfehlung;
+            if (productAge >= minAge && productAge <= maxAge) {
+              allProducts.push({
+                ...product,
+                categorySlug: category.slug
+              });
+            }
+          }
+        });
+      }
+    });
+    return allProducts;
+  }, [categoryData, minAge, maxAge]);
+
+  // Get age range label for display
+  const getAgeRangeLabel = () => {
+    if (minAge === 0 && maxAge === 2) return 'Babys (0-2 Jahre)';
+    if (minAge === 3 && maxAge === 5) return 'Kleinkinder (3-5 Jahre)';
+    if (minAge === 6 && maxAge === 8) return 'Kinder (6-8 Jahre)';
+    if (minAge === 9 && maxAge === 12) return 'Schulkinder (9-12 Jahre)';
+    if (minAge === 13 && maxAge === 99) return 'Teenager (13+ Jahre)';
+    return `${minAge} - ${maxAge} Jahre`;
+  };
 
   const selectedCategory = useMemo(() => {
     if (categorySlug) {
@@ -50,10 +86,21 @@ export default function ProductsPage() {
       if (category.products && Array.isArray(category.products)) {
         category.products.forEach(product => {
           if (product.name && product.name.trim() !== '') {
-            allProducts.push({
-              ...product,
-              categorySlug: category.slug
-            });
+            // Filter by age if minAge/maxAge params exist
+            if (minAge !== null && maxAge !== null) {
+              const productAge = product.Altersempfehlung;
+              if (productAge >= minAge && productAge <= maxAge) {
+                allProducts.push({
+                  ...product,
+                  categorySlug: category.slug
+                });
+              }
+            } else {
+              allProducts.push({
+                ...product,
+                categorySlug: category.slug
+              });
+            }
           }
         });
       }
@@ -61,7 +108,7 @@ export default function ProductsPage() {
 
     // Get first 8 products as featured
     return allProducts.slice(0, 8);
-  }, [categoryData]);
+  }, [categoryData, minAge, maxAge]);
 
   // Pagination logic for category products
   const getPaginatedProducts = useMemo(() => {
@@ -115,7 +162,7 @@ export default function ProductsPage() {
         </div>
 
         {/* Bottom Section: Products */}
-        {selectedCategory ? (
+        {selectedCategory || (minAge !== null && maxAge !== null) ? (
           <>
             <div className={`mt-16 pt-8 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
               <h2 className="h2-style" style={{ fontSize: '1.875rem', color: darkMode ? '#ffffff' : '#111827', marginBottom: '0.5rem' }}>
@@ -125,15 +172,29 @@ export default function ProductsPage() {
                 {selectedCategory.description}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-                {getPaginatedProducts.length > 0 ? (
-                  getPaginatedProducts.map((product) => (
-                    <ProductItemCard
-                      key={product.slug || product.index}
-                      product={product}
-                      categorySlug={selectedCategory.slug}/>
-                  ))
+                {selectedCategory ? (
+                  getPaginatedProducts.length > 0 ? (
+                    getPaginatedProducts.map((product) => (
+                      <ProductItemCard
+                        key={product.slug || product.index}
+                        product={product}
+                        categorySlug={selectedCategory.slug}/>
+                    ))
+                  ) : (
+                    <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>{t.noProductsAvailable}</p>
+                  )
                 ) : (
-                  <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>{t.noProductsAvailable}</p>
+                  // Display age-filtered products
+                  getProductsByAge.length > 0 ? (
+                    getProductsByAge.map((product) => (
+                      <ProductItemCard
+                        key={`${product.categorySlug}-${product.slug}`}
+                        product={product}
+                        categorySlug={product.categorySlug}/>
+                    ))
+                  ) : (
+                    <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>{t.noProductsAvailable}</p>
+                  )
                 )}
               </div>
 

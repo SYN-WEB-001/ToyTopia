@@ -1,5 +1,4 @@
-import categoryDataEn from '../../../data/categoryData.json';
-import categoryDataDe from '../../../data/categoryData.de.json';
+import categoryDataBilingual from '../../../data/categoryData.json';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import CategoryCard from './CategoryCard';
@@ -12,7 +11,7 @@ const CategoryCards = ({ showHeader = true, useNavigation = false, onCategoryCli
   const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
   
-  const categoryData = language === 'de' ? categoryDataDe : categoryDataEn;
+  const categoryData = categoryDataBilingual[language];
 
   const handleCategoryClick = (categorySlug) => {
     if (onCategoryClick) {

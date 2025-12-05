@@ -3,8 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Container } from '@mui/material';
 import { useCart } from '../context/CartContext';
 import { useNotification } from '../context/NotificationContext';
-import categoryDataEn from '../data/categoryData.json';
-import categoryDataDe from '../data/categoryData.de.json';
+import categoryDataBilingual from '../data/categoryData.json';
 import { LanguageContext } from '../context/LanguageContext';
 import { translations } from '../translations/translations';
 
@@ -18,7 +17,7 @@ export default function ProductDetailPage() {
   const [category, setCategory] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  const categoryData = language === 'de' ? categoryDataDe : categoryDataEn;
+  const categoryData = categoryDataBilingual[language];
   const t = translations[language];
   const tNav = t.nav;
   const tProductDetail = t.productDetail;
