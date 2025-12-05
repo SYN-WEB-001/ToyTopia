@@ -24,10 +24,10 @@ const AboutUs = () => {
       >
         <Container maxWidth="lg">
           <div className="text-center">
-          <h1 style={{ fontSize: '3.75rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>
+          <h1 className="h1-style" style={{ color: darkMode ? '#ffffff' : '#111827' }}>
             {data.hero.title} <span style={{ background: 'linear-gradient(to right, #2563eb, #9333ea)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{data.hero.highlightedText}</span>
           </h1>
-          <p style={{ fontSize: '1.25rem', color: darkMode ? '#d1d5db' : '#4b5563', maxWidth: '48rem', margin: '0 auto' }}>
+          <p className="p-style" style={{ color: darkMode ? '#d1d5db' : '#4b5563' }}>
             {data.hero.subtitle}
           </p>
           </div>
@@ -39,11 +39,11 @@ const AboutUs = () => {
         <Container maxWidth="lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>
+              <h2 className="h2-style" style={{ fontSize: '2.25rem', color: darkMode ? '#ffffff' : '#111827' }}>
                 {data.ourStory.title}
               </h2>
               {data.ourStory.paragraphs.map((paragraph, index) => (
-                <p key={index} style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', marginBottom: '1rem' }}>
+                <p key={index} className="p-style-small" style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', marginBottom: '1rem' }}>
                   {paragraph}
                 </p>
               ))}
@@ -62,7 +62,7 @@ const AboutUs = () => {
       {/* Our Values Section */}
       <section style={{ padding: '4rem 1rem', backgroundColor: darkMode ? '#1f2937' : '#f9fafb' }}>
         <Container maxWidth="lg">
-          <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', textAlign: 'center', marginBottom: '4rem' }}>
+          <h2 className="h2-style" style={{ fontSize: '2.25rem', color: darkMode ? '#ffffff' : '#111827', textAlign: 'center', marginBottom: '4rem' }}>
             {data.coreValues.title}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -85,8 +85,8 @@ const AboutUs = () => {
                       <path fillRule="evenodd" d={iconPaths[value.icon]} clipRule="evenodd"/>
                     </svg>
                   </div>
-                  <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '0.75rem' }}>{value.title}</h3>
-                  <p style={{ color: darkMode ? '#d1d5db' : '#4b5563' }}>
+                  <h3 className="h4-style" style={{ color: darkMode ? '#ffffff' : '#111827', marginBottom: '0.75rem' }}>{value.title}</h3>
+                  <p className="p-style-small" style={{ color: darkMode ? '#d1d5db' : '#4b5563' }}>
                     {value.description}
                   </p>
                 </div>
@@ -99,10 +99,10 @@ const AboutUs = () => {
       {/* Team Section */}
       <section style={{ padding: '4rem 1rem', backgroundColor: darkMode ? '#111827' : '#ffffff' }}>
         <Container maxWidth="lg">
-          <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', textAlign: 'center', marginBottom: '1rem' }}>
+          <h2 className="h2-style" style={{ fontSize: '2.25rem', color: darkMode ? '#ffffff' : '#111827', textAlign: 'center', marginBottom: '1rem' }}>
             {data.team.title}
           </h2>
-          <p style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', textAlign: 'center', maxWidth: '48rem', margin: '0 auto 4rem' }}>
+          <p className="p-style-small" style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', textAlign: 'center', maxWidth: '48rem', margin: '0 auto 4rem' }}>
             {data.team.subtitle}
           </p>
           
@@ -145,14 +145,14 @@ const AboutUs = () => {
       <section style={{ padding: '4rem 1rem', backgroundColor: darkMode ? '#1f2937' : '#f9fafb' }}>
         <Container maxWidth="lg">
           <div className="max-w-4xl mx-auto text-center">
-          <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>
+          <h2 className="h2-style" style={{ fontSize: '2.25rem', color: darkMode ? '#ffffff' : '#111827' }}>
             {data.mission.title}
           </h2>
-          <p style={{ fontSize: '1.25rem', color: darkMode ? '#d1d5db' : '#4b5563', lineHeight: '1.75', marginBottom: '2rem' }}>
+          <p className="p-style" style={{ color: darkMode ? '#d1d5db' : '#4b5563', lineHeight: '1.75', marginBottom: '2rem' }}>
             {data.mission.description}
           </p>
           <div style={{ display: 'inline-block', backgroundColor: darkMode ? '#1e3a8a' : '#dbeafe', borderLeft: darkMode ? '4px solid #60a5fa' : '4px solid #2563eb', padding: '1.5rem', borderRadius: '0.25rem' }}>
-            <p style={{ fontSize: '1.125rem', fontWeight: '600', color: darkMode ? '#93c5fd' : '#1e3a8a' }}>
+            <p className="p-style-small" style={{ fontSize: '1.125rem', fontWeight: '600', color: darkMode ? '#93c5fd' : '#1e3a8a' }}>
               "{data.mission.quote}"
             </p>
           </div>

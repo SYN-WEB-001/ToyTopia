@@ -16,11 +16,11 @@ const CartPage = () => {
   return (
     <div style={{ minHeight: '100vh', padding: '4rem 0', backgroundColor: darkMode ? '#111827' : '#ffffff' }}>
       <Container maxWidth="lg">
-        <h1 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>{t.title}</h1>
+        <h1 className="h2-style" style={{ fontSize: '2.25rem', color: darkMode ? '#ffffff' : '#111827' }}>{t.title}</h1>
 
         {cartItems.length === 0 ? (
           <div className="text-center py-20">
-            <p style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', marginBottom: '1.5rem' }}>{t.empty}</p>
+            <p className="p-style-small" style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', marginBottom: '1.5rem' }}>{t.empty}</p>
             <Link to="/products" style={{ display: 'inline-block', backgroundColor: '#2563eb', color: '#ffffff', padding: '0.75rem 1.5rem', borderRadius: '0.375rem', textDecoration: 'none' }}>{t.continueShopping}</Link>
           </div>
         ) : (
@@ -32,7 +32,7 @@ const CartPage = () => {
             </div>
 
             <aside style={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff', borderRadius: '0.5rem', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)', padding: '1.5rem' }}>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>{t.orderSummary}</h2>
+              <h2 className="h4-style" style={{ color: darkMode ? '#ffffff' : '#111827', marginBottom: '1rem' }}>{t.orderSummary}</h2>
               <div className="flex justify-between mb-2">
                 <span style={{ color: darkMode ? '#d1d5db' : '#4b5563' }}>{t.items}</span>
                 <span style={{ fontWeight: '500', color: darkMode ? '#ffffff' : '#111827' }}>{cartCount}</span>

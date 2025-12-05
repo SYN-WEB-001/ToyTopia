@@ -55,7 +55,7 @@ export default function ProductDetailPage() {
       <div className="min-h-screen py-16">
         <Container maxWidth="lg">
           <div className="text-center py-20">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">{t.productsPage.productNotFound}</h1>
+            <h1 className="h2-style" style={{ color: '#111827' }}>{t.productsPage.productNotFound}</h1>
             <Link to="/products" className="text-green-600 hover:text-green-700">
               {t.productsPage.backToProducts}
             </Link>
@@ -162,7 +162,7 @@ export default function ProductDetailPage() {
 
             {/* Product Info Section */}
             <div className="flex flex-col">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              <h1 className="h1-style" style={{ color: '#111827' }}>
                 {product.name}
               </h1>
 
@@ -195,8 +195,8 @@ export default function ProductDetailPage() {
               {/* Description */}
               {product.description && (
                 <div className="mb-6">
-                  <h2 className="text-xl font-bold text-gray-900 mb-3">{t.productsPage.description}</h2>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  <h2 className="h4-style" style={{ color: '#111827', marginBottom: '0.75rem' }}>{t.productsPage.description}</h2>
+                  <p className="p-style-small" style={{ color: '#374151', lineHeight: '1.75', whiteSpace: 'pre-line' }}>
                     {product.description}
                   </p>
                 </div>

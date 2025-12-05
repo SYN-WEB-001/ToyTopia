@@ -31,14 +31,14 @@ const Footer = () => {
                 className="h-12 md:h-16 w-auto mb-4"
               />
             </Link>
-            <p style={{ fontSize: '0.875rem', textAlign: 'center', color: darkMode ? '#9ca3af' : '#4b5563' }} className="md:text-left">
+            <p className="p-style-small" style={{ textAlign: 'center', color: darkMode ? '#9ca3af' : '#4b5563' }} className="md:text-left">
               {t.tagline}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>Quick Links</h3>
+            <h3 className="h5-style" style={{ fontWeight: '600', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1rem' }}>Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -81,8 +81,8 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="text-center md:text-left">
-            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>Contact Us</h3>
-            <ul className="space-y-2" style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#4b5563' }}>
+            <h3 className="h5-style" style={{ fontWeight: '600', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1rem' }}>Contact Us</h3>
+            <ul className="space-y-2 p-style-small" style={{ color: darkMode ? '#9ca3af' : '#4b5563' }}>
               <li>Email: info@toytopia.com</li>
               <li>Phone: +49 (555) 123-4567</li>
               <li>Address: Toytopiastraße 123, 12345 Berlin</li>
@@ -129,7 +129,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div style={{ borderTop: `1px solid ${darkMode ? '#374151' : '#e5e7eb'}`, marginTop: '2rem', paddingTop: '1.5rem', textAlign: 'center' }}>
-          <p style={{ fontSize: '0.875rem', color: darkMode ? '#9ca3af' : '#4b5563' }}>
+          <p className="p-style-small" style={{ color: darkMode ? '#9ca3af' : '#4b5563' }}>
             {t.copyright}
           </p>
         </div>

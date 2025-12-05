@@ -101,12 +101,12 @@ export default function ProductsPage() {
                 className="mb-4 text-green-600 hover:text-green-700 font-semibold flex items-center gap-2">
                 {t.backButton}
               </button>
-              <h1 className={`text-4xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.allProducts}</h1>
+              <h1 className="h1-style" style={{ fontSize: '2.5rem', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>{t.allProducts}</h1>
             </>
           ) : (
             <>
-              <h1 className={`text-4xl font-bold mb-8 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.title}</h1>
-              <p className={`text-lg mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              <h1 className="h1-style" style={{ fontSize: '2.5rem', color: darkMode ? '#ffffff' : '#111827', marginBottom: '2rem' }}>{t.title}</h1>
+              <p className="p-style-small" style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', marginBottom: '2rem' }}>
                 {t.filterByCategory}
               </p>
             </>
@@ -118,10 +118,10 @@ export default function ProductsPage() {
         {selectedCategory ? (
           <>
             <div className={`mt-16 pt-8 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-              <h2 className={`text-3xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className="h2-style" style={{ fontSize: '1.875rem', color: darkMode ? '#ffffff' : '#111827', marginBottom: '0.5rem' }}>
                 {selectedCategory.name}
               </h2>
-              <p className={`text-lg mb-6 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              <p className="p-style-small" style={{ fontSize: '1.125rem', color: darkMode ? '#d1d5db' : '#4b5563', marginBottom: '1.5rem' }}>
                 {selectedCategory.description}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
@@ -230,7 +230,7 @@ export default function ProductsPage() {
           <>
             {/* Bottom Section: Random Products */}
             <div className={`mt-16 pt-8 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-              <h2 className={`text-3xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{t.recommendedProducts}</h2>
+              <h2 className="h2-style" style={{ fontSize: '1.875rem', color: darkMode ? '#ffffff' : '#111827', marginBottom: '1.5rem' }}>{t.recommendedProducts}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {randomProducts.map((product, index) => (
                   <ProductItemCard

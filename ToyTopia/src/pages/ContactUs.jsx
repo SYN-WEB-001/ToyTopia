@@ -59,23 +59,17 @@ export default function ContactUs() {
               color: darkMode ? "white" : "black",
             }}
           >
-            <Typography variant="h3" sx={{ fontWeight: 800, mb: 2 }} className="dark:text-white">
+            <h1 className="h3-style" style={{ fontWeight: 800, marginBottom: '0.5rem', color: darkMode ? '#ffffff' : '#111827' }}>
               {t.title}
-            </Typography>
+            </h1>
 
-            <Typography
-              variant="body1"
-              sx={{ opacity: 0.8, mb: 3 }}
-            >
+            <p className="p-style" style={{ opacity: 0.8, marginBottom: '0.75rem', color: darkMode ? '#ffffff' : '#111827' }}>
               {t.subtitle}
-            </Typography>
+            </p>
 
-            <Typography
-              variant="body2"
-              sx={{ opacity: 0.65, mb: 4 }}
-            >
+            <p className="p-style-small" style={{ opacity: 0.65, marginBottom: '1rem', color: darkMode ? '#ffffff' : '#111827' }}>
               {t.description}
-            </Typography>
+            </p>
 
             <Stack spacing={2} sx={{ alignItems: "left" }}>
               <Stack direction="row" spacing={1.5} alignItems="left">

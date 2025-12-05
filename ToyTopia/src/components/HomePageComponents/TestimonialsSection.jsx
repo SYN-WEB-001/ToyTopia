@@ -74,10 +74,10 @@ export default function TestimonialsSection() {
     >
       <Container maxWidth="lg">
         <div className="text-center px-4">
-          <h2 className="mt-2 text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="h2-style mt-2" style={{ color: '#111827' }}>
             {t.testimonials}
           </h2>
-          <p className="mt-3 text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
+          <p className="p-style-small mt-3" style={{ color: '#4b5563', maxWidth: '42rem' }}>
             {language === 'de' 
               ? 'Höre von glücklichen Eltern, Pädagogen und Schenkenden, die ToyTopia für Qualitätsspielzeug vertrauen'
               : 'Hear from happy parents, educators, and gift-givers who trust ToyTopia for quality toys'}
