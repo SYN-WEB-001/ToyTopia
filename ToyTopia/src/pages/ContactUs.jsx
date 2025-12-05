@@ -6,6 +6,7 @@ import {
   Stack,
   Link as MuiLink,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import LanguageIcon from "@mui/icons-material/Language";
@@ -15,7 +16,10 @@ import { ThemeContext } from "../context/ThemeContext";
 import { LanguageContext } from "../context/LanguageContext";
 import { translations } from "../translations/translations";
 
+const gradientBg = "linear-gradient(180deg, #00d2ff 0%, #3a7bd5 40%, #f7faff 90%)";
+
 export default function ContactUs() {
+  const theme = useTheme();
   const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
   const t = translations[language].contactPage;
@@ -30,11 +34,8 @@ export default function ContactUs() {
         justifyContent: "center",
         px: 2,
 
-        // 🌈 gradiente claro/escuro dependendo do tema
-        background:
-          theme.palette.mode === "light"
-            ? "linear-gradient(135deg, #ffe6e9 0%, #fff6e9 20%, #fff7d9 50%, #e3ffe4 80%, #e8e5ff 100%)"
-            : "linear-gradient(135deg, #0a0a0c 0%, #0f0f14 30%, #1a1a21 70%, #000000 100%)",
+        // mesmo gradiente usado nos cards
+        background: gradientBg,
       }}
     >
       <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2, md: 3 } }}>
@@ -45,6 +46,12 @@ export default function ContactUs() {
             gap: { xs: 4, sm: 5, md: 6 },
             alignItems: { xs: "stretch", md: "center" },
             justifyContent: "center",
+            background: "rgba(255,255,255,0.85)",
+            backdropFilter: "blur(6px)",
+            border: "1px solid rgba(255,255,255,0.4)",
+            borderRadius: "24px",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.12)",
+            p: { xs: 2.5, sm: 3, md: 4 },
           }}
         >
           {/* --- LEFT (text) --- */}

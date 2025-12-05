@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
 import { Container } from '@mui/material';
 import testimonialsDataBilingual from "../../data/testimonialsData.json";
-import { ThemeContext } from '../../context/ThemeContext';
 import { LanguageContext } from '../../context/LanguageContext';
 import { translations } from '../../translations/translations';
 
 const gradientBg =
-  "linear-gradient(to Bottom, #00d2ff 0%, #3a7bd5 100%)";
+  "linear-gradient(to bottom, #00d2ff 0%, #3a7bd5 100%)";
 
 const itemsPerSlide = 3;
 
@@ -15,9 +14,8 @@ export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
-  const { darkMode } = useContext(ThemeContext);
   const { language } = useContext(LanguageContext);
-  
+
   const testimonials = testimonialsDataBilingual[language];
   const t = translations[language].homepage;
 
@@ -71,20 +69,6 @@ export default function TestimonialsSection() {
         backgroundImage: gradientBg
       }}
     >
-<<<<<<< HEAD
-      <div className="max-w-6xl mx-auto px-4 lg:px-0 text-center">
-        <p className="text-sm font-semibold text-black uppercase tracking-wide">
-          Was unsere Kunden sagen
-        </p>
-        <h2 className="mt-2 text-3xl md:text-4xl font-bold text-gray-900">
-          What Our Customers Say
-        </h2>
-        <p className="mt-3 text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
-          Hear from happy parents, educators, and gift-givers who trust ToyTopia
-          for quality toys.
-        </p>
-      </div>
-=======
       <Container maxWidth="lg">
         <div className="text-center px-4">
           <h2 className="mt-2 text-3xl md:text-4xl font-bold text-gray-900">
@@ -96,7 +80,6 @@ export default function TestimonialsSection() {
               : 'Hear from happy parents, educators, and gift-givers who trust ToyTopia for quality toys'}
           </p>
         </div>
->>>>>>> origin/main
 
         {/* Main area with external arrows and cards */}
         <div className="relative mt-10 flex items-center justify-center gap-8 px-4">
